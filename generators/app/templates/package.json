@@ -1,0 +1,30 @@
+{
+  "name": "<%= name %>",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start":"gulp default"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.0.0-beta",
+    "glob": "^7.1.2",
+    "gulp": "^3.9.1",
+    "gulp-nunjucks-render": "^2.2.1",
+    "gulp-prettify": "^0.5.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-data": "^1.2.1",
+    "gulp-sass-glob": "^1.0.8",
+    "pump": "^1.0.2",
+    "through2": "^2.0.3",
+    "vue": "^2.4.4",
+    "vue-server-renderer": "^2.4.4"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.18.13"
+  }
+}

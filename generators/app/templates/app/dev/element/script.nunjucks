@@ -1,0 +1,4 @@
+<script src="/javascript/lib/jquery/dist/jquery.min.js"></script>
+<script src="/javascript/lib/gsap/src/minified/TweenMax.min.js"></script>
+<script src="/javascript/lib/mobile-detect/mobile-detect.min.js"></script>
+<script src="/javascript/script.js"></script>

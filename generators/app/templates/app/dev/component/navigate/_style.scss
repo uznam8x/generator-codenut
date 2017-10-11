@@ -1,0 +1,10 @@
+[data-codenut-component="navigate"]{
+  position: relative;
+  @at-root {
+    #{&}, #{&} ul{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

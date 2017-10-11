@@ -1,0 +1,6 @@
+<li>
+  <a :href="model.link">{{model.title}}</a>
+  <ul v-if="model.children">
+    <navigate-item :model="model" v-for="model in model.children" :key="model.title"></navigate-item>
+  </ul>
+</li>
