@@ -4,10 +4,7 @@ var path = require('path');
 
 Vue.component('navigate-item',{
     props: ['model'],
-    template:fs.readFileSync(path.resolve(__dirname, './item.html'), 'utf-8'),
-    mounted:function(){
-        console.log('mounted')
-    }
+    template:fs.readFileSync(path.resolve(__dirname, './item.html'), 'utf-8')
 });
 Vue.component('navigate',{
     props:['type'],

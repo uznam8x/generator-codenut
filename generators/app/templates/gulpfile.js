@@ -65,6 +65,74 @@ var manageEnvironment = function(environment) {
   });
 };
 
+var baseHTML = function( str ){
+  var el = str
+    .replace(/data\-server\-rendered="true"/g, '')
+    .replace(/[a-z]+="\s*"/g, '')
+    .replace(/<!---->/g, '')
+
+    .replace(/<br(.*?)>/g, '<br$1/>')
+    .replace(/<hr(.*?)>/g, '<hr$1/>');
+
+  var mixed = function( attr, value ){
+    var match = value.match( /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g);
+    if( match !== null ){
+      for(var i = 0, len = match.length; i<len; i++){
+        var prop = match[i].replace(/'/g, "").replace(/"/g, "").split('=');
+        attr[ prop[0] ] = prop[1];
+      }
+    }
+
+
+    return attr;
+  };
+  var attribute = function( obj ){
+    var prop = '';
+    for(var key in obj){
+      prop += key+'="'+obj[key]+'" ';
+    }
+    return prop;
+  };
+
+  el = el.replace(/<img[^>]*>/g, function( value ){
+    return '<img {{attr}}/>'.replace("{{attr}}", attribute( mixed( { src:"", alt:"" }, value ) ));;
+  });
+
+  el = el.replace(/<input[^>]*>/g, function(value){
+    return '<input {{attr}}/>'.replace("{{attr}}", attribute( mixed( { type:"text", name:"", value:"" }, value ) ));
+  });
+  el = el.replace(/<textarea[^>]*>/g, function(value){
+    return '<textarea {{attr}}>'.replace("{{attr}}", attribute( mixed( { name:"", value:"" }, value ) ));
+  });
+  el = el.replace(/<select[^>]*>/g, function(value){
+    return '<select {{attr}}>'.replace("{{attr}}", attribute( mixed( { name:"" }, value ) ));
+  });
+  el = el.replace(/<option[^>]*>/g, function(value){
+    return '<option {{attr}}>'.replace("{{attr}}", attribute( mixed( { value:"" }, value ) ));
+  });
+
+  el = el.replace(/<iframe[^>]*>/g, function(value){
+    return '<iframe {{attr}}>'.replace("{{attr}}", attribute( mixed( { src:"", frameBorder:"0" }, value ) ));
+  });
+
+  el = el.replace(/<main[^>]*>/g, function(value){
+    return '<main {{attr}}>'.replace("{{attr}}", attribute( mixed( { role:"main" }, value ) ));
+  });
+
+  el = el.replace(/<button[^>]*>/g, function(value){
+    return '<button {{attr}}>'.replace("{{attr}}", attribute( mixed( { type:"button" }, value ) ));
+  });
+
+  el = el.replace(/<a[^>]*>/g, function(value){
+    return '<a {{attr}}>'.replace("{{attr}}", attribute( mixed( { href:"#" }, value ) ));
+  });
+
+  el = el.replace(/<form[^>]*>/g, function(value){
+    return '<form {{attr}}>'.replace("{{attr}}", attribute( mixed( { name:"", method:"get", action:"" }, value ) ));
+  });
+
+  return el;
+};
 
 gulp.task('nunjucks', function() {
 
@@ -89,15 +157,7 @@ gulp.task('nunjucks', function() {
         template: body
       }), function(err, rendered)  {
         if(err) throw err;
-        var string = rendered
-          .replace(/data\-server\-rendered="true"/g, '')
-          .replace(/<input(.*?)>/g, '<input$1/>')
-          .replace(/<img(.*?)>/g, '<img$1/>')
-          .replace(/<br(.*?)>/g, '<br$1/>')
-          .replace(/<hr(.*?)>/g, '<hr$1/>');
-        string = string.replace(/[a-z]+="\s*"/g, '');
-        string = string.replace(/<!---->/g, '');
-        html = html.replace(/<body[^>]*>((.|\n)*)<\/body>/gi, string);
+        html = html.replace(/<body[^>]*>((.|\n)*)<\/body>/gi, baseHTML(rendered));
 
         chunk.contents = new Buffer(html, "utf8");
       } );
