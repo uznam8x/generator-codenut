@@ -61,6 +61,10 @@ module.exports = class extends Generator {
       this.templatePath('app'),
       this.destinationPath('app')
     );
+    this.fs.copy(
+      this.templatePath('codenut.component.js'),
+      this.destinationPath('codenut.component.js')
+    );
   }
 
   install() {
