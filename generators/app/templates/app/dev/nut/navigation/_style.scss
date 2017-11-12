@@ -1,0 +1,24 @@
+[data-codenut-component="navigation"] {
+  position: relative;
+  display: block;
+  padding: 0;
+  margin: 0;
+  .navigation__menu {
+    display: block;
+    list-style: none;
+  }
+  .navigation__link {
+    display: block;
+  }
+}
+
+@media (min-width: map-get($breakpoint, 'xl')) {
+  .navigation--horizontal {
+    > .navigation__menu {
+      @include flexbox();
+      > .navigation__item {
+        @include flex(1 1);
+      }
+    }
+  }
+}

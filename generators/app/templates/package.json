@@ -4,27 +4,30 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start":"gulp default"
+    "start": "gulp default"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "^4.0.0-beta",
-    "glob": "^7.1.2",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "codenut-style": "0.0.5",
     "gulp": "^3.9.1",
+    "gulp-data": "^1.2.1",
     "gulp-nunjucks-render": "^2.2.1",
     "gulp-prettify": "^0.5.0",
-    "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
-    "gulp-uglify": "^3.0.0",
-    "gulp-concat": "^2.6.1",
-    "gulp-data": "^1.2.1",
     "gulp-sass-glob": "^1.0.8",
+    "js-beautify": "^1.7.4",
+    "glob-loader": "^0.3.0",
+    "node-sass": "^4.6.0",
     "path": "^0.12.7",
-    "pump": "^1.0.2",
     "through2": "^2.0.3",
     "vue": "^2.4.4",
-    "vue-server-renderer": "^2.4.4"
+    "vue-server-renderer": "^2.4.4",
+    "webpack": "^3.8.1",
+    "webpack-stream": "^4.0.0"
   },
   "devDependencies": {
     "browser-sync": "^2.18.13"

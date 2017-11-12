@@ -23,8 +23,8 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'name',
         message: 'Project name?',
-        default: this.appname
-      }
+        default: this.appname,
+      },
     ];
 
     return this.prompt(prompts).then(props => {
@@ -35,8 +35,8 @@ module.exports = class extends Generator {
   writing() {
     this.fs.copyTpl(
       this.templatePath('package.json'),
-      this.destinationPath('package.json'),{
-        name: this.props.name
+      this.destinationPath('package.json'), {
+        name: this.props.name,
       }
     );
     this.fs.copy(
@@ -45,8 +45,8 @@ module.exports = class extends Generator {
     );
     this.fs.copyTpl(
       this.templatePath('bower.json'),
-      this.destinationPath('bower.json'),{
-        name: this.props.name
+      this.destinationPath('bower.json'), {
+        name: this.props.name,
       }
     );
     this.fs.copy(
@@ -58,12 +58,20 @@ module.exports = class extends Generator {
       this.destinationPath('gulpfile.js')
     );
     this.fs.copy(
-      this.templatePath('app'),
-      this.destinationPath('app')
+      this.templatePath('codenut.js'),
+      this.destinationPath('codenut.js')
     );
     this.fs.copy(
-      this.templatePath('codenut.component.js'),
-      this.destinationPath('codenut.component.js')
+      this.templatePath('.jscsrc'),
+      this.destinationPath('.jscsrc')
+    );
+    this.fs.copy(
+      this.templatePath('.scss-lint.yml'),
+      this.destinationPath('.scss-lint.yml')
+    );
+    this.fs.copy(
+      this.templatePath('app'),
+      this.destinationPath('app')
     );
   }
 

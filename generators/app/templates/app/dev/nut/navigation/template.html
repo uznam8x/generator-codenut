@@ -1,0 +1,6 @@
+<nav role="navigation" data-codenut-component="navigation">
+  <ul class="navigation__menu">
+    <navigation-item :model="model" v-for="model in model" :key="model.title"></navigation-item>
+  </ul>
+  <slot></slot>
+</nav>

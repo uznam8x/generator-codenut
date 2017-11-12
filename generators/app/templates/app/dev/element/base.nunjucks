@@ -6,6 +6,7 @@
   <title>TITLE</title>
 </head>
 <body>
+<skip />
 {% block content %}{% endblock %}
 {% include 'script.nunjucks' %}
 </body>

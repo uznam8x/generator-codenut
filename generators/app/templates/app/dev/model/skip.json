@@ -1,0 +1,8 @@
+{
+  "skip":[
+    {
+      "title": "Go to main",
+      "link": "#main"
+    }
+  ]
+}

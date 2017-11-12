@@ -1,0 +1,7 @@
+<nav data-codenut-component="skip">
+  <ul class="skip__menu">
+    <li v-for="(item, index) in model" :key="index" class="skip__item">
+      <a :href="item.link" class="skip__link">{{item.title}}</a>
+    </li>
+  </ul>
+</nav>

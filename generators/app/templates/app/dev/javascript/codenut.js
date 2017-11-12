@@ -1,123 +1,152 @@
-(function($){
-  var component = {};
+// jscs:disable requireSpaceBeforeBlockStatements
+module.exports = (($) => {
+  'use strict';
+  const component = {};
   window.Codenut = window.Codenut || {};
   $.extend(Codenut, {
-    debug:false,
-    $win:$(window),
-    $dom:$(document),
-    $html:$('html'),
-    $head:$('head'),
-    $body:$('body'),
-    request:(function(){
-      var queryString = {};
+    debug: false,
+    $win: $(window),
+    $dom: $(document),
+    $html: $('html'),
+    $head: $('head'),
+    $body: $('body'),
+    request: (() => {
+      const queryString = {};
       window.location.search.replace(
-        new RegExp("([^?=&]+)(=([^&]*))?", "g"), function($0, $1, $2, $3) {
+        new RegExp('([^?=&]+)(=([^&]*))?', 'g'), ($0, $1, $2, $3) => {
           queryString[$1] = $3;
         }
       );
       return queryString;
     })(),
 
-    event:{
-      component:{
-        init:'codenut_component_init',
-        redraw:'codenut_component_redraw',
-        destroy:'codenut_component_destroy'
-      }
+    event: {
+      component: {
+        init: 'codenut_component_init',
+        redraw: 'codenut_component_redraw',
+        destroy: 'codenut_component_destroy',
+      },
     },
-    component:{
-      set:function( comp ){
-        var guid = Codenut.util.guid();
+    component: {
+      set: (comp) => {
+        const guid = Codenut.util.guid();
         component[guid] = comp;
         comp.el.setAttribute('data-codenut-guid', guid);
 
       },
-      get:function( selector ){
-        var comp = [];
-        $(selector).each( function(i, node){
-          var guid = node.getAttribute('data-codenut-guid');
-          comp.push( component[ guid ] );
-        } );
+
+      get: (selector) => {
+        const comp = [];
+        $(selector).each((i, node) => {
+          const guid = node.getAttribute('data-codenut-guid');
+          comp.push(component[guid]);
+        });
+
         return comp;
-      }
+      },
     },
-    util:{
-      guid:function() {
-        function s4() {
-          return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-        }
+    util: {
+      guid: () => {
+        const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
       },
-      uuid:function(){
-        var d = new Date().getTime();
-        if(window.performance && typeof window.performance.now === "function"){
-          d += performance.now();
+
+      uuid: () => {
+        let d = new Date().getTime();
+        if (window.performance && typeof window.performance.now === 'function') {
+          d += window.performance.now();
         }
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-          var r = (d + Math.random()*16)%16 | 0;
-          d = Math.floor(d/16);
-          return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+          let r = (d + Math.random() * 16) % 16 | 0;
+          d = Math.floor(d / 16);
+          return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
         });
-      }
-    },
-    bem:{
-      element:function( target, value ){
-        var block = target.name;
-        return block+'__'+value;
       },
-      modify:function(target, value){
-        var block = target.name;
-        return block+'--'+value;
-      }
-    }
-  } );
+    },
+    bem: {
+      element: (target, value) => target.name + '__' + value,
+      modify: (target, value) => target.name + '--' + value,
+    },
+  });
 
-  if( Codenut.request['debug'] && Codenut.request['debug'] === 'true' ) Codenut.debug = true;
+  if (Codenut.request.hasOwnProperty('debug') && Codenut.request.debug === 'true') {
+    Codenut.debug = true;
+  }
 
-  if( Codenut.debug ){
+  if (Codenut.debug) {
     console.group('codenut dependercy');
-    console.log('jQuery : '+(window.jQuery ? 'Loaded' :'Fail'));
-    console.log('TweenMax in gsap : '+(window.TweenMax ? 'Loaded' :'Fail'));
-    console.log('MobileDetect : '+(window.MobileDetect ? 'Loaded' :'Fail'));
+    console.log('jQuery : ' + (window.hasOwnProperty('jQuery') ? 'Loaded' : 'Fail'));
+    console.log('TweenMax in gsap : ' + (window.hasOwnProperty('TweenMax') ? 'Loaded' : 'Fail'));
+    console.log('MobileDetect : ' + (window.hasOwnProperty('MobileDetect') ? 'Loaded' : 'Fail'));
     console.groupEnd();
 
-    if( Object.keys(Codenut.request).length ){
+    if (Object.keys(Codenut.request).length) {
       console.group('query string');
-      for(var key in Codenut.request){
-        console.log( key+' : '+Codenut.request[key] );
+      for (const key in Codenut.request) {
+        if (Codenut.request.hasOwnProperty(key)){
+          console.log(key + ' : ' + Codenut.request[key]);
+        }
       }
+
       console.groupEnd();
     }
   }
 
-  var md = new MobileDetect(window.navigator.userAgent);
-  function resize(e){
-    var screen = {
-      'data-screen-width':Codenut.$win.width(),
-      'data-screen-mode':'',
-      'data-screen-device':'pc'
+  const md = new MobileDetect(window.navigator.userAgent);
+  const resize = () => {
+    const screen = {
+      'data-screen-width': Codenut.$win.width(),
+      'data-screen-mode': '',
+      'data-screen-device': 'pc',
     };
-    if( md.tablet() ) screen['data-screen-device'] = 'tablet';
-    if( md.mobile() ) screen['data-screen-device'] = 'mobile';
-    if( Codenut.breakpoint ){
-      var sh = Codenut.$win.width();
-      if( sh >= Codenut.breakpoint.xs ) screen['data-screen-mode'] = 'xs';
-      if( sh >= Codenut.breakpoint.sm ) screen['data-screen-mode'] = 'sm';
-      if( sh >= Codenut.breakpoint.md ) screen['data-screen-mode'] = 'md';
-      if( sh >= Codenut.breakpoint.lg ) screen['data-screen-mode'] = 'lg';
-      if( sh >= Codenut.breakpoint.xl ) screen['data-screen-mode'] = 'xl';
+    if (md.tablet()) screen['data-screen-device'] = 'tablet';
+    if (md.mobile()) screen['data-screen-device'] = 'mobile';
+
+    let style = '';
+    let scss = null;
+    if (window.getComputedStyle && window.getComputedStyle(document.documentElement, '::before')) {
+      style = window.getComputedStyle(document.documentElement, '::before');
+      style = style.content;
+    }
+
+    if (style.length) {
+      style = style
+        .replace(/^['"]+|\s+|\\|(;\s?})+|['"]$/g, '')
+        .replace(/\(/g, '{')
+        .replace(/\)/g, '}')
+        .replace(/:[\"]?([a-zA-Z0-9]*)([,|\}])/g, ':"$1"$2');
+      scss = eval('(' + style + ')');
+    }
+
+    if (scss.hasOwnProperty('breakpoint')) {
+      const breakpoint = scss.breakpoint;
+      const sh = Codenut.$win.width();
+      for(let key in breakpoint){
+        if( breakpoint.hasOwnProperty(key) ){
+          breakpoint[key] = parseInt(breakpoint[key]);
+        }
+      }
+
+      if (sh >= breakpoint.xs) screen['data-screen-mode'] = 'xs';
+      if (sh >= breakpoint.sm) screen['data-screen-mode'] = 'sm';
+      if (sh >= breakpoint.md) screen['data-screen-mode'] = 'md';
+      if (sh >= breakpoint.lg) screen['data-screen-mode'] = 'lg';
+      if (sh >= breakpoint.xl) screen['data-screen-mode'] = 'xl';
     }
 
     Codenut.screen = {};
-    for(var key in screen){
-      Codenut.screen[key.replace('data-screen-','')] = screen[key];
+    for (const key in screen) {
+      Codenut.screen[key.replace('data-screen-', '')] = screen[key];
     }
-    Codenut.$html.attr(screen)
-  }
-  resize();
-  Codenut.$win.resize( resize );
-  Codenut.$dom.ready( resize );
 
-  if( Codenut.debug ) console.log('%ccodenut initialize', 'color:#133783; font-weight:bold;');
+    Codenut.$html.attr(screen);
+  };
+
+  resize();
+  Codenut.$win.resize(resize);
+  Codenut.$dom.ready(resize);
+
+  if (Codenut.debug) console.log('%ccodenut initialize', 'color:#133783; font-weight:bold;');
 
 })(jQuery);

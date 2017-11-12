@@ -1,0 +1,22 @@
+[data-codenut-component="skip"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  ul {
+    li {
+      a {
+        position: absolute;
+        top: 0;
+        left: -200%;
+        display: block;
+        width: 100%;
+        &:focus {
+          left: 0;
+        }
+      }
+    }
+  }
+}
