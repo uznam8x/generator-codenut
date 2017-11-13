@@ -84,7 +84,7 @@ module.exports = (($) => {
     if (Object.keys(Codenut.request).length) {
       console.group('query string');
       for (const key in Codenut.request) {
-        if (Codenut.request.hasOwnProperty(key)){
+        if (Codenut.request.hasOwnProperty(key)) {
           console.log(key + ' : ' + Codenut.request[key]);
         }
       }
@@ -122,8 +122,8 @@ module.exports = (($) => {
     if (scss.hasOwnProperty('breakpoint')) {
       const breakpoint = scss.breakpoint;
       const sh = Codenut.$win.width();
-      for(let key in breakpoint){
-        if( breakpoint.hasOwnProperty(key) ){
+      for (let key in breakpoint) {
+        if (breakpoint.hasOwnProperty(key)) {
           breakpoint[key] = parseInt(breakpoint[key]);
         }
       }
@@ -150,3 +150,7 @@ module.exports = (($) => {
   if (Codenut.debug) console.log('%ccodenut initialize', 'color:#133783; font-weight:bold;');
 
 })(jQuery);
+
+require('glob-loader!../nut/loader.txt');
+require('glob-loader!./external/loader.txt');
+

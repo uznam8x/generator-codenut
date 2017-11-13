@@ -1,0 +1,9 @@
+<div data-codenut="sns">
+  <ul class="sns__menu">
+    <li v-for="(item, index) of items" :key="index" class="sns__item">
+      <button type="button" :class="'sns__link sns--'+item">
+        <img :src="'/resource/image/sns/'+item+'.png'" :alt="item" />
+      </button>
+    </li>
+  </ul>
+</div>

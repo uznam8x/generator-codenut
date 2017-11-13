@@ -26,7 +26,7 @@ gulp.task('browser-sync', function () {
 gulp.task('webpack', () => gulp.src('./app/dev/javascript/codenut.js')
   .pipe(webpack(require('./webpack.config.js')))
   .pipe(gulp.dest('app/prod/javascript'))
-  .pipe(reload({stream: true}))
+  .pipe(reload({ stream: true }))
 );
 
 gulp.task('sass', () => {
@@ -38,7 +38,7 @@ gulp.task('sass', () => {
     .pipe(sassGlob())
     .pipe(sass(option))
     .pipe(gulp.dest('./app/prod/stylesheet/'))
-    .pipe(reload({stream: true}));
+    .pipe(reload({ stream: true }));
 });
 
 const baseHTML = (str) => {
@@ -78,47 +78,54 @@ const baseHTML = (str) => {
   el = el
     .replace(
       /<img[^>]*>/g,
-      (value) => '<img {{attr}}/>'.replace('{{attr}}', attribute(mixed({ src: '', alt: ''}, value)))
+      (value) => '<img {{attr}}/>'.replace('{{attr}}', attribute(mixed({ src: '', alt: '' }, value)))
     )
     .replace(
       /<input[^>]*>/g,
-      (value) => '<input {{attr}}/>'.replace('{{attr}}', attribute(mixed({ type: 'text', name: '', value: ''}, value)))
+      (value) => '<input {{attr}}/>'.replace('{{attr}}', attribute(mixed({
+        type: 'text',
+        name: '',
+        value: '',
+      }, value)))
     )
     .replace(
       /<textarea[^>]*>/g,
-      (value) => '<textarea {{attr}}>'.replace('{{attr}}', attribute(mixed({ name: '', value: ''}, value)))
+      (value) => '<textarea {{attr}}>'.replace('{{attr}}', attribute(mixed({ name: '', value: '' }, value)))
     )
     .replace(
       /<select[^>]*>/g,
-      (value) => '<select {{attr}}>'.replace('{{attr}}', attribute(mixed({ name: ''}, value)))
+      (value) => '<select {{attr}}>'.replace('{{attr}}', attribute(mixed({ name: '' }, value)))
     )
     .replace(
       /<option[^>]*>/g,
-      (value) => '<option {{attr}}>'.replace('{{attr}}', attribute(mixed({ value: ''}, value)))
+      (value) => '<option {{attr}}>'.replace('{{attr}}', attribute(mixed({ value: '' }, value)))
     )
     .replace(
       /<iframe[^>]*>/g,
-      (value) => '<iframe {{attr}}>'.replace('{{attr}}', attribute(mixed({ src: '', frameborder: '0'}, value)))
+      (value) => '<iframe {{attr}}>'.replace('{{attr}}', attribute(mixed({ src: '', frameborder: '0' }, value)))
     )
     .replace(
       /<main[^>]*>/g,
-      (value) => '<main {{attr}}>'.replace('{{attr}}', attribute(mixed({ role: 'main'}, value)))
+      (value) => '<main {{attr}}>'.replace('{{attr}}', attribute(mixed({ role: 'main' }, value)))
     )
     .replace(
       /<button[^>]*>/g,
-      (value) => '<button {{attr}}>'.replace('{{attr}}', attribute(mixed({ type: 'button'}, value)))
+      (value) => '<button {{attr}}>'.replace('{{attr}}', attribute(mixed({ type: 'button' }, value)))
     )
     .replace(
       /<a[^>]*>/g,
-      (value) => '<a {{attr}}>'.replace('{{attr}}', attribute(mixed({ href: '#'}, value)))
+      (value) => '<a {{attr}}>'.replace('{{attr}}', attribute(mixed({ href: '#' }, value)))
     )
     .replace(
       /<form[^>]*>/g,
-      (value) => '<form {{attr}}>'.replace('{{attr}}', attribute(mixed({ name: '', method: 'get', action: ''}, value)))
+      (value) => '<form {{attr}}>'.replace('{{attr}}', attribute(mixed({
+        name: '',
+        method: 'get',
+        action: '',
+      }, value)))
     );
   return el;
 };
-
 
 const manageEnvironment = (environment) => {
   environment.addGlobal('merge', () => {
@@ -199,15 +206,15 @@ gulp.task('nunjucks', () => gulp.src('./app/dev/page/**/*.html')
     indent_inner_html: true,
   }))
   .pipe(gulp.dest('./app/prod/page'))
-  .pipe(reload({stream: true}))
+  .pipe(reload({ stream: true }))
 );
 gulp.task('watch', ['browser-sync', 'sass'], () => {
-  gulp.watch('app/dev/**/*.+(html|nunjucks)', {cwd: './'}, ['nunjucks']);
-  gulp.watch('app/dev/model/**/*.json', {cwd: './'}, ['nunjucks']);
-  gulp.watch('app/dev/stylesheet/**/*.scss', {cwd: './'}, ['sass']);
-  gulp.watch('app/dev/nut/**/*.scss', {cwd: './'}, ['sass']);
-  gulp.watch('app/dev/javascript/**/*.js', {cwd: './'}, ['webpack']);
-  gulp.watch('app/dev/nut/**/*.js', {cwd: './'}, ['webpack']);
+  gulp.watch('app/dev/**/*.+(html|nunjucks)', { cwd: './' }, ['nunjucks']);
+  gulp.watch('app/dev/model/**/*.json', { cwd: './' }, ['nunjucks']);
+  gulp.watch('app/dev/stylesheet/**/*.scss', { cwd: './' }, ['sass']);
+  gulp.watch('app/dev/nut/**/*.scss', { cwd: './' }, ['sass']);
+  gulp.watch('app/dev/javascript/**/*.js', { cwd: './' }, ['webpack']);
+  gulp.watch('app/dev/nut/**/*.js', { cwd: './' }, ['webpack']);
 });
 
-gulp.task('default', ['webpack', 'sass', 'watch', 'browser-sync']);
+gulp.task('default', ['nunjucks', 'sass', 'webpack', 'watch', 'browser-sync']);

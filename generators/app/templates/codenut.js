@@ -10,6 +10,7 @@ glob('app/dev/nut/**/*.nut', { cwd: './' }, (err, files) => {
     if (err) {
       throw err;
     }
+
     load(files);
   }
 );
