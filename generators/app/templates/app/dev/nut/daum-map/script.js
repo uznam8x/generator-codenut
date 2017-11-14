@@ -1,7 +1,7 @@
 ((_) => {
   'use strict';
   const maps = [];
-  const init = () => {
+  const init = (map) => {
     _.each(map, (node, i) => {
       const config = {
         lat: Number(node.getAttribute('data-lat')),
@@ -10,7 +10,7 @@
       };
 
       const map = new daum.maps.Map(node, {
-        center:new daum.maps.LatLng(config.lat, config.lng),
+        center: new daum.maps.LatLng(config.lat, config.lng),
         level: 3,
       });
       maps.push(map);
@@ -29,11 +29,13 @@
     });
   };
 
-  const map = document.documentElement.querySelectorAll('[data-codenut="daum-map"]');
-  if (map.length) init();
+  if (window.daum && window.daum.maps) {
+    const map = document.documentElement.querySelectorAll('[data-codenut="daum-map"]');
+    if (map.length) init( map );
 
-  if (Codenut.debug) {
-    console.log('%ccodenut component : "daum-map" initialize', 'color:#133783');
+    if (Codenut.debug) {
+      console.log('%ccodenut component : "daum-map" initialize', 'color:#133783');
+    }
   }
 })(_);
 

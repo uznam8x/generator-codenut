@@ -1,6 +1,6 @@
 ((_) => {
   const maps = [];
-  const init = () => {
+  const init = (map) => {
     _.each(map, function (node, i) {
 
       const config = {
@@ -28,11 +28,13 @@
     });
   };
 
-  const map = document.documentElement.querySelectorAll('[data-codenut="naver-map"]');
-  if (map.length) init();
+  if (window.naver && window.naver.maps) {
+    const map = document.documentElement.querySelectorAll('[data-codenut="naver-map"]');
+    if (map.length) init(map);
 
-  if (Codenut.debug) {
-    console.log('%ccodenut component : "naver-map" initialize', 'color:#133783');
+    if (Codenut.debug) {
+      console.log('%ccodenut component : "naver-map" initialize', 'color:#133783');
+    }
   }
 })(_);
 

@@ -68,6 +68,13 @@ module.exports = (($) => {
       element: (target, value) => target.name + '__' + value,
       modify: (target, value) => target.name + '--' + value,
     },
+    selector: {
+      hasClass: (el, cls) => Codenut.regex.hasClass(cls).test(' ' + el.className + ' '),
+      closest: (el, fn) => (el && (fn(el) ? el : Codenut.selector.closest(el.parentNode, fn))),
+    },
+    regex: {
+      hasClass: (cls) => new RegExp('[\\s]' + cls + '[\\s]?', 'g'),
+    }
   });
 
   if (Codenut.request.hasOwnProperty('debug') && Codenut.request.debug === 'true') {
@@ -79,6 +86,7 @@ module.exports = (($) => {
     console.log('jQuery : ' + (window.hasOwnProperty('jQuery') ? 'Loaded' : 'Fail'));
     console.log('TweenMax in gsap : ' + (window.hasOwnProperty('TweenMax') ? 'Loaded' : 'Fail'));
     console.log('MobileDetect : ' + (window.hasOwnProperty('MobileDetect') ? 'Loaded' : 'Fail'));
+    console.log('Lodash : ' + (window.hasOwnProperty('_') ? 'Loaded' : 'Fail'));
     console.groupEnd();
 
     if (Object.keys(Codenut.request).length) {
