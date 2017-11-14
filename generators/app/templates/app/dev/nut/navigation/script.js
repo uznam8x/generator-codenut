@@ -1,5 +1,6 @@
 (($, nut) => {
-  nut.$dom.on('click', '[data-codenut-component="navigate"] a[href="#"]', (e) => {
+  'use strict';
+  nut.$dom.on('click', '[data-codenut="navigate"] a[href="#"]', (e) => {
     e.preventDefault();
   });
 

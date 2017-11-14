@@ -1,3 +1,18 @@
 [data-codenut="sns"] {
+  position: relative;
+}
 
+.sns {
+  @include e("menu") {
+    font-size: 0;
+  }
+
+  @include e("item") {
+    display: inline-block;
+  }
+
+  @include e("link") {
+    width: rem(48px);
+    border: 0;
+  }
 }

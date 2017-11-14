@@ -2,12 +2,23 @@
   position: relative;
   padding: 0;
   margin: 0;
-  font-size: 0;
-  line-height: 0;
   white-space: nowrap;
   list-style: none;
-  > li {
+}
+
+.pagination {
+  @include e("menu") {
+    @include flexbox();
+  }
+  @include e("item") {
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+  @include e("link") {
     display: inline-block;
-    font-size: 1rem;
+    line-height: 1;
+    text-decoration: none;
+    border-radius: rem(6px);
   }
 }
