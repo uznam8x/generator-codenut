@@ -19,6 +19,7 @@
     "gulp-prettify": "^0.5.0",
     "gulp-sass": "^3.1.0",
     "gulp-sass-glob": "^1.0.8",
+    "gulp-sequence": "^0.4.6",
     "js-beautify": "^1.7.4",
     "glob-loader": "^0.3.0",
     "node-sass": "^4.6.0",

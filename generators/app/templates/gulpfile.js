@@ -1,5 +1,6 @@
 // jscs:disable maximumLineLength
 const gulp = require('gulp');
+const sequence = require('gulp-sequence');
 const webpack = require('webpack-stream');
 const sassGlob = require('gulp-sass-glob');
 const sass = require('gulp-sass');
@@ -36,7 +37,7 @@ gulp.task('sass', () => {
   };
   return gulp.src('./app/dev/stylesheet/**/*.scss')
     .pipe(sassGlob())
-    .pipe(sass(option))
+    .pipe(sass(option).on('error', sass.logError))
     .pipe(gulp.dest('./app/prod/stylesheet/'))
     .pipe(reload({ stream: true }));
 });
@@ -155,6 +156,8 @@ const manageEnvironment = (environment) => {
   });
 
   environment.addGlobal('render', (markup) => {
+    Vue.config.debug = false;
+    Vue.config.productionTip = true;
     renderer.renderToString(new Vue({
       template: markup,
     }), function (err, rendered) {
@@ -173,6 +176,10 @@ const manageEnvironment = (environment) => {
   });
 };
 
+gulp.task('reload', () => {
+  browserSync.reload();
+});
+
 gulp.task('nunjucks', () => gulp.src('./app/dev/page/**/*.html')
   .pipe(data(() => ({
       nav: require('./app/dev/model/nav.json'),
@@ -189,16 +196,22 @@ gulp.task('nunjucks', () => gulp.src('./app/dev/page/**/*.html')
     'use strict';
     let html = chunk.contents.toString();
 
-    const body = html.match(/<body[^>]*>((.|\n)*)<\/body>/gi)[0];
-    renderer.renderToString(new Vue({
-      template: body,
-    }), function (err, rendered) {
-      if (err) throw err;
-      html = html.replace(/<body[^>]*>((.|\n)*)<\/body>/gi, baseHTML(rendered));
-      chunk.contents = new Buffer(html, 'utf8');
-    });
+    try {
+      const body = html.match(/<body[^>]*>((.|\n)*)<\/body>/gi)[0];
+      renderer.renderToString(new Vue({
+          template: body,
+        }), function (err, rendered) {
+          if (err) throw err;
+          html = html.replace(/<body[^>]*>((.|\n)*)<\/body>/gi, baseHTML(rendered));
+          chunk.contents = new Buffer(html, 'utf8');
+        }
+      );
+      callback(null, chunk);
+    } catch (e) {
+      chunk.contents = new Buffer('<html></html>', 'utf8');
+      callback(null, chunk);
+    }
 
-    callback(null, chunk);
   }))
   .pipe(prettify({
     indent_size: 2,
@@ -206,15 +219,30 @@ gulp.task('nunjucks', () => gulp.src('./app/dev/page/**/*.html')
     indent_inner_html: true,
   }))
   .pipe(gulp.dest('./app/prod/page'))
-  .pipe(reload({ stream: true }))
 );
-gulp.task('watch', ['browser-sync', 'sass'], () => {
-  gulp.watch('app/dev/**/*.+(html|nunjucks)', { cwd: './' }, ['nunjucks']);
-  gulp.watch('app/dev/model/**/*.json', { cwd: './' }, ['nunjucks']);
+gulp.task('watch', () => {
+  gulp.watch('app/dev/**/*.+(html|nunjucks)', { cwd: './' }, () => {
+    sequence('nunjucks', 'reload')((err) => {
+      if (err) console.log(err);
+    });
+  });
+  gulp.watch('app/dev/model/**/*.json', { cwd: './' }, () => {
+    sequence('nunjucks', 'reload')((err) => {
+      if (err) console.log(err);
+    });
+  });
   gulp.watch('app/dev/stylesheet/**/*.scss', { cwd: './' }, ['sass']);
   gulp.watch('app/dev/nut/**/*.scss', { cwd: './' }, ['sass']);
-  gulp.watch('app/dev/javascript/**/*.js', { cwd: './' }, ['webpack']);
-  gulp.watch('app/dev/nut/**/*.js', { cwd: './' }, ['webpack']);
+  gulp.watch('app/dev/javascript/**/*.js', { cwd: './' }, () => {
+    sequence('webpack', 'reload')((err) => {
+      if (err) console.log(err);
+    });
+  });
+  gulp.watch('app/dev/nut/**/*.js', { cwd: './' }, () => {
+    sequence('webpack', 'reload')((err) => {
+      if (err) console.log(err);
+    });
+  });
 });
 
 gulp.task('default', ['nunjucks', 'sass', 'webpack', 'watch', 'browser-sync']);

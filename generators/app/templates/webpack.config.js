@@ -5,7 +5,7 @@ module.exports = {
   entry: path.resolve(__dirname, 'app/dev/javascript/codenut.js'),
   output: {
     path: path.resolve(__dirname, 'app/prod/javascript/'),
-    filename: 'codenut.min.js',
+    filename: 'script.min.js',
   },
   cache: true,
 
@@ -26,7 +26,13 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: true,
+      }
+      ,
+      output: {
+        comments: false,
       },
+      sourceMap: false,
     }),
   ],
+
 };

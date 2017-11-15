@@ -9,16 +9,24 @@
 .pagination {
   @include e("menu") {
     @include flexbox();
+
   }
   @include e("item") {
     &:first-child {
       margin-left: 0;
     }
+    border: 1px solid #bbb;
+    margin: 0 .1rem;
+    @include border-radius(rem(4px));
+    overflow: hidden;
   }
   @include e("link") {
     display: inline-block;
     line-height: 1;
     text-decoration: none;
-    border-radius: rem(6px);
+    padding: .4rem .4rem .5rem;
+    background-color: #fff;
+    color: #666;
+
   }
 }
