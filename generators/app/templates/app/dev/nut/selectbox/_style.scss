@@ -3,9 +3,9 @@
   display: inline-block;
   min-width: 8rem;
   min-height: 1rem;
+  padding: .4rem .5rem;
   background-color: #fff;
   border: 1px solid #bbb;
-  padding: .4rem .5rem .4rem;
 }
 
 .selectbox {
@@ -26,16 +26,26 @@
     display: block;
     width: 100%;
     line-height: 1;
+    color: #aaa;
     &::after {
       position: absolute;
       top: 50%;
       right: 0;
-      @include transform(translate(0,-50%));
+      @include transform(translate(0, -50%));
       z-index: 1;
       display: inline-block;
       font-family: FontAwesome;
       content: "\f0d7";
     }
+  }
+  @include e("empty") {
+    display: none;
+  }
+}
+
+.selectbox--selected {
+  .selectbox__title {
+    color: #000;
   }
 }
 

@@ -7,6 +7,9 @@ Vue.component('sns', {
       show: {
         default: '',
       },
+      symbol: {
+        default: false,
+      }
     },
     data: () => (
       {
@@ -33,6 +36,7 @@ Vue.component('sns', {
         ],
       }
     ),
+
     template: fs.readFileSync(path.resolve(__dirname, './template.html'), 'utf-8'),
     created: function () {
       'use strict';
@@ -41,6 +45,10 @@ Vue.component('sns', {
         let items = prop.show.split(' ');
         for (let i = 0, len = items.length; i < len; i++) {
           if (this._data.list.indexOf(items[i]) && items[i].replace(/\s/g, '').length) {
+            if (this._props.symbol === 'true') {
+              items[i] += '-symbol';
+            };
+
             this.items.push(items[i]);
           }
         }

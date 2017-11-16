@@ -19,7 +19,6 @@ module.exports = (($) => {
       );
       return queryString;
     })(),
-
     event: {
       component: {
         init: 'codenut_component_init',
@@ -129,6 +128,8 @@ module.exports = (($) => {
 
     if (scss.hasOwnProperty('breakpoint')) {
       const breakpoint = scss.breakpoint;
+      Codenut.breakpoint = breakpoint;
+
       const sh = Codenut.$win.width();
       for (let key in breakpoint) {
         if (breakpoint.hasOwnProperty(key)) {
@@ -144,8 +145,9 @@ module.exports = (($) => {
     }
 
     Codenut.screen = {};
-    for (const key in screen) {
-      Codenut.screen[key.replace('data-screen-', '')] = screen[key];
+    for (let key in screen) {
+      let prop = key.replace('data-screen-', '');
+      Codenut.screen[prop] = screen[key];
     }
 
     Codenut.$html.attr(screen);

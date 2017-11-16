@@ -16,11 +16,23 @@
       const change = (e) => {
         e.preventDefault();
         title.innerText = $el.getText();
+        el.classList.add('selectbox--selected');
+
+        let empty = el.getElementsByClassName('selectbox__empty');
+        if (empty.length) {
+          select.removeChild(empty[0]);
+        }
+
         $el.trigger({ type: 'selectbox_change', codenut: $el });
+
       };
 
       $el.on('change', '.selectbox__select', change);
-      $(select).trigger({ type: 'change' });
+      if (select.querySelector('[selected]')) {
+        $(select).trigger({ type: 'change' });
+      } else {
+        $(select).prepend('<option value="" selected="selected" class="selectbox__empty"></option>');
+      }
 
       return $el;
     };

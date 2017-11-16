@@ -183,6 +183,13 @@ gulp.task('reload', () => {
 gulp.task('nunjucks', () => gulp.src('./app/dev/page/**/*.html')
   .pipe(data(() => ({
       nav: require('./app/dev/model/nav.json'),
+      seo: {
+        title: '',
+        description: '',
+        keyword: '',
+        icon: '',
+        site: '',
+      },
       util: {
         date: +new Date(),
       },

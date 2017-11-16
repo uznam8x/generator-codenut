@@ -13,6 +13,7 @@
 
   @include e("link") {
     width: rem(48px);
+    background-color: transparent;
     border: 0;
   }
 }

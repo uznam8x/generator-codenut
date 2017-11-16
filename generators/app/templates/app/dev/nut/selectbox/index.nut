@@ -10,6 +10,9 @@ Vue.component('selectbox', {
       multiple: {
         default: false,
       },
+      placeholder: {
+        default: 'Please select',
+      }
     },
     template: fs.readFileSync(path.resolve(__dirname, './template.html'), 'utf-8'),
   }
