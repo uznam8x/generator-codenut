@@ -6,9 +6,27 @@
     let post = null;
     let $frame = null;
     let ready = false;
+    
+    const layer = '' +
+      '<div id="{{guid}}" class="daum-postcode-layer">\n' +
+      '  <div class="daum-postcode-layer__iframe">\n' +
+      '    <div class="daum-postcode-layer__head">' +
+      '     <h4>우편번호 서비스</h4>' +
+      '     <button type="button" class="daum-postcode-layer__close">CLOSE</button></div>\n' +
+      '  </div>\n' +
+      '</div>';
+
     const search = (e) => {
       $frame = $(e.currentTarget).closest('[data-codenut="daum-postcode"]');
       if (ready) {
+
+        const guid = nut.util.guid();
+        e.currentTarget.setAttribute('data-codenut-guid', guid);
+        document.getElementsByTagName('body')[0]
+          .insertAdjacentHTML('beforeend', layer.replace('{{guid}}', 'guid-' + guid));
+
+        const wrap = document.getElementById('guid-' + guid);
+
         post = new daum.Postcode({
           oncomplete: (data) => {
             $frame.find('input[name]').each((i, node) => {
@@ -17,16 +35,15 @@
             });
             close();
           },
-        }).embed($frame.find('.daum-postcode-layer__iframe')[0]);
-        $frame.find('.daum-postcode-layer')[0].style.display = 'block';
+        }).embed(wrap.getElementsByClassName('daum-postcode-layer__iframe')[0]);
       } else {
         alert('다음 우편번호 서비스가 로드 되지 않았습니다.');
       }
     };
 
     const close = () => {
-      $frame.find('.daum-postcode-layer')[0].style.display = 'none';
-      $frame.find('.daum-postcode-layer__iframe').children().last().remove();
+      $('.daum-postcode-layer').remove();
+      $frame = null;
     };
 
     const init = () => {
