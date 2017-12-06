@@ -62,10 +62,6 @@ module.exports = class extends Generator {
       this.destinationPath('webpack.config.js')
     );
     this.fs.copy(
-      this.templatePath('codenut.js'),
-      this.destinationPath('codenut.js')
-    );
-    this.fs.copy(
       this.templatePath('.jscsrc'),
       this.destinationPath('.jscsrc')
     );
@@ -76,6 +72,10 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('app'),
       this.destinationPath('app')
+    );
+    this.fs.copy(
+      this.templatePath('configuation'),
+      this.destinationPath('configuation')
     );
   }
 
