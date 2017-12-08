@@ -2,17 +2,24 @@
   'use strict';
   const component = document.documentElement.querySelectorAll('[data-codenut="textfield"]');
   if (component.length) {
+    const getTextfield = (el) => nut.selector.closest(el, (node) => node.getAttribute('data-codenut') === 'textfield');
+
     const input = (e) => {
       const target = e.currentTarget;
-      target.parentNode.classList[((target.value ? 'add' : 'remove'))]('textfield--fill');
+      getTextfield(e.currentTarget)
+        .classList[((target.value ? 'add' : 'remove'))]('textfield--fill');
     };
 
     const focus = (e) => {
-      e.currentTarget.parentNode.classList.add('textfield--focus');
+      let textfield = getTextfield(e.currentTarget);
+      getTextfield(e.currentTarget)
+        .classList.add('textfield--focus');
     };
 
     const blur = (e) => {
-      e.currentTarget.parentNode.classList.remove('textfield--focus');
+      let textfield = getTextfield(e.currentTarget);
+      getTextfield(e.currentTarget)
+        .classList.remove('textfield--focus');
     };
 
     nut.$dom.on('input', '[data-codenut="textfield"] input', input);

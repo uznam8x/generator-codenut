@@ -1,11 +1,31 @@
+$select-padding: rem(12px);
 [data-codenut="selectbox"] {
-  position: relative;
-  display: inline-block;
-  min-width: 8rem;
-  min-height: 1rem;
-  padding: .4rem .5rem;
-  background-color: #fff;
-  border: 1px solid #bbb;
+  label {
+    position: relative;
+    display: block;
+    min-width: 8rem;
+    min-height: 1rem;
+    margin-bottom: 0;
+    font-size: rem(14px);
+    @include background-gradient(#fff, #f8f8f8);
+    border: 1px solid #ced0da;
+    border-radius: rem(6px);
+  }
+
+  @include transition(border .2s ease-out);
+
+  &.selectbox--focus {
+    border-color: #377fb2;
+  }
+  &.textfield--error {
+    border-color: #ed1c24 !important;
+    .selectbox__title {
+      color: #ed1c24 !important;
+    }
+  }
+  &.selectbox--success {
+    border-color: #1bb934;
+  }
 }
 
 .selectbox {
@@ -19,18 +39,20 @@
     width: 100%;
     height: 100%;
     cursor: pointer;
+    outline: none;
     @include opacity(0);
   }
   @include e("title") {
     position: relative;
     display: block;
     width: 100%;
+    padding: $select-padding;
     line-height: 1;
-    color: #aaa;
+    color: #adb0b5;
     &::after {
       position: absolute;
       top: 50%;
-      right: 0;
+      right: $select-padding;
       @include transform(translate(0, -50%));
       z-index: 1;
       display: inline-block;
@@ -38,8 +60,8 @@
       content: "\f0d7";
     }
   }
-  @include e("empty") {
-    display: none;
+  @include e("placeholder") {
+
   }
 }
 

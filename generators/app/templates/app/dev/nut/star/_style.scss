@@ -1,0 +1,21 @@
+[data-codenut="star"] {
+  position: relative;
+  display: inline-block;
+  font-size: 0;
+  > span {
+    font-size: 1rem;
+    color: #e2bc12;
+    &::before {
+      display: inline-block;
+      content: "\2606";
+    }
+  }
+}
+
+.star--fill {
+  > span {
+    &::before {
+      content: "\2605";
+    }
+  }
+}

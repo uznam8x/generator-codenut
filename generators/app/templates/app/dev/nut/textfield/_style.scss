@@ -1,18 +1,44 @@
+$input-padding: rem(12px);
 [data-codenut="textfield"] {
   position: relative;
-  display: block;
-  width: 100%;
+  overflow: hidden;
   background-color: #fff;
-  border: 1px solid #bbb;
-  > input {
-    position: relative;
-    z-index: 3;
+  border: 1px solid #ced0da;
+  border-radius: rem(6px);
+  @include transition(border .2s ease-out);
+  label {
     display: block;
     width: 100%;
-    padding: .4rem .4rem;
-    line-height: 1;
+    margin-bottom: 0;
     background-color: transparent;
-    border: 0;
+    > input {
+      position: relative;
+      z-index: 3;
+      display: block;
+      width: 100%;
+      padding: $input-padding;
+      font-size: rem(14px);
+      line-height: 1;
+      color: #354052;
+      background-color: transparent;
+      border: 0;
+      outline: none;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  &.textfield--focus {
+    border-color: #377fb2;
+  }
+  &.textfield--error {
+    border-color: #ed1c24 !important;
+    .textfield__placeholder, input {
+      color: #ed1c24 !important;
+    }
+  }
+  &.textfield--success {
+    border-color: #1bb934;
   }
 }
 
@@ -24,13 +50,11 @@
     bottom: 0;
     left: 0;
     z-index: 1;
-    @include flexbox();
-    @include align-items(center);
     width: 100%;
     height: 100%;
-    padding-left: .4rem;
-    line-height: 1;
-    color: #bbb;
+    padding: $input-padding;
+    font-size: inherit;
+    color: #adb0b5;
   }
 }
 

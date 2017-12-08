@@ -1,6 +1,10 @@
 [data-codenut="checkbox"] {
   position: relative;
   display: inline-block;
+  label {
+    display: block;
+    margin-bottom: 0;
+  }
 }
 
 .checkbox {

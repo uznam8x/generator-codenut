@@ -1,6 +1,10 @@
 [data-codenut="radiobox"] {
   position: relative;
   display: inline-block;
+  label {
+    display: block;
+    margin-bottom: 0;
+  }
 }
 
 .radiobox {
@@ -29,7 +33,6 @@
       content: "\f10c";
     }
   }
-
 
   @at-root {
     #{&}__input:checked + #{&}__title::before {

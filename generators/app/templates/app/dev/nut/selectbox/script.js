@@ -1,4 +1,4 @@
-(($, _) => {
+(($, _, nut) => {
   'use strict';
   const component = document.documentElement.querySelectorAll('[data-codenut="selectbox"]');
   if (component.length) {
@@ -9,6 +9,7 @@
       const $el = $(el);
       const select = el.getElementsByClassName('selectbox__select')[0];
       const title = el.getElementsByClassName('selectbox__title')[0];
+      const getSelectbox = (el) => nut.selector.closest(el, (node) => node.getAttribute('data-codenut') === 'selectbox');
 
       $el.getValue = () => select.value;
       $el.getText = () => select.options[select.selectedIndex].text;
@@ -21,11 +22,11 @@
       };
 
       const focus = (e) => {
-        e.currentTarget.parentNode.classList.add('selectbox--focus');
+        getSelectbox(e.currentTarget).classList.add('selectbox--focus');
       };
 
       const blur = (e) => {
-        e.currentTarget.parentNode.classList.remove('selectbox--focus');
+        getSelectbox(e.currentTarget).classList.remove('selectbox--focus');
       };
 
       $el.on('focusin', '.selectbox__select', focus);
@@ -45,4 +46,4 @@
       console.log('%ccodenut component : "selectbox" initialize', 'color:#133783');
     }
   }
-})(jQuery, _);
+})(jQuery, _, Codenut);
