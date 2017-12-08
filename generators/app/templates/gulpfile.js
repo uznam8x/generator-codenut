@@ -21,7 +21,7 @@ gulp.task('watch', () => {
     },
   });
 
-  gulp.watch('app/dev/page/**/*.html', { cwd: './' }, (file) => {
+  gulp.watch('app/dev/**/*.html', { cwd: './' }, (file) => {
     render(file.path);
   });
   gulp.watch(['app/dev/**/*.nunjucks', 'app/dev/model/**/*.json'], { cwd: './' }, (file) => {
@@ -35,7 +35,7 @@ gulp.task('watch', () => {
       browserSync.reload();
     }, 300);
   });
-  gulp.watch(['app/dev/stylesheet/**/*.scss', 'app/dev/nut/**/*.scss'], { cwd: './' }, () => {
+  gulp.watch(['app/dev/stylesheet/**/*.scss', 'app/dev/nut/**/*.scss'], { cwd: './' }, (file) => {
     sequence('sass')((err) => {
       if (err) console.log(err);
       clearTimeout(timeout);
@@ -45,7 +45,7 @@ gulp.task('watch', () => {
 
     });
   });
-  gulp.watch(['app/dev/javascript/**/*.js', 'app/dev/nut/**/*.js'], { cwd: './' }, () => {
+  gulp.watch(['app/dev/javascript/**/*.js', 'app/dev/nut/**/*.js'], { cwd: './' }, (file) => {
     sequence('webpack')((err) => {
       if (err) console.log(err);
     });

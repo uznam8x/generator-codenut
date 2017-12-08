@@ -64,7 +64,7 @@ const render = (src) => {
   let locate = dest.split('/');
   locate.splice(-1, 1);
   dest = locate.join('/').replace('**', '');
-  return gulp.src(src)
+  return gulp.src([src, '!' + root + '/app/dev/nut/**/*.html'])
     .pipe(data(() => ({
         nav: require(root + '/app/dev/model/nav.json'),
         seo: require(root + '/app/dev/model/seo.json'),
@@ -96,7 +96,7 @@ const render = (src) => {
         );
         callback(null, chunk);
       } catch (e) {
-        chunk.contents = new Buffer(error(err), 'utf8');
+        chunk.contents = new Buffer(error(e), 'utf8');
         callback(null, chunk);
       }
 
@@ -109,5 +109,5 @@ const render = (src) => {
     .pipe(gulp.dest(dest));
 };
 
-gulp.task('render', () => render(root + '/app/dev/page/**/*.html'));
+gulp.task('render', () => render(root + '/app/dev/**/*.html'));
 module.exports = render;
