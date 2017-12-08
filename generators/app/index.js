@@ -83,8 +83,8 @@ module.exports = class extends Generator {
     this.installDependencies({
       skipInstall: this.options['skip-install'],
       callback: () => {
+        console.log('Codenut Prerender');
         this.spawnCommand('gulp', ['render']);
-        this.spawnCommand('npm', ['start']);
       }
     });
   }

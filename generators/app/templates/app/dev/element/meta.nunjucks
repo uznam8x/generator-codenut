@@ -13,28 +13,3 @@
 <meta name="keywords" content="" />
 <meta name="contact" content="" />
 <meta name="date" content="{{util.date}}" />
-
-<meta name="msapplication-TileColor" content="#ffffff" />
-<meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
-<meta name="theme-color" content="#ffffff" />
-
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:url" content="{{seo.site}}" />
-<meta name="twitter:title" content="Codenut" />
-<meta name="twitter:description" content="{{seo.description}}" />
-<meta name="twitter:image" content="{{seo.icon}}" />
-<meta name="twitter:site" content="@uznam8x" />
-<meta name="twitter:creator" content="@uznam8x" />
-
-<meta property="og:title" content="{{seo.title}}" />
-<meta property="og:type" content="website" />
-<meta property="og:image" content="{{seo.icon}}" />
-<meta property="og:site_name" content="{{seo.title}}" />
-<meta property="og:url" content="{{seo.site}}" />
-<meta property="og:description" content="{{seo.description}}" />
-
-<meta name="nate:title" content="{{seo.title}}" />
-<meta name="nate:description" content="{{seo.description}}" />
-<meta name="nate:site_name" content="{{seo.title}}" />
-<meta name="nate:url" content="{{seo.site}}" />
-<meta name="nate:image" content="{{seo.icon}}" />
