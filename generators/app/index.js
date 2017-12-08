@@ -80,6 +80,12 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.installDependencies();
+    this.installDependencies({
+      skipInstall: this.options['skip-install'],
+      callback: () => {
+        this.spawnCommand('gulp', ['render']);
+        this.spawnCommand('npm', ['start']);
+      }
+    });
   }
 };
