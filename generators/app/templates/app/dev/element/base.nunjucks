@@ -4,9 +4,11 @@
   {% include 'element/meta.nunjucks' %}
   {% include 'element/link.nunjucks' %}
   <title>Title</title>
+  {% block head %}{% endblock %}
 </head>
 <body>
 {% block content %}{% endblock %}
 {% include 'element/script.nunjucks' %}
+{% block foot %}{% endblock %}
 </body>
 </html>

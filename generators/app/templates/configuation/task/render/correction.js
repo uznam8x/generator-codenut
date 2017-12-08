@@ -82,7 +82,7 @@ const correction = (str) => {
         action: '',
       }, value)))
     );
-  return el.replace(/\/\//g, '/');
+  return el.replace(/\/\s\//g, '/');
 };
 
 module.exports = correction;
