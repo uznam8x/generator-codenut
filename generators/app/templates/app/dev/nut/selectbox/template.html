@@ -1,6 +1,7 @@
 <label data-codenut="selectbox">
   <select :name="name" :multiple="multiple" class="selectbox__select">
+    <option v-if="placeholder" value="" selected="selected" disabled="disabled">{{placeholder}}</option>
     <slot></slot>
   </select>
-  <span class="selectbox__title">{{placeholder}}</span>
+  <span class="selectbox__title">{{(placeholder)?placeholder:'Please select'}}</span>
 </label>

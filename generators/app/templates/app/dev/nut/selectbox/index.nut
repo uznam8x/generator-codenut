@@ -11,8 +11,8 @@ Vue.component('selectbox', {
         default: false,
       },
       placeholder: {
-        default: 'Please select',
-      }
+        default: false,
+      },
     },
     template: fs.readFileSync(path.resolve(__dirname, './template.html'), 'utf-8'),
   }

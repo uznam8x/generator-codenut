@@ -1,6 +1,6 @@
 {
   "name": "generator-codenut",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "yoman generator codenut for website",
   "homepage": "http://codenut.prisf.com",
   "author": {
@@ -15,7 +15,15 @@
   "keywords": [
     "codenut",
     "yeoman-generator",
-    "generator-codenut"
+    "generator-codenut",
+    "uznam8x",
+    "prisf",
+    "web",
+    "sass",
+    "gulp",
+    "front-end",
+    "javascript",
+    "webpack"
   ],
   "devDependencies": {
     "yeoman-test": "^1.6.0",
@@ -79,5 +87,5 @@
     ]
   },
   "repository": "uznam8x/generator-codenut",
-  "license": "Apache-2.0"
+  "license": "MIT"
 }
