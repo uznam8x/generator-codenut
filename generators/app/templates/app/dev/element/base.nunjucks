@@ -6,7 +6,7 @@
   {% block head %}{% endblock %}
   <title>Codenut</title>
 </head>
-<body>
+<body {% if attr %} {{attr}} {% endif %}>
 {% block content %}{% endblock %}
 {% include 'element/script.nunjucks' %}
 {% block foot %}{% endblock %}

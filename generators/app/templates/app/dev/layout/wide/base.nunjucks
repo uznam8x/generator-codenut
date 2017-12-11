@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="/stylesheet/layout/wide/style.css" />
 {% endblock %}
 {% block content %}
-{% include './header.nunjucks' %}
+{% block header %} {% include './header.nunjucks' %} {% endblock %}
 {% block nav %}{% endblock %}
 <main role="main">
   {% block main %}{% endblock %}
 </main>
-{% include './footer.nunjucks' %}
+{% block footer %} {% include './footer.nunjucks' %} {% endblock %}
 {% endblock %}

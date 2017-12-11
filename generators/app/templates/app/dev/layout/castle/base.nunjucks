@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="/stylesheet/layout/castle/style.css" />
 {% endblock %}
 {% block content %}
-{% include './header.nunjucks' %}
+{% block header %} {% include './header.nunjucks' %} {% endblock %}
 
 <main role="main">
   <aside class="basket">
@@ -17,5 +17,5 @@
     {% block main %}{% endblock %}
   </section>
 </main>
-{% include './footer.nunjucks' %}
+{% block footer %} {% include './footer.nunjucks' %} {% endblock %}
 {% endblock %}
