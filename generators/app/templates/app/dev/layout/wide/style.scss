@@ -1,0 +1,21 @@
+// Default
+header, footer, main {
+  position: relative;
+  display: block;
+}
+
+// Styling
+header {
+  min-height: 5rem;
+  background-color: #eee;
+}
+
+main {
+  min-height: calc(100% - 9rem);
+  background-color: #ddd;
+}
+
+footer {
+  min-height: 4rem;
+  background-color: #bbb;
+}

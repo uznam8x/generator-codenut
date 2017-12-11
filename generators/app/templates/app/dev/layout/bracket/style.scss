@@ -1,0 +1,41 @@
+// Default
+header, footer, main, aside.bracket, section {
+  position: relative;
+  display: block;
+}
+
+aside.bracket {
+  position: absolute;
+  z-index: 3;
+  height: 100%;
+}
+
+aside.bracket {
+  right: 0;
+}
+
+// Styling
+header {
+  min-height: 5rem;
+  background-color: #eee;
+}
+
+aside.bracket {
+  min-width: 15rem;
+  background-color: #ccc;
+}
+
+main {
+  height: calc(100% - 9rem);
+  padding-right: 15rem;
+  > section {
+    width: 100%;
+    min-height: 100%;
+    background-color: #ddd;
+  }
+}
+
+footer {
+  min-height: 4rem;
+  background-color: #bbb;
+}

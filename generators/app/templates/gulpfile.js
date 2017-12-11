@@ -35,14 +35,13 @@ gulp.task('watch', () => {
       browserSync.reload();
     }, 300);
   });
-  gulp.watch(['app/dev/stylesheet/**/*.scss', 'app/dev/nut/**/*.scss'], { cwd: './' }, (file) => {
+  gulp.watch(['app/dev/**/*.scss'], { cwd: './' }, (file) => {
     sequence('sass')((err) => {
       if (err) console.log(err);
       clearTimeout(timeout);
       timeout = setTimeout(() => {
         browserSync.reload('app/prod/stylehseet/**/*.css');
       }, 300);
-
     });
   });
   gulp.watch(['app/dev/javascript/**/*.js', 'app/dev/nut/**/*.js'], { cwd: './' }, (file) => {

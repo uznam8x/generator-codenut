@@ -1,0 +1,18 @@
+{% extends "element/base.nunjucks" %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/stylesheet/layout/bracket/style.css" />
+{% endblock %}
+{% block content %}
+{% include './header.nunjucks' %}
+
+<main role="main">
+  <aside class="bracket">
+    {% block bracket %}{% endblock %}
+  </aside>
+  <section>
+    {% block main %}{% endblock %}
+  </section>
+</main>
+{% include './footer.nunjucks' %}
+{% endblock %}

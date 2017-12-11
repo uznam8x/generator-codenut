@@ -1,0 +1,47 @@
+// Default
+header, footer, main, aside.basket, section {
+  position: relative;
+  display: block;
+}
+
+main {
+  > section {
+    width: 100%;
+    min-height: 100%;
+  }
+}
+
+aside.basket, aside.bracket {
+  position: absolute;
+  z-index: 3;
+  height: 100%;
+}
+
+aside.basket {
+  left: 0;
+}
+
+// Styling
+header {
+  min-height: 5rem;
+  background-color: #eee;
+}
+
+aside.basket, aside.bracket {
+  min-width: 15rem;
+  background-color: #ccc;
+}
+
+main {
+  height: calc(100% - 9rem);
+  padding-left: 15rem;
+  > section {
+    width: 100%;
+    background-color: #ddd;
+  }
+}
+
+footer {
+  min-height: 4rem;
+  background-color: #bbb;
+}

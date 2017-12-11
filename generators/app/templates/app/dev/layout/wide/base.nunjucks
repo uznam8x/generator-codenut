@@ -1,0 +1,13 @@
+{% extends "element/base.nunjucks" %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/stylesheet/layout/wide/style.css" />
+{% endblock %}
+{% block content %}
+{% include './header.nunjucks' %}
+{% block nav %}{% endblock %}
+<main role="main">
+  {% block main %}{% endblock %}
+</main>
+{% include './footer.nunjucks' %}
+{% endblock %}
