@@ -71,7 +71,11 @@ const correction = (str) => {
       (value) => '<button {{attr}}>'.replace('{{attr}}', attribute(mixed({ type: 'button' }, value)))
     )
     .replace(
-      /<a[^>]*>/g,
+      /<a\s[^>]*>/g,
+      (value) => '<a {{attr}}>'.replace('{{attr}}', attribute(mixed({ href: '#' }, value)))
+    )
+    .replace(
+      /<a>/g,
       (value) => '<a {{attr}}>'.replace('{{attr}}', attribute(mixed({ href: '#' }, value)))
     )
     .replace(
