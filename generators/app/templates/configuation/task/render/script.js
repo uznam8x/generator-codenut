@@ -67,8 +67,7 @@ function guid() {
 }
 
 const cheerio = require('cheerio');
-const Entities = require('html-entities').AllHtmlEntities;
-const entities = new Entities();
+const entities = require('entities');
 const async = require('async');
 const render = (src) => {
   'use strict';
@@ -131,14 +130,14 @@ const render = (src) => {
               } else {
 
 
-                let rendered = entities.decode( correction.render($.html()) );
+                let rendered = entities.decodeHTML( correction.render($.html()) );
                 chunk.contents = new Buffer(rendered, 'utf8');
                 callback(null, chunk);
               }
             }
           );
         } else {
-          let rendered = entities.decode( correction.render($.html()) );
+          let rendered = entities.decodeHTML( correction.render($.html()) );
           chunk.contents = new Buffer(rendered, 'utf8');
           callback(null, chunk);
         }
