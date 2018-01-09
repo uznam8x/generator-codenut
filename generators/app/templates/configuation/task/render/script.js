@@ -58,8 +58,19 @@ const manageEnvironment = (environment) => {
   });
 };
 
+function guid() {
+  function s4() {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+  }
+
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
+const cheerio = require('cheerio');
+const async = require('async');
 const render = (src) => {
   'use strict';
+
   let dest = src.replace(/\\/g, '/').replace('dev/', 'prod/');
   let locate = dest.split('/');
   locate.splice(-1, 1);
@@ -82,19 +93,57 @@ const render = (src) => {
       let html = chunk.contents.toString();
 
       try {
-        const body = html.match(/<body[^>]*>((.|\n)*)<\/body>/gi)[0];
-        renderer.renderToString(new Vue({
-            template: body,
-          }), function (err, rendered) {
-            if (err) {
-              chunk.contents = new Buffer(error(err), 'utf8');
-            } else {
-              html = html.replace(/<body[^>]*>((.|\n)*)<\/body>/gi, correction(rendered));
-              chunk.contents = new Buffer(html, 'utf8');
-            }
+
+        let $ = cheerio.load(html, {
+          ignoreWhitespace: true,
+          xmlMode: true,
+          lowerCaseTags: true
+        });
+        let component = [];
+        for (let key in Vue.options.components) {
+          let comp = $(key);
+
+          if (comp.length) {
+            component.push.apply(component, comp);
           }
-        );
-        callback(null, chunk);
+        }
+        if( component.length ){
+          async.each(component, (task, next) => {
+              renderer.renderToString(new Vue({
+                  template: $.html(task),
+                }), function (err, rendered) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    $(task).replaceWith(rendered);
+                    next();
+                  }
+                }
+              );
+
+            }, (err) => {
+              if (err) {
+                console.log(err);
+                chunk.contents = new Buffer(error(err), 'utf8');
+                callback(null, chunk);
+              } else {
+                let rendered = cheerio.load(correction($.html()), {
+                  ignoreWhitespace: true,
+                  xmlMode: false,
+                  lowerCaseTags: true
+                });
+
+                rendered = correction($.html());
+                chunk.contents = new Buffer(rendered, 'utf8');
+                callback(null, chunk);
+              }
+            }
+          );
+        } else {
+          chunk.contents = new Buffer(correction(html), 'utf8');
+          callback(null, chunk);
+        }
+
       } catch (e) {
         chunk.contents = new Buffer(error(e), 'utf8');
         callback(null, chunk);
@@ -103,11 +152,11 @@ const render = (src) => {
     }))
     .pipe(prettify({
       indent_size: 2,
-      unformatted: ['pre', 'code', 'xmp', 'iframe'],
+      unformatted: ['pre', 'code', 'xmp'],
       indent_inner_html: true,
     }))
     .pipe(gulp.dest(dest));
 };
 
-gulp.task('render', () => render(root + '/app/dev/**/*.html'));
+gulp.task('render', () => render(global.root + '/app/dev/**/*.html'));
 module.exports = render;

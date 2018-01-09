@@ -16,14 +16,16 @@ const render = require('./configuation/task/render/script');
 
 let timeout = null;
 gulp.task('restart', function () {
-  const keys = Object.keys(browserSync.instance.io.sockets.connected);
-  if (keys.length) {
-    spawn('gulp', ['default', '--browser', false], { stdio: 'inherit' });
-  } else {
-    spawn('gulp', ['default'], { stdio: 'inherit' });
-  }
+  setTimeout(() => {
+    const keys = Object.keys(browserSync.instance.io.sockets.connected);
+    if (keys.length) {
+      spawn('gulp', ['default', '--browser', false], { stdio: 'inherit' });
+    } else {
+      spawn('gulp', ['default'], { stdio: 'inherit' });
+    }
 
-  process.exit();
+    process.exit();
+  },300);
 });
 
 const serve = (bool) => {
