@@ -24,14 +24,24 @@ const attribute = (obj) => {
 };
 
 const closeTag = (el) => {
-  const tag = ['img', 'br', 'hr', 'meta', 'link', 'input'];
+  const tag = ['img', 'br', 'hr', 'meta', 'link'];
   el = el.replace(/<(\w+)[^>]*\/>/g, (match, capture) => {
-    if( tag.indexOf(capture) === -1 ){
+    if (tag.indexOf(capture) === -1) {
       match = match.replace('/>', '></' + capture + '>');
     }
+
     return match;
   });
   return el;
+};
+
+const singleTag = (el) => {
+  return el
+    .replace(/<br(.*?)>/g, '<br $1/>').replace(/\/\//g, '/')
+    .replace(/<hr(.*?)>/g, '<hr $1/>').replace(/\/\//g, '/')
+    .replace(/<img(.*?)>/g, '<img $1/>').replace(/\/\//g, '/')
+    .replace(/<link(.*?)>/g, '<link $1/>').replace(/\/\//g, '/')
+    .replace(/<meta(.*?)>/g, '<meta $1/>').replace(/\/\//g, '/');
 };
 
 const correction = (str) => {
@@ -41,14 +51,8 @@ const correction = (str) => {
     .replace(/data-server-rendered="true"/g, '')
     .replace(/[a-z]+="\s*"/g, '')
     .replace(/<!---->/g, '')
-    .replace(/>\s</g, '><')
-
-    .replace(/<br(.*?)>/g, '<br $1/>').replace(/\/\//g, '/')
-    .replace(/<hr(.*?)>/g, '<hr $1/>').replace(/\/\//g, '/')
-    .replace(/<img(.*?)>/g, '<img $1/>').replace(/\/\//g, '/')
-    .replace(/<link(.*?)>/g, '<link $1/>').replace(/\/\//g, '/')
-    .replace(/<meta(.*?)>/g, '<meta $1/>').replace(/\/\//g, '/');
-    .replace(/<input(.*?)>/g, '<input $1/>').replace(/\/\//g, '/');
+    .replace(/>\s</g, '><');
+  el = singleTag(el);
   el = closeTag(el);
   el = el
     .replace(
@@ -72,10 +76,6 @@ const correction = (str) => {
       (value) => '<select {{attr}}>'.replace('{{attr}}', attribute(mixed({ name: '' }, value)))
     )
     .replace(
-      /<input[^>]*>/g,
-      (value) => '<select {{attr}}>'.replace('{{attr}}', attribute(mixed({ name: '', value: '' }, value)))
-    )
-    .replace(
       /<option[^>]*>/g,
       (value) => '<option {{attr}}>'.replace('{{attr}}', attribute(mixed({ value: '' }, value)))
     )
@@ -92,7 +92,7 @@ const correction = (str) => {
       (value) => '<button {{attr}}>'.replace('{{attr}}', attribute(mixed({ type: 'button' }, value)))
     )
     .replace(
-      /<a[^>]*>/g,
+      /<a\s[^>]*>/g,
       (value) => '<a {{attr}}>'.replace('{{attr}}', attribute(mixed({ href: '#' }, value)))
     )
     .replace(
@@ -107,4 +107,7 @@ const correction = (str) => {
   return el.replace(/\/\s\//g, '/').replace(/\/\/>/g, '/>');
 };
 
-module.exports = correction;
+module.exports = {
+  render: correction,
+  singleTag: singleTag,
+};

@@ -25,7 +25,7 @@ gulp.task('restart', function () {
     }
 
     process.exit();
-  },300);
+  }, 300);
 });
 
 const serve = (bool) => {
@@ -33,6 +33,7 @@ const serve = (bool) => {
   if (bool && bool === 'false') {
     open = false;
   }
+
   browserSync.init({
     port: 3400,
     open: open,
