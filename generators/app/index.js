@@ -18,14 +18,18 @@ module.exports = class extends Generator {
       'Welcome to the majestic ' + chalk.red('generator-codenut') + ' generator!'
     ));
 
+
     const prompts = [
       {
         type: 'input',
         name: 'name',
         message: 'Project name?',
-        default: this.appname,
+        default: this.appname.trim().replace(
+          /(?:^\w|[A-Z]|\b\w)/g, (letter, index) => index === 0 ? letter.toLowerCase() : letter.toUpperCase()
+        ).replace(/\s+/g, ''),
       },
     ];
+
 
     return this.prompt(prompts).then(props => {
       this.props = props;
@@ -36,7 +40,9 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('package.json'),
       this.destinationPath('package.json'), {
-        name: this.props.name,
+        name: this.props.name.trim().replace(
+          /(?:^\w|[A-Z]|\b\w)/g, (letter, index) => index === 0 ? letter.toLowerCase() : letter.toUpperCase()
+        ).replace(/\s+/g, ''),
       }
     );
     this.fs.copy(
@@ -58,6 +64,10 @@ module.exports = class extends Generator {
       this.destinationPath('gulpfile.js')
     );
     this.fs.copy(
+      this.templatePath('codenut.js'),
+      this.destinationPath('codenut.js')
+    );
+    this.fs.copy(
       this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js')
     );
@@ -73,18 +83,17 @@ module.exports = class extends Generator {
       this.templatePath('app'),
       this.destinationPath('app')
     );
-    this.fs.copy(
-      this.templatePath('configuation'),
-      this.destinationPath('configuation')
-    );
   }
 
   install() {
     this.installDependencies({
+      bower: true,
+      npm: true,
+      skipMessage: this.options['skip-install-message'],
       skipInstall: this.options['skip-install'],
       callback: () => {
         console.log('Codenut Prerender');
-        this.spawnCommand('gulp', ['render']);
+        this.spawnCommand('./node_modules/gulp/bin/gulp.js', ['render']);
       }
     });
   }

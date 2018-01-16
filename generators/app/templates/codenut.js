@@ -3,11 +3,11 @@ const path = require('path');
 const load = (file) => {
   'use strict';
   for (let i = 0, len = file.length; i < len; i++) {
-    require( path.relative(__dirname, file[i]) );
+    require(path.resolve(__dirname, file[i]));
   }
 };
 
-glob(root + '/app/dev/nut/**/*.nut', { cwd: root }, (err, files) => {
+glob(__dirname + '/app/dev/nut/**/*.nut',  (err, files) => {
     if (err) throw err;
     load(files);
   }

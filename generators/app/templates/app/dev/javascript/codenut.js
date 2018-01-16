@@ -161,6 +161,4 @@ module.exports = (($) => {
 
 })(jQuery);
 
-require('glob-loader!../nut/loader.txt');
-require('glob-loader!./external/loader.txt');
-
+require('./loader.js!./loader.js');

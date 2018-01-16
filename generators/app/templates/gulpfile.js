@@ -5,15 +5,15 @@ const path = require('path');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
 const spawn = require('child_process').spawn;
-
-global.root = path.resolve(__dirname);
-
+const compiler = require('codenut-compiler');
+const sassGlob = require('gulp-sass-glob');
+const sass = require('gulp-sass');
 const sequence = require('gulp-sequence');
-require('./configuation/codenut.js');
-require('./configuation/task/sass/script');
-require('./configuation/task/webpack/script');
-const render = require('./configuation/task/render/script');
+const through = require('through2');
+const glob = require('glob');
+require('./codenut.js');
 
+// SERVER
 let timeout = null;
 gulp.task('restart', function () {
   setTimeout(() => {
@@ -47,12 +47,59 @@ gulp.task('serve', () => {
   serve();
 });
 
+
+// HTML Compile
+const compile = (src) => {
+  let dest = src.replace(/\\/g, '/').replace('dev/', 'prod/');
+  let locate = dest.split('/');
+  locate.splice(-1, 1);
+  dest = locate.join('/').replace('**', '');
+  return gulp.src([src, '!./app/dev/nut/**/*.html'])
+    .pipe(compiler.html({
+      path: ['./app/dev']
+    }))
+    .pipe(gulp.dest(dest))
+};
+
+gulp.task('compile', () => compile('./app/dev/**/*.html'));
+
+
+// SCSS
+const option = {
+  outputStyle: 'compressed', // expanded
+  includePaths: [
+    './node_modules/codenut-style/scss/',
+    './app/dev/stylesheet/',
+  ],
+};
+
+gulp.task('scss', () => {
+    return gulp.src(['./app/dev/stylesheet/**/*.scss', './app/dev/**/*.scss'])
+      .pipe(sassGlob())
+      .pipe(sass(option).on('error', (err) => {
+        console.log(err);
+      }))
+      .pipe(gulp.dest('./app/prod/stylesheet/'))
+  }
+);
+
+
+// WEBPACK
+const webpack = require('webpack-stream');
+gulp.task('webpack', () => gulp.src('./app/dev/javascript/codenut.js')
+  .pipe(webpack(require('./webpack.config.js')))
+  .pipe(gulp.dest('./app/prod/javascript'))
+);
+
+
+// WATCH
 gulp.task('watch', () => {
+  // html
   gulp.watch('app/dev/**/*.html', { cwd: './' }, (file) => {
-    render(file.path);
+    compile(file.path);
   });
   gulp.watch(['app/dev/**/*.nunjucks', 'app/dev/model/**/*.json'], { cwd: './' }, (file) => {
-    sequence('render')((err) => {
+    sequence('compile')((err) => {
       if (err) console.log(err);
     });
   });
@@ -62,8 +109,10 @@ gulp.task('watch', () => {
       browserSync.reload();
     }, 300);
   });
+
+  // style
   gulp.watch(['app/dev/**/*.scss'], { cwd: './' }, (file) => {
-    sequence('sass')((err) => {
+    sequence('scss')((err) => {
       if (err) console.log(err);
       clearTimeout(timeout);
       timeout = setTimeout(() => {
@@ -71,6 +120,8 @@ gulp.task('watch', () => {
       }, 300);
     });
   });
+
+  // javascript
   gulp.watch(['app/dev/javascript/**/*.js', 'app/dev/nut/**/*.js'], { cwd: './' }, (file) => {
     sequence('webpack')((err) => {
       if (err) console.log(err);
@@ -79,8 +130,10 @@ gulp.task('watch', () => {
 
   gulp.watch(['./gulpfile.js', './webpack.config.js', 'app/dev/nut/**/*.nut', 'app/dev/nut/**/*.html'], ['restart']);
 });
-gulp.task('default', () => {
 
+
+/* ## Default ## */
+gulp.task('default', () => {
   let arg = {
     browser: true,
   };
@@ -90,7 +143,7 @@ gulp.task('default', () => {
     arg.browser = process.argv[index + 1];
   }
 
-  sequence('sass', 'webpack', 'watch')((err) => {
+  sequence('scss', 'webpack', 'watch')((err) => {
     if (err) console.log(err);
     serve(arg.browser);
   });
