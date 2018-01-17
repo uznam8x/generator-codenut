@@ -6,7 +6,7 @@
 {% block content %}
 {% block header %} {% include './header.nunjucks' %} {% endblock %}
 
-<main role="main">
+<main role="main" id="main">
   <aside class="basket">
     {% block basket %}{% endblock %}
   </aside>

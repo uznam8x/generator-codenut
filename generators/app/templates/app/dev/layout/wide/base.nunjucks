@@ -6,7 +6,7 @@
 {% block content %}
 {% block header %} {% include './header.nunjucks' %} {% endblock %}
 {% block nav %}{% endblock %}
-<main role="main">
+<main role="main" id="main">
   {% block main %}{% endblock %}
 </main>
 {% block footer %} {% include './footer.nunjucks' %} {% endblock %}

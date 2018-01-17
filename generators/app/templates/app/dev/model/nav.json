@@ -1,73 +1,48 @@
 {
   "gnb":[
     {
-      "title":"회사소개",
+      "title":"ABOUT US",
       "link":"#",
       "children":[
         {
-          "title":"기업정보",
+          "title":"Overview",
           "link":"#"
         },
         {
-          "title":"기업연혁",
-          "link":"#"
-        },
-        {
-          "title":"오시는길",
+          "title":"Location",
           "link":"#"
         }
       ]
     },
 
     {
-      "title":"홍보센터",
+      "title":"NEWS",
       "link":"#",
       "children":[
         {
-          "title":"News",
-          "link":"#"
-        },
-        {
-          "title":"CI / BI",
+          "title":"Archives",
           "link":"#"
         }
       ]
     },
     {
-      "title":"인재채용",
+      "title":"COMMUNITY",
       "link":"#",
       "children":[
         {
-          "title":"인사제도",
+          "title":"Notice",
           "link":"#"
         },
         {
-          "title":"복리후생",
-          "link":"#"
-        },
-        {
-          "title":"채용공고",
+          "title":"FAQs",
           "link":"#"
         }
       ]
     },
     {
-      "title":"고객센터",
+      "title":"CONTACT",
       "link":"#",
-      "children":[
-        {
-          "title":"FAQ",
-          "link":"#"
-        },
-        {
-          "title":"1:1 문의",
-          "link":"#"
-        },
-        {
-          "title":"제휴 문의",
-          "link":"#"
-        }
-      ]
+      "children":[]
     }
   ]
 }
