@@ -11,7 +11,7 @@ const sass = require('gulp-sass');
 const sequence = require('gulp-sequence');
 const through = require('through2');
 const glob = require('glob');
-require('./codenut.js');
+const codenut = require('./codenut.config.js');
 
 // SERVER
 let timeout = null;
@@ -86,7 +86,7 @@ gulp.task('scss', () => {
 
 // WEBPACK
 const webpack = require('webpack-stream');
-gulp.task('webpack', () => gulp.src('./app/dev/javascript/codenut.js')
+gulp.task('webpack', () => gulp.src('./app/dev/javascript/script.js')
   .pipe(webpack(require('./webpack.config.js')))
   .pipe(gulp.dest('./app/prod/javascript'))
 );

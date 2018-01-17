@@ -2,10 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 module.exports = {
   output: {
-    path: root + '/app/prod/javascript/',
     filename: 'script.min.js',
   },
-  cache: true,
+  cache: false,
 
   module: {
     loaders: [
@@ -24,8 +23,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
-      }
-      ,
+      },
       output: {
         comments: false,
       },

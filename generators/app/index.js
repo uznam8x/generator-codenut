@@ -64,8 +64,8 @@ module.exports = class extends Generator {
       this.destinationPath('gulpfile.js')
     );
     this.fs.copy(
-      this.templatePath('codenut.js'),
-      this.destinationPath('codenut.js')
+      this.templatePath('codenut.config.js'),
+      this.destinationPath('codenut.config.js')
     );
     this.fs.copy(
       this.templatePath('webpack.config.js'),

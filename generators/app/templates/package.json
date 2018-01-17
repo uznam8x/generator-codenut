@@ -14,6 +14,7 @@
     "babel-preset-es2015": "^6.24.1",
     "cheerio": "^1.0.0-rc.2",
     "child_process": "^1.0.2",
+    "codenut-js": "latest",
     "codenut-compiler": "latest",
     "codenut-style": "latest",
     "entities": "^1.1.1",
