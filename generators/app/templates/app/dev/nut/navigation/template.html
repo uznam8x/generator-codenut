@@ -1,6 +1,6 @@
 <nav role="navigation" data-codenut="navigation">
   <ul class="navigation__menu">
-    <navigation-item :model="model" v-for="model in model" :key="model.title"></navigation-item>
+    <navigation-item :model="model" v-for="(model, index) in model" :key="model.title" :nid="index" :activate="activate"></navigation-item>
   </ul>
   <slot></slot>
 </nav>

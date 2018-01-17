@@ -93,7 +93,7 @@ module.exports = class extends Generator {
       skipInstall: this.options['skip-install'],
       callback: () => {
         console.log('Codenut Prerender');
-        this.spawnCommand('./node_modules/gulp/bin/gulp.js', ['render']);
+        this.spawnCommand('./node_modules/gulp/bin/gulp.js', ['compile']);
       }
     });
   }
