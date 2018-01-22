@@ -79,7 +79,7 @@ gulp.task('scss', () => {
       .pipe(sass(option).on('error', (err) => {
         console.log(err);
       }))
-      .pipe(gulp.dest('./app/prod/stylesheet/'))
+      .pipe(gulp.dest('./app/prod/resource/stylesheet/'))
   }
 );
 
@@ -88,7 +88,7 @@ gulp.task('scss', () => {
 const webpack = require('webpack-stream');
 gulp.task('webpack', () => gulp.src('./app/dev/javascript/script.js')
   .pipe(webpack(require('./webpack.config.js')))
-  .pipe(gulp.dest('./app/prod/javascript'))
+  .pipe(gulp.dest('./app/prod/resource/javascript'))
 );
 
 
