@@ -1,6 +1,0 @@
-<li class="navigation__item" :class="{'navigation--activate':selected}">
-  <a :href="model.link" class="navigation__link" :target="model.target">{{model.title}}</a>
-  <ul v-if="model.children && model.children.length" class="navigation__menu">
-    <navigation-item :model="model" v-for="(model, index) in model.children" :key="model.title" :nid="nid +','+ index" :activate="activate"></navigation-item>
-  </ul>
-</li>

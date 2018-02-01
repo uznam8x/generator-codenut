@@ -1,7 +1,9 @@
 // jscs:disable maximumLineLength
 'use strict';
 const gulp = require('gulp');
+const data = require('gulp-data');
 const path = require('path');
+const fs = require('fs');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
 const spawn = require('child_process').spawn;
@@ -15,18 +17,7 @@ const codenut = require('./codenut.config.js');
 
 // SERVER
 let timeout = null;
-gulp.task('restart', function () {
-  setTimeout(() => {
-    const keys = Object.keys(browserSync.instance.io.sockets.connected);
-    if (keys.length) {
-      spawn('gulp', ['default', '--browser', false], { stdio: 'inherit' });
-    } else {
-      spawn('gulp', ['default'], { stdio: 'inherit' });
-    }
 
-    process.exit();
-  }, 300);
-});
 
 const serve = (bool) => {
   let open = true;
@@ -47,7 +38,6 @@ gulp.task('serve', () => {
   serve();
 });
 
-
 // HTML Compile
 const compile = (src) => {
   let dest = src.replace(/\\/g, '/').replace('dev/', 'prod/');
@@ -55,6 +45,14 @@ const compile = (src) => {
   locate.splice(-1, 1);
   dest = locate.join('/').replace('**', '');
   return gulp.src([src, '!./app/dev/nut/**/*.html'])
+    .pipe(data(() => ({
+        nav: JSON.parse(fs.readFileSync(path.resolve(__dirname, './app/dev/model/nav.json'), 'utf-8')),
+        seo: JSON.parse(fs.readFileSync(path.resolve(__dirname, './app/dev/model/seo.json'), 'utf-8')),
+        util: {
+          date: +new Date(),
+        },
+      })
+    ))
     .pipe(compiler.html({
       path: ['./app/dev']
     }))
@@ -62,7 +60,6 @@ const compile = (src) => {
 };
 
 gulp.task('compile', () => compile('./app/dev/**/*.html'));
-
 
 // SCSS
 const option = {
@@ -83,14 +80,12 @@ gulp.task('scss', () => {
   }
 );
 
-
 // WEBPACK
 const webpack = require('webpack-stream');
 gulp.task('webpack', () => gulp.src('./app/dev/javascript/script.js')
   .pipe(webpack(require('./webpack.config.js')))
   .pipe(gulp.dest('./app/prod/resource/javascript'))
 );
-
 
 // WATCH
 gulp.task('watch', () => {
@@ -127,10 +122,7 @@ gulp.task('watch', () => {
       if (err) console.log(err);
     });
   });
-
-  gulp.watch(['./gulpfile.js', './webpack.config.js', 'app/dev/nut/**/*.nut', 'app/dev/nut/**/*.html'], ['restart']);
 });
-
 
 /* ## Default ## */
 gulp.task('default', () => {

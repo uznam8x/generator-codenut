@@ -1,6 +1,20 @@
-<nav role="navigation" data-codenut="navigation">
+{% macro create(item) %}
+<li class="navigation__item">
+  <a href="{{item.link}}" class="navigation__link">{{item.title|upper}}</a>
+  {% if item.children|length %}
   <ul class="navigation__menu">
-    <navigation-item :model="model" v-for="(model, index) in model" :key="model.title" :nid="index" :activate="activate"></navigation-item>
+    {% for child in item.children %}
+    {{ create(child) }}
+    {% endfor %}
   </ul>
-  <slot></slot>
+  {% endif %}
+</li>
+{% endmacro %}
+
+<nav role="navigation" data-codenut="navigation" data-nav-model="{{props.type}}" {{arrtibs(el.attribs)}}>
+  <ul class="navigation__menu">
+    {% for child in data.nav[props.type] %}
+    {{ create(child) }}
+    {% endfor %}
+  </ul>
 </nav>

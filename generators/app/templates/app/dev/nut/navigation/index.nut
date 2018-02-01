@@ -2,65 +2,44 @@ const fs = require('fs');
 const Vue = require('vue');
 const path = require('path');
 const _ = require('lodash');
+const nut = require('codenut-compiler').nut;
+const cheerio = require('cheerio');
 
-Vue.component('navigation-item', {
-    props: {
-      model: {
-        default: {}
-      },
-      nid: {
-        default: null,
-      },
-      activate: {
-        default: null,
-      }
-    },
-    data: function () {
-      return {
-        selected: false,
-      }
-    },
-    template: fs.readFileSync(path.resolve(__dirname, './item.html'), 'utf-8'),
-    created: function () {
-      'use strict';
-      if (this.activate !== null) {
-        let xid = String(this.activate).trim().split(','); // 2
-        let sid = String(this.nid).trim().split(','); // 1
+nut.register('navigation', {
+  props: {
+    type: '',
+  },
+  created: (el, file) => {
+    let cur = file.path.replace(path.dirname(module.parent.filename), '');
+    cur = cur.replace('\\', '/').replace('/app/dev', '');
 
-        let chk = [];
-        _.each(sid, (value, index) => {
-          chk.push( xid[index] === value );
-        });
+    let $ = cheerio.load(el, {
+      ignoreWhitespace: true,
+      xmlMode: false,
+      lowerCaseTags: true
+    });
 
-        let fillter = chk.filter((value)=>{
-          return value === false;
-        });
-
-        if( chk.length && !fillter.length ){
-          this._data.selected = true;
+    const indication = ( node ) => {
+      let attr = node.parent.attribs;
+      if( attr['data-codenut'] !== 'navigation' ){
+        if( node.parent.name !== 'ul' ){
+          if( !node.parent.attribs['class'] )node.parent.attribs['class'] = '';
+          if( node.parent.attribs['class'].indexOf('navigation--activate') === -1 ){
+            node.parent.attribs['class'] += ' navigation--activate';
+          }
         }
+        indication(node.parent);
       }
-    }
-  }
-);
+    };
 
-Vue.component('navigation', {
-    props: {
-      type: {
-        default: '',
-      },
-      activate: {
-        default: null,
-      },
-    },
-    data: function () {
-      const nav = JSON.parse(fs.readFileSync('./app/dev/model/nav.json', 'utf-8'));
-      return {
-        model: nav[this.type],
-      };
-    },
+    $(`a[href="${cur}"]`).each((index, node) => {
+      indication(node);
+    });
+    el = $.html().replace(/<[\/]?html>|<[\/]?head>|<[\/]?body>/g, '');
+    $ = null;
+    return el;
+  },
+  template: fs.readFileSync(path.resolve(__dirname, './template.html'), 'utf-8'),
+});
 
-    template: fs.readFileSync(path.resolve(__dirname, './template.html'), 'utf-8'),
-  }
-);
 module.exports = this;

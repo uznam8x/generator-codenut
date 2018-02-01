@@ -1,0 +1,38 @@
+// Default
+[data-codenut="breadcrumb"] {
+  position: relative;
+}
+[data-codenut="breadcrumb"].breadcrumb--activate{
+  opacity: 1;
+}
+
+.breadcrumb {
+  @include e('list') {
+    font-size: 0;
+  }
+  @include e('item') {
+    display: inline-block;
+    font-size: rem(13px);
+    vertical-align: middle;
+    .nut-icon--home{
+      @include transform(scale(.7));
+      margin-right: rem(-14px);
+    }
+    a{
+      color: #898989;
+      text-decoration: none;
+      &::before{
+        content:">";
+        display: inline-block;
+        margin: rem(0 6px);
+      }
+    }
+  }
+}
+
+// Styling
+[data-codenut="breadcrumb"] {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+}

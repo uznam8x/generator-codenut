@@ -1,0 +1,8 @@
+<article data-codenut="breadcrumb" data-nav-model="{{props.type}}" {{arrtibs(el.attribs)}}>
+  <ul class="breadcrumb__list">
+    <li class="breadcrumb__item"><span class="nut-icon--home"><i></i></span></li>
+    {% for item in data.item %}
+    <li class="breadcrumb__item"><a href="{{item.link}}" class="breadcrumb__link">{{item.title}}</a></li>
+    {% endfor %}
+  </ul>
+</article>

@@ -18,6 +18,7 @@
     "codenut-compiler": "latest",
     "codenut-style": "latest",
     "entities": "^1.1.1",
+    "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-data": "^1.2.1",
     "gulp-nunjucks-render": "^2.2.1",
@@ -30,8 +31,6 @@
     "node-sass": "^4.6.0",
     "path": "^0.12.7",
     "through2": "^2.0.3",
-    "vue": "^2.4.4",
-    "vue-server-renderer": "^2.4.4",
     "webpack": "^3.8.1",
     "webpack-stream": "^4.0.0"
   },
