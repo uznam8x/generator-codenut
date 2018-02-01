@@ -1,0 +1,25 @@
+<nav data-codenut="pagination">
+  <ul class="pagination__menu">
+
+    <li class="pagination__item pagination__prev">
+      {% if props.slot.prev | length %}
+      <a href="#" class="pagination__link">{{props.slot.prev}}</a>
+      {% else %}
+      <a href="#" class="pagination__link">PREV</a>
+      {% endif %}
+    </li>
+
+    {% for i in range(props.from | int, props.to | int +1) -%}
+    <li class="pagination__item">
+      <a href="#" class="pagination__link">{{i}}</a>
+    </li>
+    {%- endfor %}
+    <li class="pagination__item pagination__next">
+      {% if props.slot.next | length %}
+      <a href="#" class="pagination__link">{{props.slot.next}}</a>
+      {% else %}
+      <a href="#" class="pagination__link">NEXT</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
