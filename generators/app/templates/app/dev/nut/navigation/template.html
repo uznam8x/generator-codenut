@@ -11,7 +11,7 @@
 </li>
 {% endmacro %}
 
-<nav role="navigation" data-codenut="navigation" data-nav-model="{{props.type}}" {{arrtibs(el.attribs)}}>
+<nav role="navigation" data-codenut="navigation" data-nav-model="{{props.type}}" {{arrtibs(el.attribs) | safe}}>
   <ul class="navigation__menu">
     {% for child in data.nav[props.type] %}
     {{ create(child) }}

@@ -37,6 +37,7 @@ nut.register('navigation', {
         });
         config.rendered = $.html().replace(/<[\/]?html>|<[\/]?head>|<[\/]?body>/g, '');
         $ = null;
+        //console.log(config.rendered);
         return config;
     },
     template: fs.readFileSync(path.resolve(__dirname, './template.html'), 'utf-8'),

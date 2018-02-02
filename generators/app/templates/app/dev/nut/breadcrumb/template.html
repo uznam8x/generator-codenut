@@ -1,4 +1,4 @@
-<article data-codenut="breadcrumb" data-nav-model="{{props.type}}" {{arrtibs(el.attribs)}}>
+<article data-codenut="breadcrumb" data-nav-model="{{props.type}}" {{arrtibs(el.attribs) | safe}}>
     <ul class="breadcrumb__list">
         <li class="breadcrumb__item"><span class="nut-icon--home"><i></i></span></li>
         {% for item in data.item %}

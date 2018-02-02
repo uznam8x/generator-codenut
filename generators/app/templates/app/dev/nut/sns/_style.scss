@@ -1,0 +1,21 @@
+[data-codenut="sns"] {
+  position: relative;
+}
+
+.sns {
+  @include e("menu") {
+    font-size: 0;
+  }
+
+  @include e("item") {
+    display: inline-block;
+  }
+
+  @include e("link") {
+    display: inline-block;
+    width: rem(48px);
+    background-color: transparent;
+    border: 0;
+  }
+}
+
