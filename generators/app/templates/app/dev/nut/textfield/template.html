@@ -1,0 +1,12 @@
+<article data-codenut="textfield" class="{% if(props.value) %}textfield--fill{% endif %} {{props.class}}"{{arrtibs(el.attribs) | safe}}>
+  <label>
+    <input type="{{props.type}}" name="{{props.name}}" value="{{props.value}}"
+           {% if(props.readonly) %}readonly="readonly"{% endif %}
+           {% if(props.required) %}required="required"{% endif %}
+           {% if(props.autocomplete) %}autocomplete="true"{% endif %}
+           {% if(props.maxlength) %}maxlength="{{props.maxlength}}"{% endif %}
+           {% if(props.disabled) %}disabled="disabled"{% endif %}
+    />
+    <span class="textfield__placeholder">{{props.placeholder}}</span>
+  </label>
+</article>

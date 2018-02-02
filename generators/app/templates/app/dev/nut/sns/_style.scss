@@ -1,3 +1,4 @@
+// Default
 [data-codenut="sns"] {
   position: relative;
 }
@@ -13,9 +14,15 @@
 
   @include e("link") {
     display: inline-block;
-    width: rem(48px);
     background-color: transparent;
     border: 0;
   }
 }
 
+
+// Styling
+.sns {
+  @include e("link") {
+    width: rem(48px);
+  }
+}

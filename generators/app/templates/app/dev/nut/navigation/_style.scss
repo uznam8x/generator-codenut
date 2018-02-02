@@ -1,3 +1,4 @@
+// Default
 [data-codenut="navigation"] {
   position: relative;
   display: block;
@@ -12,13 +13,4 @@
   }
 }
 
-@media (min-width: map-get($breakpoint, 'xl')) {
-  .navigation--horizontal {
-    > .navigation__menu {
-      @include flexbox();
-      > .navigation__item {
-        @include flex(1 1);
-      }
-    }
-  }
-}
+// Styling

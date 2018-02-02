@@ -31,8 +31,8 @@ nut.register('sns', {
         ]
     },
     beforeCreate: function (config) {
+        config.data.item = [];
         if (config.props.show){
-            config.data.item = [];
             let icon = config.props.show.split(' ');
             for(let name of icon){
                 if( this.data.list.indexOf(name) > -1 ){

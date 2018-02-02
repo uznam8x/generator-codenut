@@ -1,0 +1,43 @@
+// Default
+[data-codenut="textfield"] {
+  position: relative;
+  label {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin-bottom: 0;
+    background-color: transparent;
+    input {
+      display: block;
+      width: 100%;
+      position: relative;
+      z-index: 3;
+      border: 0;
+      background-color: transparent;
+    }
+  }
+}
+
+.textfield {
+  @include e("placeholder") {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+    font-size: inherit;
+  }
+  @include m('fill') {
+    .textfield__placeholder {
+      top: 0;
+      bottom: auto;
+    }
+  }
+  @include m('focus') {
+    .textfield__placeholder {
+      top: 0;
+      bottom: auto;
+    }
+  }
+}
+
+// Styling
