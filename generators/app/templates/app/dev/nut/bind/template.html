@@ -1,0 +1,9 @@
+<article data-codenut="bind" data-uri="{{props.uri}}">
+    {% set path = props.base+props.uri+"/template.html" %}
+    {% import path as template %}
+    {% set model %}
+        {% include props.base+props.uri+"/model.json" %}
+    {% endset %}
+
+    {{template.create( json(model) )}}
+</article>
