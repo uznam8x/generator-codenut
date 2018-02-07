@@ -13,7 +13,7 @@ nut.register('pagination', {
             prev:'',
             next:''
         };
-        _.each(config.task.children, (node, index) => {
+        _.each(config.el.children, (node, index) => {
             if( node.name ){
                 let name = node.name.replace('pagination__', '');
                 if( slot.hasOwnProperty(name) ){

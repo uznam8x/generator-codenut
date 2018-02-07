@@ -10,21 +10,20 @@ nut.register('navigation', {
         type: '',
     },
     created: (config) => {
-        let cur = config.file.path.replace(path.dirname(module.parent.filename), '');
-        cur = cur.replace('\\', '/').replace('/app/dev', '');
 
+        let path = config.data.filepath.replace('\\', '/').replace('/app/dev', '');
         let $ = cheerio.load(config.rendered, {
             ignoreWhitespace: true,
             xmlMode: false,
             lowerCaseTags: true
         });
 
-        const indication = ( node ) => {
+        const indication = (node) => {
             let attr = node.parent.attribs;
-            if( attr['data-codenut'] !== 'navigation' ){
-                if( node.parent.name !== 'ul' ){
-                    if( !node.parent.attribs['class'] )node.parent.attribs['class'] = '';
-                    if( node.parent.attribs['class'].indexOf('navigation--activate') === -1 ){
+            if (attr['data-codenut'] !== 'navigation') {
+                if (node.parent.name !== 'ul') {
+                    if (!node.parent.attribs['class']) node.parent.attribs['class'] = '';
+                    if (node.parent.attribs['class'].indexOf('navigation--activate') === -1) {
                         node.parent.attribs['class'] += ' navigation--activate';
                     }
                 }
@@ -32,7 +31,7 @@ nut.register('navigation', {
             }
         };
 
-        $(`a[href="${cur}"]`).each((index, node) => {
+        $(`a[href="${path}"]`).each((index, node) => {
             indication(node);
         });
         config.rendered = $.html().replace(/<[\/]?html>|<[\/]?head>|<[\/]?body>/g, '');

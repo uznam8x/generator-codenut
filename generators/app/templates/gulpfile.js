@@ -6,31 +6,25 @@ const path = require('path');
 const fs = require('fs');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
-const spawn = require('child_process').spawn;
+const childProcess = require('child_process');
+const spawn = childProcess.spawn;
 const compiler = require('codenut-compiler');
 const sassGlob = require('gulp-sass-glob');
 const sass = require('gulp-sass');
 const sequence = require('gulp-sequence');
 const through = require('through2');
 const glob = require('glob');
-const codenut = require('./codenut.config.js');
 
-// SERVER
+// SERVER ///////////////////////////////////////////////////////////////
 let timeout = null;
-
-
 const serve = (bool) => {
-  let open = true;
-  if (bool && bool === 'false') {
-    open = false;
-  }
-
   browserSync.init({
     port: 3400,
-    open: open,
+    open: false,
     server: {
       baseDir: './app/prod',
     },
+  }, (bs, open) => {
   });
 };
 
@@ -38,7 +32,9 @@ gulp.task('serve', () => {
   serve();
 });
 
-// HTML Compile
+/////////////////////////////////////////////////////////////////////////
+
+// HTML Compile /////////////////////////////////////////////////////////
 const compile = (src) => {
   let dest = src.replace(/\\/g, '/').replace('dev/', 'prod/');
   let locate = dest.split('/');
@@ -53,15 +49,16 @@ const compile = (src) => {
         },
       })
     ))
-    .pipe(compiler.html({
-      path: ['./app/dev']
-    }))
-    .pipe(gulp.dest(dest))
+    .pipe(compiler({ path: ['./app/dev'] }))
+    .pipe(gulp.dest(dest));
 };
 
 gulp.task('compile', () => compile('./app/dev/**/*.html'));
 
-// SCSS
+/////////////////////////////////////////////////////////////////////////
+
+// SCSS /////////////////////////////////////////////////////////////////
+
 const option = {
   outputStyle: 'compressed', // expanded
   includePaths: [
@@ -70,24 +67,26 @@ const option = {
   ],
 };
 
-gulp.task('scss', () => {
-    return gulp.src(['./app/dev/stylesheet/**/*.scss', './app/dev/**/*.scss'])
-      .pipe(sassGlob())
-      .pipe(sass(option).on('error', (err) => {
-        console.log(err);
-      }))
-      .pipe(gulp.dest('./app/prod/resource/stylesheet/'))
-  }
+gulp.task('scss', () => gulp.src(['./app/dev/stylesheet/**/*.scss', './app/dev/**/*.scss'])
+  .pipe(sassGlob())
+  .pipe(sass(option).on('error', (err) => {
+    console.log(err);
+  }))
+  .pipe(gulp.dest('./app/prod/resource/stylesheet/'))
 );
 
-// WEBPACK
+/////////////////////////////////////////////////////////////////////////
+
+// WEBPACK //////////////////////////////////////////////////////////////
 const webpack = require('webpack-stream');
 gulp.task('webpack', () => gulp.src('./app/dev/javascript/script.js')
   .pipe(webpack(require('./webpack.config.js')))
   .pipe(gulp.dest('./app/prod/resource/javascript'))
 );
 
-// WATCH
+/////////////////////////////////////////////////////////////////////////
+
+// WATCH ////////////////////////////////////////////////////////////////
 gulp.task('watch', () => {
   // html
   gulp.watch('app/dev/**/*.html', { cwd: './' }, (file) => {
@@ -124,20 +123,44 @@ gulp.task('watch', () => {
   });
 });
 
-/* ## Default ## */
-gulp.task('default', () => {
-  let arg = {
-    browser: true,
-  };
+/////////////////////////////////////////////////////////////////////////
 
-  let index = process.argv.indexOf('--browser');
-  if (index !== -1) {
-    arg.browser = process.argv[index + 1];
+// START ////////////////////////////////////////////////////////////////
+gulp.task('default', () => {
+  let p = null;
+
+  function spawnChildren(e) {
+    if (p) {
+      p.kill();
+      childProcess.exec('gulp compile', function (err, stdout, stderr) {
+        console.log(stdout);
+        console.log(stderr);
+      });
+    }
+
+    p = spawn('gulp', ['start'], { stdio: 'inherit' });
   }
 
-  sequence('scss', 'webpack', 'watch')((err) => {
+  gulp.watch(
+    [
+      'app/dev/nut/**/template.html',
+      'app/dev/nut/**/*.nut',
+      'gulpfile.js',
+    ],
+    { cwd: './' },
+    () => {
+      browserSync.exit();
+      console.log('Wait for restart');
+      setTimeout(spawnChildren, 100);
+    }
+  );
+  spawnChildren();
+});
+
+gulp.task('start', () => {
+  sequence('scss', 'webpack', 'watch', 'serve')((err) => {
     if (err) console.log(err);
-    serve(arg.browser);
   });
 });
 
+/////////////////////////////////////////////////////////////////////////
