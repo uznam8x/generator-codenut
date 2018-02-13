@@ -1,10 +1,10 @@
 {% macro create(item) %}
 <li class="navigation__item">
-  <a href="{{item.link}}" class="navigation__link">{{item.title|upper}}</a>
+  <a href="{{item.link}}" class="navigation__link">{{item.title}}</a>
   {% if item.children|length %}
   <ul class="navigation__menu">
     {% for child in item.children %}
-    {{ create(child) }}
+      {{ create(child) }}
     {% endfor %}
   </ul>
   {% endif %}
@@ -14,7 +14,7 @@
 <nav role="navigation" data-codenut="navigation" data-nav-model="{{props.type}}" {{arrtibs(el.attribs) | safe}}>
   <ul class="navigation__menu">
     {% for child in data.nav[props.type] %}
-    {{ create(child) }}
+      {{ create(child) }}
     {% endfor %}
   </ul>
 </nav>
