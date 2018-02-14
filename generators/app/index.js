@@ -52,7 +52,7 @@ module.exports = class extends Generator {
     this.fs.copyTpl(
       this.templatePath('bower.json'),
       this.destinationPath('bower.json'), {
-        name: this.props.name,
+        name: this.props.name
       }
     );
     this.fs.copy(
@@ -62,10 +62,6 @@ module.exports = class extends Generator {
     this.fs.copy(
       this.templatePath('gulpfile.js'),
       this.destinationPath('gulpfile.js')
-    );
-    this.fs.copy(
-      this.templatePath('codenut.config.js'),
-      this.destinationPath('codenut.config.js')
     );
     this.fs.copy(
       this.templatePath('webpack.config.js'),
