@@ -49,7 +49,7 @@ const compile = (src) => {
         },
       })
     ))
-    .pipe(compiler({ path: ['./app/dev'] }))
+    .pipe(compiler({path: ['./app/dev']}))
     .pipe(gulp.dest(dest));
 };
 
@@ -65,13 +65,12 @@ const option = {
     './node_modules/codenut-style/scss/',
     './app/dev/stylesheet/',
   ],
+  errLogToConsole:true,
 };
 
 gulp.task('scss', () => gulp.src(['./app/dev/stylesheet/**/*.scss', './app/dev/**/*.scss'])
   .pipe(sassGlob())
-  .pipe(sass(option).on('error', (err) => {
-    console.log(err);
-  }))
+  .pipe(sass(option).on('error', sass.logError))
   .pipe(gulp.dest('./app/prod/resource/stylesheet/'))
 );
 
@@ -79,8 +78,12 @@ gulp.task('scss', () => gulp.src(['./app/dev/stylesheet/**/*.scss', './app/dev/*
 
 // WEBPACK //////////////////////////////////////////////////////////////
 const webpack = require('webpack-stream');
-gulp.task('webpack', () => gulp.src('./app/dev/javascript/script.js')
+gulp.task('webpack', () => gulp.src('./app/dev/javascript/*.js')
   .pipe(webpack(require('./webpack.config.js')))
+  .on('error', function(err) {
+    console.log(err);
+    this.emit('end');
+  })
   .pipe(gulp.dest('./app/prod/resource/javascript'))
 );
 
@@ -89,15 +92,15 @@ gulp.task('webpack', () => gulp.src('./app/dev/javascript/script.js')
 // WATCH ////////////////////////////////////////////////////////////////
 gulp.task('watch', () => {
   // html
-  gulp.watch('app/dev/**/*.html', { cwd: './' }, (file) => {
+  gulp.watch('app/dev/**/*.html', {cwd: './'}, (file) => {
     compile(file.path);
   });
-  gulp.watch(['app/dev/**/*.nunjucks', 'app/dev/model/**/*.json'], { cwd: './' }, (file) => {
+  gulp.watch(['app/dev/**/*.nunjucks', 'app/dev/model/**/*.json'], {cwd: './'}, (file) => {
     sequence('compile')((err) => {
       if (err) console.log(err);
     });
   });
-  gulp.watch('app/prod/page/**/*.html', { cwd: './' }, () => {
+  gulp.watch('app/prod/page/**/*.html', {cwd: './'}, () => {
     clearTimeout(timeout);
     timeout = setTimeout(() => {
       browserSync.reload();
@@ -105,7 +108,7 @@ gulp.task('watch', () => {
   });
 
   // style
-  gulp.watch(['app/dev/**/*.scss'], { cwd: './' }, (file) => {
+  gulp.watch(['app/dev/**/*.scss'], {cwd: './'}, (file) => {
     sequence('scss')((err) => {
       if (err) console.log(err);
       clearTimeout(timeout);
@@ -116,9 +119,13 @@ gulp.task('watch', () => {
   });
 
   // javascript
-  gulp.watch(['app/dev/javascript/**/*.js', 'app/dev/nut/**/*.js'], { cwd: './' }, (file) => {
+  gulp.watch(['app/dev/javascript/**/*.js', 'app/dev/nut/**/*.js'], {cwd: './'}, (file) => {
     sequence('webpack')((err) => {
       if (err) console.log(err);
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        browserSync.reload();
+      }, 300);
     });
   });
 });
@@ -138,7 +145,7 @@ gulp.task('default', () => {
       });
     }
 
-    p = spawn('gulp', ['start'], { stdio: 'inherit' });
+    p = spawn('gulp', ['start'], {stdio: 'inherit'});
   }
 
   gulp.watch(
@@ -147,11 +154,25 @@ gulp.task('default', () => {
       'app/dev/nut/**/*.nut',
       'gulpfile.js',
     ],
-    { cwd: './' },
+    {cwd: './'},
     () => {
       browserSync.exit();
       console.log('Wait for restart');
       setTimeout(spawnChildren, 100);
+    }
+  );
+
+  gulp.watch(
+    [
+      'app/dev/javascript/**/*.js',
+    ],
+    {cwd: './'},
+    (e) => {
+      if( e.type === 'added' || e.type === 'deleted' ){
+        browserSync.exit();
+        console.log('Wait for restart');
+        setTimeout(spawnChildren, 100);
+      }
     }
   );
   spawnChildren();

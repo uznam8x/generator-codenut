@@ -1,8 +1,15 @@
 const webpack = require('webpack');
 const path = require('path');
+const glob = require('glob');
+const _ = require('lodash');
 module.exports = {
+  entry: (() => glob.sync("./app/dev/javascript/*.js").reduce((prev, current, index, array) => {
+    const name = /([\w\d_-]*)\.?[^\\\/]*$/i;
+    prev[current.match(name)[1]] = current;
+    return prev;
+  }, {}))(),
   output: {
-    filename: 'script.min.js',
+    filename: '[name].min.js',
   },
   cache: false,
 
