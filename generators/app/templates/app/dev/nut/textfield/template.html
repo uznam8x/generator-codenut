@@ -1,4 +1,4 @@
-<article data-codenut="textfield" class="{% if(props.value) %}textfield--fill{% endif %} {{props.class}}"{{arrtibs(el.attribs) | safe}}>
+<article data-codenut="textfield" class="{% if(props.value) %}textfield--fill{% endif %} {{props.class}}"{{arrtibs(el.attribs)}}>
   <label>
     <input type="{{props.type}}" name="{{props.name}}" value="{{props.value}}"
            {% if(props.readonly) %}readonly="readonly"{% endif %}
