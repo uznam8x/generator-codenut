@@ -1,8 +1,8 @@
-<article data-codenut="sns" {{arrtibs(el.attribs)}}>
+<article data-codenut="sns" {{arrtibs(el.attribs) | safe}}>
   <ul class="sns__menu">
     {% for item in data.item %}
     <li class="sns__item">
-      <a href="#" class="sns__link sns--{{item.name}}">
+      <a href="{{item.href}}" {% if(item.target) %} target="{{item.target}}" {% endif%} class="sns__link sns--{{item.name}}">
         <img src="/resource/image/sns/{{item.name}}{% if(props.symbol) %}-symbol{% endif%}.png" alt="{{item.name}}" />
       </a>
     </li>

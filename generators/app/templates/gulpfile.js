@@ -24,7 +24,6 @@ const serve = (bool) => {
     server: {
       baseDir: './app/prod',
     },
-  }, (bs, open) => {
   });
 };
 
@@ -62,8 +61,8 @@ gulp.task('compile', () => compile('./app/dev/**/*.html'));
 const option = {
   outputStyle: 'compressed', // expanded
   includePaths: [
-    './node_modules/codenut-style/scss/',
-    './app/dev/stylesheet/',
+    __dirname+'/node_modules/codenut-style/scss/',
+    __dirname+'/app/dev/stylesheet/',
   ],
   errLogToConsole:true,
 };
