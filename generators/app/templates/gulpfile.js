@@ -144,7 +144,7 @@ gulp.task('default', () => {
       });
     }
 
-    p = spawn('gulp', ['start'], {stdio: 'inherit'});
+    p = spawn('node', ['./node_modules/gulp/bin/gulp.js', 'start'], {stdio: 'inherit'});
   }
 
   gulp.watch(
