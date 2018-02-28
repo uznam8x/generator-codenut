@@ -1,5 +1,4 @@
 const path = require('path');
-const nut = require('codenut-compiler').nut;
 const fs = require('fs');
 module.exports = {
     bind:{

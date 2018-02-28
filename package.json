@@ -1,6 +1,6 @@
 {
   "name": "generator-codenut",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "yoman generator codenut for website",
   "homepage": "http://codenut.prisf.com",
   "author": {
@@ -8,9 +8,7 @@
     "email": "uznam8x@gmail.com",
     "url": "http://codenut.prisf.com"
   },
-  "files": [
-    "generators"
-  ],
+  "files": ["generators"],
   "main": "generators/index.js",
   "keywords": [
     "codenut",
@@ -55,20 +53,11 @@
     "test": "jest"
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["eslint --fix", "git add"],
+    "*.json": ["prettier --write", "git add"]
   },
   "eslintConfig": {
-    "extends": [
-      "xo",
-      "prettier"
-    ],
+    "extends": ["xo", "prettier"],
     "env": {
       "jest": true,
       "node": true
@@ -82,9 +71,7 @@
         }
       ]
     },
-    "plugins": [
-      "prettier"
-    ]
+    "plugins": ["prettier"]
   },
   "repository": "uznam8x/generator-codenut",
   "license": "GPLv2"

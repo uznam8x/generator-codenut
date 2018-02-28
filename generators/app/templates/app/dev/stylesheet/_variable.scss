@@ -1,15 +1,20 @@
 $font-base: 16px;
+$font-family: 'Roboto', sans-serif;
+$font-heading: (
+  h1: 40px,
+  h2: 36px,
+  h3: 32px,
+  h4: 28px,
+  h5: 24px,
+  h6: 20px,
+) !default;
+
 $breakpoint: (
   xs: 0,
-  sm: 320px,
-  md: 360px,
-  lg: 375px,
-  xl: 414px
+  sm: 414px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
 ) !default;
-html {
-  font-family: "Noto Sans", sans-serif;
-  &::before {
-    display: none;
-    content: "{breakpoint:#{$breakpoint}}";
-  }
-}
+
+$icon-color:#626262;

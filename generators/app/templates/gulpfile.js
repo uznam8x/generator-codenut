@@ -68,7 +68,7 @@ const option = {
 };
 
 gulp.task('scss', () => gulp.src(['./app/dev/stylesheet/**/*.scss', './app/dev/**/*.scss'])
-  .pipe(sassGlob())
+  .pipe(sassGlob(option))
   .pipe(sass(option).on('error', sass.logError))
   .pipe(gulp.dest('./app/prod/resource/stylesheet/'))
 );

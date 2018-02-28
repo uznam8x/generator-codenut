@@ -16,6 +16,7 @@
     "child_process": "^1.0.2",
     "codenut-compiler": "latest",
     "codenut-style": "latest",
+    "codenut-js": "latest",
     "entities": "^1.1.1",
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",

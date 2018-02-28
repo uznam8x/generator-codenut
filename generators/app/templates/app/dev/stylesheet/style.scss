@@ -1,12 +1,12 @@
 @import "variable";
-@import "mixin/flex";
-@import "mixin/bem";
-@import "mixin/crossbrowser";
-@import "function/rem";
+@import "mixin/*.scss";
+@import "function/*.scss";
+@import "icon";
 @import "base/initialize";
 @import "base/regular";
 @import "base/color";
 
 @import "component/grid";
+@import "component/table";
 @import "component/*";
 @import "../nut/**/_style.scss";
