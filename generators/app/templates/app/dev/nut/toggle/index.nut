@@ -1,9 +1,9 @@
 const path = require('path');
 
 module.exports = {
-    vimeo:{
+    toggle: {
         props: {
-            vid: "",
+            activate: false
         },
         template: path.resolve(__dirname, './template.html'),
     }

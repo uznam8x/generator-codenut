@@ -1,0 +1,16 @@
+// Default
+[data-codenut="top"] {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+
+// Styling
+.top {
+  @include e("button") {
+    width:rem(48px);
+    height:rem(48px);
+    @include icon-arrow-top(#000);
+  }
+}

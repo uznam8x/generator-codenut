@@ -1,45 +1,51 @@
 const fs = require('fs');
-const Vue = require('vue');
 const path = require('path');
 const _ = require('lodash');
-const nut = require('codenut-compiler').nut;
-const cheerio = require('cheerio');
 
-nut.register('navigation', {
-    props: {
-        type: '',
-    },
-    created: (config) => {
+module.exports = {
+    navigation: {
+        props: {
+            type: '',
+        },
+        beforeCreate: (config) => {
+            let nav = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../model/nav.json'), 'utf-8'));
+            let filePath = config.file.path.replace('\\', '/').replace('/app/dev', '');
+            config.props.item = [];
+            config.props.template = config.template;
 
-        let path = config.data.filepath.replace('\\', '/').replace('/app/dev', '');
-        let $ = cheerio.load(config.rendered, {
-            ignoreWhitespace: true,
-            xmlMode: false,
-            lowerCaseTags: true
-        });
-
-        const indication = (node) => {
-            let attr = node.parent.attribs;
-            if (attr['data-codenut'] !== 'navigation') {
-                if (node.parent.name !== 'ul') {
-                    if (!node.parent.attribs['class']) node.parent.attribs['class'] = '';
-                    if (node.parent.attribs['class'].indexOf('navigation--activate') === -1) {
-                        node.parent.attribs['class'] += ' navigation--activate';
+            const find = (model, id = null) => {
+                let result = [];
+                id = (id) ? id + ',' : '';
+                _.each(model, (node, index) => {
+                    node.index = `${id}${index}`;
+                    if (node.link === filePath) {
+                        result.push(node);
                     }
+                    if (node.children && node.children.length) {
+                        result = result.concat(find(node.children, node.index));
+                    }
+                });
+                return result;
+            };
+
+
+            if (config.props.type.length && nav[config.props.type]) {
+                let model = nav[config.props.type];
+                let result = find(model);
+                if (result.length) {
+                    let loc = result[0].index.split(',');
+                    loc.reduce((accumulator, value, index, array) => {
+                        accumulator = accumulator[value];
+                        accumulator.activate = true;
+                        //console.log( accumulator );
+                        return accumulator.children;
+                    }, model);
                 }
-                indication(node.parent);
+                config.props.item = model;
             }
-        };
+            return config;
+        },
 
-        $(`a[href="${path}"]`).each((index, node) => {
-            indication(node);
-        });
-        config.rendered = $.html().replace(/<[\/]?html>|<[\/]?head>|<[\/]?body>/g, '');
-        $ = null;
-        //console.log(config.rendered);
-        return config;
-    },
-    template: fs.readFileSync(path.resolve(__dirname, './template.html'), 'utf-8'),
-});
-
-module.exports = this;
+        template: path.resolve(__dirname, './template.html'),
+    }
+};

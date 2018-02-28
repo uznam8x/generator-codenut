@@ -4,6 +4,13 @@
   display: block;
   padding: 0;
   margin: 0;
+  .navigation__mobile{
+    display: none;
+    @include e('button'){
+      background: none;
+      border: 0;
+    }
+  }
   .navigation__menu {
     display: block;
     list-style: none;

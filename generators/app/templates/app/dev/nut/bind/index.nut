@@ -1,17 +1,18 @@
-const fs = require('fs');
-const Vue = require('vue');
 const path = require('path');
-const _ = require('lodash');
 const nut = require('codenut-compiler').nut;
-const cheerio = require('cheerio');
+const fs = require('fs');
+module.exports = {
+    bind:{
+        props: {
+            uri: '',
+            base:'nut/bind/partial',
+        },
+        beforeCreate:(config)=>{
+            console.log( config );
+            config.props.item = JSON.parse(fs.readFileSync(__dirname+'/partial'+config.props.uri+'/model.json', 'utf-8'));
 
-nut.register('bind', {
-    props: {
-        uri: '',
-        base:'nut/bind/partial',
-    },
-
-    template: fs.readFileSync(path.resolve(__dirname, './template.html'), 'utf-8'),
-});
-
-module.exports = this;
+            return config;
+        },
+        template: path.resolve(__dirname, './template.html'),
+    }
+};

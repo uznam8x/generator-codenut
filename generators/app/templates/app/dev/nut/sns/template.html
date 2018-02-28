@@ -1,11 +1,13 @@
-<article data-codenut="sns" {{arrtibs(el.attribs) | safe}}>
+{% macro create(props, attribs) %}
+<article data-codenut="sns" {{arrtibs(attribs)}}>
   <ul class="sns__menu">
-    {% for item in data.item %}
+    {% for name, item in props.item %}
     <li class="sns__item">
-      <a href="{{item.href}}" {% if(item.target) %} target="{{item.target}}" {% endif%} class="sns__link sns--{{item.name}}">
-        <img src="/resource/image/sns/{{item.name}}{% if(props.symbol) %}-symbol{% endif%}.png" alt="{{item.name}}" />
+      <a {{arrtibs(item)}} class="sns__link sns--{{name}}">
+        <img src="/resource/image/sns/{{name}}{% if(props.symbol) %}-symbol{% endif%}.png" alt="{{name}}" />
       </a>
     </li>
     {% endfor %}
   </ul>
 </article>
+{% endmacro %}

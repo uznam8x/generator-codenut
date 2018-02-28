@@ -1,20 +1,26 @@
-{% macro create(item) %}
-<li class="navigation__item">
+{% macro nested(item) %}
+<li class="navigation__item{% if item.activate %} navigation--activate{% endif %}">
   <a href="{{item.link}}" class="navigation__link">{{item.title}}</a>
   {% if item.children|length %}
   <ul class="navigation__menu">
     {% for child in item.children %}
-      {{ create(child) }}
+    {{ nested(child) }}
     {% endfor %}
   </ul>
   {% endif %}
 </li>
 {% endmacro %}
 
-<nav role="navigation" data-codenut="navigation" data-nav-model="{{props.type}}" {{arrtibs(el.attribs)}}>
+{% macro create(props, attribs) %}
+<nav role="navigation" data-codenut="navigation" data-nav-model="{{props.type}}" {{arrtibs(attribs)}}>
+  <div class="navigation__mobile">
+    <button type="button" class="navigation__mobile__button"><i></i></button>
+  </div>
   <ul class="navigation__menu">
-    {% for child in data.nav[props.type] %}
-      {{ create(child) }}
+    {% for child in props.item %}
+      {% call nested(child) %}
+      {% endcall %}
     {% endfor %}
   </ul>
 </nav>
+{% endmacro %}

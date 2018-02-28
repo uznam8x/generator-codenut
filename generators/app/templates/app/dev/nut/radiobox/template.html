@@ -1,0 +1,15 @@
+{% macro create(props, attribs) %}
+<article data-codenut="radiobox" {{arrtibs(attribs) | safe}}>
+  <label>
+    <input type="radio"
+           class="checkbox__input"
+           name="{{props.name}}"
+           value="{{props.value}}"
+           {% if(props.required) %}required="required"{% endif %}
+           {% if(props.disabled) %}disabled="disabled"{% endif %}
+           {% if(props.checked) %}checked="checked"{% endif %}
+    />
+    <span class="radiobox__title">{{props.title}}</span>
+  </label>
+</article>
+{% endmacro %}

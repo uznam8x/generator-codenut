@@ -1,60 +1,48 @@
 const fs = require('fs');
-const Vue = require('vue');
 const path = require('path');
 const _ = require('lodash');
-const nut = require('codenut-compiler').nut;
-const cheerio = require('cheerio');
-nut.register('breadcrumb', {
-    props: {
-        type: "",
-    },
-    beforeCreate: (config) => {
-        let path = config.data.filepath.replace('\\', '/').replace('/app/dev', '');
-        const map = (node, el) => {
-            _.each(node, (item, index) => {
-                el += `<li><a href="${item.link}">${item.title}</a>`;
-                if (item.children && item.children.length) {
-                    el += '<ul>';
-                    el = map(item.children, el);
-                    el += '</ul>';
-                }
-                el += '</li>';
-            });
-            return el;
-        };
 
-        const indication = (node) => {
-            let attr = node.parent.attribs;
-            if (attr['data-codenut'] !== 'breadcrumb') {
-                if (node.parent.name !== 'ul') {
-                    if (!node.parent.attribs['class']) node.parent.attribs['class'] = '';
-                    if (node.parent.attribs['class'].indexOf('breadcrumb--activate') === -1) {
-                        node.parent.attribs['class'] += ' breadcrumb--activate';
+module.exports = {
+    breadcrumb:{
+        props: {
+            type: "",
+        },
+        beforeCreate: (config)=> {
+            let nav = JSON.parse( fs.readFileSync(path.resolve(__dirname, '../../model/nav.json'), 'utf-8') );
+            config.props.item = [];
+            let filePath = config.file.path.replace('\\', '/').replace('/app/dev', '');
+
+            const find = (model, id = null)=>{
+                let result = [];
+                id = (id)?id+',':'';
+                _.each(model, (node, index)=>{
+                    node.index = `${id}${index}`;
+                    if(node.link === filePath){
+                        result.push(node);
                     }
+                    if( node.children && node.children.length ){
+                        result = result.concat( find( node.children, node.index ) );
+                    }
+                });
+                return result;
+            };
+
+            if (config.props.type.length && nav[config.props.type]) {
+                let model = nav[config.props.type];
+                let result = find( model );
+                if( result.length ){
+                    let loc = result[0].index.split(',');
+                    loc.reduce((accumulator, value, index, array)=>{
+                        accumulator = accumulator[value];
+                        config.props.item.push( {title:accumulator.title, link:accumulator.link} );
+                        return accumulator.children;
+                    }, model);
                 }
-                indication(node.parent);
+
             }
-        };
+            return config;
+        },
 
-        if (config.props.type.length && config.data.nav[config.props.type]) {
-            let nav = '<ul data-codenut="breadcrumb">' + map(config.data.nav[config.props.type], '') + '</ul>';
-            let $ = cheerio.load(nav);
-
-            $(`a[href="${path}"]`).each((index, node) => {
-                indication(node);
-            });
-            config.data.item = [];
-            _.each($('.breadcrumb--activate'), (item, index) => {
-                let link = item.children[0];
-                config.data.item.push({title: link.children[0].data, link: link.attribs['href']});
-            });
-
-            $ = null;
-        }
-        return config;
-    },
-
-    template: fs.readFileSync(path.resolve(__dirname, './template.html'), 'utf-8'),
-});
-
-module.exports = this;
+        template: path.resolve(__dirname, './template.html'),
+    }
+};

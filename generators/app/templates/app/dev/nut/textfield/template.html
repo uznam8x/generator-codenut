@@ -1,4 +1,5 @@
-<article data-codenut="textfield" class="{% if(props.value) %}textfield--fill{% endif %} {{props.class}}"{{arrtibs(el.attribs)}}>
+{% macro create(props, attribs) %}
+<article data-codenut="checkbox" {{arrtibs(attribs) | safe}}>
   <label>
     <input type="{{props.type}}" name="{{props.name}}" value="{{props.value}}"
            {% if(props.readonly) %}readonly="readonly"{% endif %}
@@ -10,3 +11,4 @@
     <span class="textfield__placeholder">{{props.placeholder}}</span>
   </label>
 </article>
+{% endmacro %}

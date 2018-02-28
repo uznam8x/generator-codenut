@@ -1,3 +1,5 @@
-<article data-codenut="vimeo" {{arrtibs(el.attribs)}}>
+{% macro create(props, attribs) %}
+<article data-codenut="vimeo" {{arrtibs(attribs) | safe}}>
   <iframe src="https://player.vimeo.com/video/{{props.vid}}?title=0&byline=0&portrait=0&badge=0" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" allowfullscreen="allowfullscreen"></iframe>
 </article>
+{% endmacro %}

@@ -1,10 +1,8 @@
 const path = require('path');
 
 module.exports = {
-    vimeo:{
-        props: {
-            vid: "",
-        },
+    top: {
+        props: {},
         template: path.resolve(__dirname, './template.html'),
     }
 };

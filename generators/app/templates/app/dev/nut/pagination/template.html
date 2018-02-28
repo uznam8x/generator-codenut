@@ -1,12 +1,12 @@
-<nav data-codenut="pagination" {{arrtibs(el.attribs)}}>
+{% macro create(props, attribs) %}
+<nav data-codenut="pagination" {{arrtibs(attribs) | safe}}>
   <ul class="pagination__menu">
-
     <li class="pagination__item pagination__prev">
-      {% if props.slot.prev | length %}
-      <a href="#" class="pagination__link">{{props.slot.prev}}</a>
-      {% else %}
-      <a href="#" class="pagination__link">PREV</a>
-      {% endif %}
+      <a href="#" class="pagination__link">
+        {% slot props.slot.prev %}
+          Prev
+        {% endslot %}
+      </a>
     </li>
 
     {% for i in range(props.from | int, props.to | int +1) -%}
@@ -14,12 +14,15 @@
       <a href="#" class="pagination__link">{{i}}</a>
     </li>
     {%- endfor %}
+
     <li class="pagination__item pagination__next">
-      {% if props.slot.next | length %}
-      <a href="#" class="pagination__link">{{props.slot.next}}</a>
-      {% else %}
-      <a href="#" class="pagination__link">NEXT</a>
-      {% endif %}
+      <a href="#" class="pagination__link">
+        {% slot props.slot.next %}
+        Next
+        {% endslot %}
+      </a>
     </li>
   </ul>
+  {% slot props.slot.default %}{% endslot %}
 </nav>
+{% endmacro %}
