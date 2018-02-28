@@ -14,22 +14,24 @@ module.exports = class extends Generator {
   }
 
   prompting() {
-    this.log(yosay(
-      'Welcome to the majestic ' + chalk.red('generator-codenut') + ' generator!'
-    ));
-
+    this.log(
+      yosay('Welcome to the majestic ' + chalk.red('generator-codenut') + ' generator!')
+    );
 
     const prompts = [
       {
         type: 'input',
         name: 'name',
         message: 'Project name?',
-        default: this.appname.trim().replace(
-          /(?:^\w|[A-Z]|\b\w)/g, (letter, index) => index === 0 ? letter.toLowerCase() : letter.toUpperCase()
-        ).replace(/\s+/g, ''),
-      },
+        default: this.appname
+          .trim()
+          .replace(
+            /(?:^\w|[A-Z]|\b\w)/g,
+            (letter, index) => (index === 0 ? letter.toLowerCase() : letter.toUpperCase())
+          )
+          .replace(/\s+/g, '')
+      }
     ];
-
 
     return this.prompt(prompts).then(props => {
       this.props = props;
@@ -39,46 +41,39 @@ module.exports = class extends Generator {
   writing() {
     this.fs.copyTpl(
       this.templatePath('package.json'),
-      this.destinationPath('package.json'), {
-        name: this.props.name.trim().replace(
-          /(?:^\w|[A-Z]|\b\w)/g, (letter, index) => index === 0 ? letter.toLowerCase() : letter.toUpperCase()
-        ).replace(/\s+/g, ''),
-      }
-    );
-    this.fs.copy(
-      this.templatePath('.bowerrc'),
-      this.destinationPath('.bowerrc')
-    );
-    this.fs.copyTpl(
-      this.templatePath('bower.json'),
-      this.destinationPath('bower.json'), {
+      this.destinationPath('package.json'),
+      {
         name: this.props.name
+          .trim()
+          .replace(
+            /(?:^\w|[A-Z]|\b\w)/g,
+            (letter, index) => (index === 0 ? letter.toLowerCase() : letter.toUpperCase())
+          )
+          .replace(/\s+/g, '')
       }
     );
-    this.fs.copy(
-      this.templatePath('.gitignore'),
-      this.destinationPath('.gitignore')
-    );
-    this.fs.copy(
-      this.templatePath('gulpfile.js'),
-      this.destinationPath('gulpfile.js')
-    );
+    this.fs.copy(this.templatePath('.bowerrc'), this.destinationPath('.bowerrc'));
+    this.fs.copyTpl(this.templatePath('bower.json'), this.destinationPath('bower.json'), {
+      name: this.props.name
+    });
+    if (this.fs.exists(this.templatePath('gitignore.txt'))) {
+      this.fs.copy(
+        this.templatePath('gitignore.txt'),
+        this.destinationPath('.gitignore')
+      );
+    }
+
+    this.fs.copy(this.templatePath('gulpfile.js'), this.destinationPath('gulpfile.js'));
     this.fs.copy(
       this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js')
     );
-    this.fs.copy(
-      this.templatePath('.jscsrc'),
-      this.destinationPath('.jscsrc')
-    );
+    this.fs.copy(this.templatePath('.jscsrc'), this.destinationPath('.jscsrc'));
     this.fs.copy(
       this.templatePath('.scss-lint.yml'),
       this.destinationPath('.scss-lint.yml')
     );
-    this.fs.copy(
-      this.templatePath('app'),
-      this.destinationPath('app')
-    );
+    this.fs.copy(this.templatePath('app'), this.destinationPath('app'));
   }
 
   install() {
