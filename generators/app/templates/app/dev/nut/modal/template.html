@@ -1,0 +1,26 @@
+{% macro create(props, attribs) %}
+<article data-codenut="modal" {{arrtibs(attribs)}}>
+  {% if props.slot.header %}
+  <div class="modal__header">
+    {% slot props.slot.header %}
+    {% endslot %}
+  </div>
+  {% endif %}
+  {% if props.slot.content %}
+  <div class="modal__content">
+    {% slot props.slot.content %}
+    {% endslot %}
+  </div>
+  {% endif %}
+
+  {% if props.slot.action %}
+  <div class="modal__action">
+    {% slot props.slot.extra %}
+    {% endslot %}
+  </div>
+  {% endif %}
+
+  {% slot props.slot.close %}
+  {% endslot %}
+</article>
+{% endmacro %}

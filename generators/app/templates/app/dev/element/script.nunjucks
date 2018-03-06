@@ -3,4 +3,5 @@
 <script src="/resource/javascript/lib/gsap/src/minified/plugins/ScrollToPlugin.min.js"></script>
 <script src="/resource/javascript/lib/gsap/src/minified/TweenMax.min.js"></script>
 <script src="/resource/javascript/lib/mobile-detect/mobile-detect.min.js"></script>
+<script src="/resource/javascript/lib/codenut-js/dist/codenut.min.js"></script>
 <script src="/resource/javascript/script.min.js"></script>

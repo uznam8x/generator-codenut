@@ -1,48 +1,52 @@
 {
-  "gnb":[
+  "gnb": [
     {
-      "title":"ABOUT US",
-      "link":"#",
-      "children":[
+      "title": "ABOUT US",
+      "link": "#",
+      "children": [
         {
-          "title":"Overview",
-          "link":"#"
+          "title": "Overview",
+          "link": "#"
         },
         {
-          "title":"Location",
-          "link":"#"
-        }
-      ]
-    },
-
-    {
-      "title":"NEWS",
-      "link":"#",
-      "children":[
-        {
-          "title":"Archives",
-          "link":"#"
+          "title": "Location",
+          "link": "#"
         }
       ]
     },
     {
-      "title":"COMMUNITY",
-      "link":"#",
-      "children":[
+      "title": "NEWS",
+      "link": "#",
+      "children": [
         {
-          "title":"Notice",
-          "link":"#"
+          "title": "Archives",
+          "link": "#"
+        }
+      ]
+    },
+    {
+      "title": "COMMUNITY",
+      "link": "#",
+      "children": [
+        {
+          "title": "Notice",
+          "link": "#"
         },
         {
-          "title":"FAQs",
-          "link":"#"
+          "title": "FAQs",
+          "link": "#"
         }
       ]
     },
     {
-      "title":"CONTACT",
-      "link":"#",
-      "children":[]
+      "title": "SERVICE",
+      "link": "#",
+      "children": []
+    },
+    {
+      "title": "CONTACT",
+      "link": "#",
+      "children": []
     }
   ]
 }

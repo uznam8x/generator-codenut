@@ -2,13 +2,15 @@
 <html lang="en">
 <head>
   {% include 'element/meta.nunjucks' %}
-  {% include 'element/link.nunjucks' %}
-  {% block head %}{% endblock %}
+  {% block head %}
+    {% include 'element/link.nunjucks' %}
+  {% endblock %}
   <title>Codenut</title>
 </head>
 <body {% if attr %} {{attr}} {% endif %}>
 {% block content %}{% endblock %}
-{% include 'element/script.nunjucks' %}
-{% block foot %}{% endblock %}
+{% block foot %}
+  {% include 'element/script.nunjucks' %}
+{% endblock %}
 </body>
 </html>

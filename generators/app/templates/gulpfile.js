@@ -138,7 +138,7 @@ gulp.task('default', () => {
   function spawnChildren(e) {
     if (p) {
       p.kill();
-      childProcess.exec('gulp compile', function (err, stdout, stderr) {
+      childProcess.exec('node ./node_modules/gulp/bin/gulp.js compile', function (err, stdout, stderr) {
         console.log(stdout);
         console.log(stderr);
       });

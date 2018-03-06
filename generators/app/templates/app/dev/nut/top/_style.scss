@@ -4,13 +4,15 @@
   right: 0;
   bottom: 0;
   z-index: 99;
+  font-size: 0;
 }
 
 // Styling
 .top {
   @include e("button") {
-    width:rem(48px);
-    height:rem(48px);
-    @include icon-arrow-top(#000);
+    width: rem(48px);
+    height: rem(48px);
+    background-color: rgba(#000, .4);
+    @include icon-arrow-top(#fff);
   }
 }

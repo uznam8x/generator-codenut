@@ -5,7 +5,7 @@ const _ = require('lodash');
 module.exports = {
     navigation: {
         props: {
-            type: '',
+            model: '',
         },
         beforeCreate: (config) => {
             let nav = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../model/nav.json'), 'utf-8'));
@@ -29,8 +29,8 @@ module.exports = {
             };
 
 
-            if (config.props.type.length && nav[config.props.type]) {
-                let model = nav[config.props.type];
+            if (config.props.model.length && nav[config.props.model]) {
+                let model = nav[config.props.model];
                 let result = find(model);
                 if (result.length) {
                     let loc = result[0].index.split(',');

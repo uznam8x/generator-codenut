@@ -1,9 +1,9 @@
 {% macro create(props, attribs) %}
 <article data-codenut="sns" {{arrtibs(attribs)}}>
   <ul class="sns__menu">
-    {% for name, item in props.item %}
+    {% for name, item in props.slot %}
     <li class="sns__item">
-      <a {{arrtibs(item)}} class="sns__link sns--{{name}}">
+      <a {{arrtibs(item.attribs)}} class="sns__link sns--{{name}}">
         <img src="/resource/image/sns/{{name}}{% if(props.symbol) %}-symbol{% endif%}.png" alt="{{name}}" />
       </a>
     </li>

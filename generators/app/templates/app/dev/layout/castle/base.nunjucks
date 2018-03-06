@@ -1,7 +1,7 @@
 {% extends "element/base.nunjucks" %}
 {% block head %}
-{{ super() }}
 <link rel="stylesheet" href="/resource/stylesheet/layout/castle/style.css" />
+{{ super() }}
 {% endblock %}
 {% block content %}
 {% block header %} {% include './header.nunjucks' %} {% endblock %}

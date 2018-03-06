@@ -1,0 +1,31 @@
+{% macro create(props, attribs) %}
+<article data-codenut="card" {{arrtibs(attribs)}}>
+  {% if props.slot.header %}
+  <div class="card__header">
+    {% slot props.slot.header %}
+    {% endslot %}
+  </div>
+  {% endif %}
+
+  {% if props.slot.image %}
+  <div class="card__image">
+    {% slot props.slot.image %}
+    {% endslot %}
+  </div>
+  {% endif %}
+
+  {% if props.slot.content %}
+  <div class="card__content">
+    {% slot props.slot.content %}
+    {% endslot %}
+  </div>
+  {% endif %}
+
+  {% if props.slot.extra %}
+  <div class="card__extra">
+    {% slot props.slot.extra %}
+    {% endslot %}
+  </div>
+  {% endif %}
+</article>
+{% endmacro %}
