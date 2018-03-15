@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  tooltip: {
+  popover: {
     props: {
       title: ''
     },

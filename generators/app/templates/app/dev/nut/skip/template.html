@@ -1,0 +1,11 @@
+{% macro create(props, attribs) %}
+<article data-codenut="skip">
+    <ul class="skip__menu">
+        {% for item in props.item %}
+        <li class="skip__item">
+            <a href="{{item.link}}" class="skip__link">{{item.title}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</article>
+{% endmacro %}

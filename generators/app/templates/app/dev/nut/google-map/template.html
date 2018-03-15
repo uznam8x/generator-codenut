@@ -1,0 +1,5 @@
+{% macro create(props, attribs) %}
+<article data-codenut="google-map" {{arrtibs(attribs)}}>
+    <iframe src="https://maps.google.com/maps?q={{props.address}}&z={{props.zoom}}&t=q&output=embed" frameborder="0"></iframe>
+</article>
+{% endmacro %}

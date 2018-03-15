@@ -1,16 +1,22 @@
-module.exports = (()=>{
-    const component = document.querySelectorAll('[data-codenut="toggle"]');
+(() => {
+    const click = (evt) => {
+        evt.currentTarget.classList.toggle('toggle--activate');
+    };
 
-    if (component.length) {
-
-        document.addEventListener('click', (e)=>{
-            let nut = e.target.getAttribute('data-codenut');
-            if( nut === 'toggle' ){
-                e.target.classList.toggle('toggle--activate');
+    const init = () => {
+        const component = document.documentElement.querySelectorAll('[data-codenut="toggle"]');
+        _.each(component, (node) => {
+            if( !node.getAttribute('data-codenut-status') ){
+                node.addEventListener('click', click);
+                node.setAttribute('data-codenut-status', 'initialized');
             }
-        });
-        if (Codenut.debug) {
-            console.log('%ccodenut component : "toggle" initialize', 'color:#133783');
-        }
+        })
+    };
+
+    document.addEventListener('DOMModified', init);
+    document.addEventListener('DOMContentLoaded', init);
+
+    if (Codenut.debug) {
+        console.log('%ccodenut component : "top" initialize', 'color:#133783');
     }
 })();

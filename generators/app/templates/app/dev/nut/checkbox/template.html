@@ -1,5 +1,5 @@
 {% macro create(props, attribs) %}
-<article data-codenut="checkbox" {{arrtibs(attribs) | safe}}>
+<article data-codenut="checkbox" {{arrtibs(attribs)}}>
   <label>
     <input type="checkbox"
            class="checkbox__input"
@@ -9,6 +9,7 @@
            {% if(props.disabled) %}disabled="disabled"{% endif %}
            {% if(props.checked) %}checked="checked"{% endif %}
     />
+    <span class="checkbox__icon"><i></i></span>
     <span class="checkbox__title">{{props.title}}</span>
   </label>
 </article>

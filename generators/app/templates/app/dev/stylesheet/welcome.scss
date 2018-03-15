@@ -1,33 +1,41 @@
-html, body{
+html, body {
   width: 100%;
   height: 100%;
 }
-body{
+
+body {
   background-color: #424652;
 }
-.welcome{
+
+.welcome {
+  height: 100%;
   font-size: 0;
   text-align: center;
-  height: 100%;
+  img {
+    height: 300px;
+  }
 }
-.welcome::before{
+
+.welcome::before {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
-  content: '';
+  content: "";
 }
+
 .welcome > * {
   display: inline-block;
   vertical-align: middle;
 }
+
 .welcome h1 {
-  color: #fff;
-  font-size: 3rem;
   margin-bottom: 1rem;
+  font-size: 3rem;
   font-weight: 100;
+  color: #fff;
 }
 
-.welcome a{
+.welcome a {
   font-size: 1rem;
   font-weight: 100;
   color: #fff;

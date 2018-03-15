@@ -1,16 +1,19 @@
 <!doctype html>
 <html lang="en">
 <head>
-  {% include 'element/meta.nunjucks' %}
-  {% block head %}
-    {% include 'element/link.nunjucks' %}
-  {% endblock %}
   <title>Codenut</title>
+  <include src="element/meta.nunjucks" />
+  <block name="head">
+    <include src="element/link.nunjucks" />
+  </block>
 </head>
+
 <body {% if attr %} {{attr}} {% endif %}>
-{% block content %}{% endblock %}
-{% block foot %}
-  {% include 'element/script.nunjucks' %}
-{% endblock %}
+<block name="body">
+  <block name="content" />
+</block>
+
+<block name="foot" />
+<include src="element/script.nunjucks" />
 </body>
 </html>

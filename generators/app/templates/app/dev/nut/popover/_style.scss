@@ -1,0 +1,72 @@
+[data-codenut="popover"] {
+  position: relative;
+  display: inline-block;
+  .popover {
+    @include e("title") {
+      display: inline-block;
+      line-height: 1;
+      &::before {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        content: "";
+      }
+
+      &.popover--visible + .popover__content {
+        z-index: 3;
+        display: block;
+      }
+
+      &.popover--focus + .popover__content {
+        opacity: 1;
+      }
+    }
+
+    @include e("content") {
+      position: absolute;
+      display: none;
+      opacity: 0;
+    }
+  }
+}
+
+// Styling
+.popover--top {
+  .popover {
+    @include e("content") {
+      top: 0;
+      left: 50%;
+      @include transform(translate(-50%, -100%));
+    }
+  }
+}
+
+.popover--bottom {
+  .popover {
+    @include e("content") {
+      top: 100%;
+      left: 50%;
+      @include transform(translate(-50%, 0));
+    }
+  }
+}
+
+.popover--right {
+  .popover {
+    @include e("content") {
+      top: 50%;
+      left: 100%;
+      @include transform(translate(0, -50%));
+    }
+  }
+}
+
+.popover--left {
+  .popover {
+    @include e("content") {
+      top: 50%;
+      right: 100%;
+      @include transform(translate(0%, -50%));
+    }
+  }
+}

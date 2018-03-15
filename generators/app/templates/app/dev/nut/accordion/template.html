@@ -1,8 +1,10 @@
 {% macro create(props, attribs) %}
-<article data-codenut="accordion" data-model="{{props.model}}" {{arrtibs(attribs)}}>
+<article data-codenut="accordion" data-model="{{props.model}}" {% if props.multiple %}data-multiple="true"{% endif%} {{arrtibs(attribs)}}>
   <ul>
     {% for item in props.item %}
-    <li>
+    {% set activate = boolean(item.activate) %}
+
+    <li class="accordion__item {% if activate %}accordion--opened {% endif %}">
       <a class="accordion__title" href="#">{{item.title | safe}}</a>
       <div class="accordion__content">{{item.content | safe}}</div>
     </li>

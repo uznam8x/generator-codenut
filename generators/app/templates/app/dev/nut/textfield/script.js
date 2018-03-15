@@ -1,4 +1,4 @@
-(($, nut) => {
+/*(($, nut) => {
   'use strict';
   const component = document.documentElement.querySelectorAll('[data-codenut="textfield"]');
   if (component.length) {
@@ -31,3 +31,40 @@
     }
   }
 })(jQuery, Codenut);
+*/
+
+
+(() => {
+    const selector = '[data-codenut="textfield"]';
+    const focus = (evt) => {
+        evt.currentTarget.closest(selector).classList.add('textfield--focus');
+    };
+
+    const blur = (evt) => {
+        evt.currentTarget.closest(selector).classList.remove('textfield--focus');
+    };
+
+    const change = (evt) => {
+        evt.currentTarget.closest(selector).classList[( evt.currentTarget.value.length )?'add':'remove']('textfield--fill');
+    };
+
+    const init = () => {
+        const component = document.documentElement.querySelectorAll('[data-codenut="textfield"]');
+        _.each(component, (node) => {
+            if( !node.getAttribute('data-codenut-status') ){
+                const input = node.querySelector('.textfield__input');
+                input.addEventListener('focus', focus);
+                input.addEventListener('focusout', blur);
+                input.addEventListener('input', change);
+                node.setAttribute('data-codenut-status', 'initialized');
+            }
+        })
+    };
+
+    document.addEventListener('DOMModified', init);
+    document.addEventListener('DOMContentLoaded', init);
+
+    if (Codenut.debug) {
+        console.log('%ccodenut component : "textfield" initialize', 'color:#133783');
+    }
+})();

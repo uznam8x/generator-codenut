@@ -1,18 +1,22 @@
-{% extends "element/base.nunjucks" %}
-{% block head %}
-<link rel="stylesheet" href="/resource/stylesheet/layout/basket/style.css" />
-{{ super() }}
-{% endblock %}
-{% block content %}
-{% block header %} {% include './header.nunjucks' %} {% endblock %}
-
-<main role="main" id="main">
-  <aside class="basket">
-    {% block basket %}{% endblock %}
-  </aside>
-  <section>
-    {% block main %}{% endblock %}
-  </section>
-</main>
-{% block footer %} {% include './footer.nunjucks' %} {% endblock %}
-{% endblock %}
+<layout src="element/base.nunjucks">
+  <block name="head">
+    <link rel="stylesheet" href="/resource/stylesheet/layout/basket/style.css"/>
+    <super/>
+  </block>
+  <block name="body">
+    <block name="header">
+      <include src="./header.nunjucks"/>
+    </block>
+    <aside class="basket">
+      <block name="basket"></block>
+    </aside>
+    <main role="main" id="main">
+      <section>
+        <block name="content"></block>
+      </section>
+    </main>
+    <block name="footer">
+      <include src="./footer.nunjucks"/>
+    </block>
+  </block>
+</layout>

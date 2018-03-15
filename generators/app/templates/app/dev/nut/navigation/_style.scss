@@ -25,6 +25,23 @@
       }
       & > .navigation__menu{
         position: absolute;
+        width: 100%;
+        min-width: rem(100px);
+
+        display: none;
+      }
+    }
+  }
+}
+
+.navigation--verti{
+  & > .navigation__menu{
+    & > .navigation__item{
+      position: relative;
+      .navigation__link{
+        text-decoration: none;
+      }
+      & > .navigation__menu{
         display: none;
       }
     }

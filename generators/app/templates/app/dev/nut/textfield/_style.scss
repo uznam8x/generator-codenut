@@ -2,22 +2,20 @@
 [data-codenut="textfield"] {
   position: relative;
   label {
-    display: block;
     position: relative;
     width: 100%;
     margin-bottom: 0;
     background-color: transparent;
     input {
-      display: block;
-      width: 100%;
       position: relative;
-      z-index: 3;
-      border: 0;
+      z-index: 2;
+      width: 100%;
       background-color: transparent;
     }
   }
 }
 
+/*
 .textfield {
   @include e("placeholder") {
     position: absolute;
@@ -39,5 +37,5 @@
     }
   }
 }
-
+*/
 // Styling

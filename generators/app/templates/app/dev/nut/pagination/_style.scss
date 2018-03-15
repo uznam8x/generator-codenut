@@ -3,19 +3,32 @@
   position: relative;
   padding: 0;
   margin: 0;
-  white-space: nowrap;
   list-style: none;
 }
 .pagination {
   @include e("menu") {
-    font-size: 0;
+    @include flexbox();
+    @include align-items(center);
   }
-  @include e("item") {
-    display: inline-block;
-  }
+
   @include e("link") {
+    &:before{
+      content: '';
+      display: inline-block;
+      height: 100%;
+      vertical-align: middle;
+    }
     display: inline-block;
+    vertical-align: middle;
   }
 }
 
 // Styling
+.pagination--simple{
+  .pagination__item{
+    display: none;
+  }
+  .pagination__item.pagination__prev, .pagination__item.pagination__next{
+    display: block;
+  }
+}
