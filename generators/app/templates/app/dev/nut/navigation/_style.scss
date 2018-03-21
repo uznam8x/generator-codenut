@@ -24,10 +24,9 @@
       }
       & > .navigation__menu {
         position: absolute;
+        display: none;
         width: 100%;
         min-width: rem(100px);
-
-        display: none;
       }
     }
   }

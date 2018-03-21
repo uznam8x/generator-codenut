@@ -7,7 +7,7 @@
             {% if(props.disabled) %}disabled="disabled"{% endif %}
     >
       <option value="" selected="selected" disabled="disabled">{{props.title}}</option>
-
+      {% slot props.slot.default %}{% endslot %}
     </select>
     <span class="selectbox__icon">
       {% slot props.slot.icon %}
@@ -16,6 +16,6 @@
     </span>
     <span class="selectbox__title">{{props.title}}</span>
   </label>
-  {% slot props.slot.default %}{% endslot %}
+
 </article>
 {% endmacro %}
