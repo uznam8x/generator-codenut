@@ -1,5 +1,5 @@
-{% macro create(props, attribs) %}
-<article data-codenut="textfield" class="{{props.class}}"{{arrtibs(attribs)}}>
+{% macro create(props, attrs) %}
+<article data-codenut="textfield" class="{{props.class}}" {{attribs(attrs)}}>
   <label>
     <input type="{{props.type}}" name="{{props.name}}" value="{{props.value}}" class="textfield__input"
            {% if props.readonly %}readonly="readonly"{% endif %}

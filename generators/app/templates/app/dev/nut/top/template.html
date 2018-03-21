@@ -1,5 +1,7 @@
-{% macro create(props, attribs) %}
-<div data-codenut="top" {{arrtibs(attribs) | safe}}>
-  <button type="button" class="top__button" title="TOP"><i></i></button>
-</div>
+{% macro create(props, attrs) %}
+<button data-codenut="top" type="button" title="TOP" {{attribs(attrs)}}>
+  {% slot props.slot.default %}
+  <i></i>
+  {% endslot %}
+</button>
 {% endmacro %}

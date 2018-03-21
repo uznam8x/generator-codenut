@@ -11,10 +11,14 @@
 </li>
 {% endmacro %}
 
-{% macro create(props, attribs) %}
-<nav role="navigation" data-codenut="navigation" data-model="{{props.model}}" {{arrtibs(attribs)}}>
+{% macro create(props, attrs) %}
+<nav role="navigation" data-codenut="navigation" data-model="{{props.model}}" {{attribs(attrs)}}>
   <div class="navigation__mobile">
-    <button type="button" class="navigation__mobile__button"><i></i></button>
+      <button type="button" class="navigation__mobile__button">
+        {% slot props.slot.icon %}
+          <i></i>
+        {% endslot %}
+      </button>
   </div>
   <ul class="navigation__menu">
     {% for child in props.item %}
@@ -22,5 +26,6 @@
       {% endcall %}
     {% endfor %}
   </ul>
+  {% slot props.slot.default %}{% endslot %}
 </nav>
 {% endmacro %}

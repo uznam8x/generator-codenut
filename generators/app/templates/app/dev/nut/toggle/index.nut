@@ -3,7 +3,8 @@ const path = require('path');
 module.exports = {
     toggle: {
         props: {
-            activate: false
+            activate: false,
+            class:'',
         },
         template: path.resolve(__dirname, './template.html'),
     }

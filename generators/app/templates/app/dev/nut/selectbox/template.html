@@ -1,5 +1,5 @@
-{% macro create(props, attribs) %}
-<article data-codenut="selectbox" {{arrtibs(attribs)}}>
+{% macro create(props, attrs) %}
+<article data-codenut="selectbox" {{attribs(attrs)}}>
   <label>
     <select name="{{props.name}}" class="selectbox__select"
             {% if(props.multiple) %}multiple="multiple"{% endif %}
@@ -7,10 +7,15 @@
             {% if(props.disabled) %}disabled="disabled"{% endif %}
     >
       <option value="" selected="selected" disabled="disabled">{{props.title}}</option>
-      {% slot props.slot.default %}{% endslot %}
+
     </select>
-    <span class="selectbox__icon"><i></i></span>
+    <span class="selectbox__icon">
+      {% slot props.slot.icon %}
+      <i></i>
+      {% endslot %}
+    </span>
     <span class="selectbox__title">{{props.title}}</span>
   </label>
+  {% slot props.slot.default %}{% endslot %}
 </article>
 {% endmacro %}

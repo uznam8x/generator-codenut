@@ -1,5 +1,6 @@
-{% macro create(props, attribs) %}
-<article data-codenut="youtube" {{arrtibs(attribs) | safe}}>
+{% macro create(props, attrs) %}
+<article data-codenut="youtube" {{attribs(attribs) | safe}}>
   <iframe src="https://www.youtube.com/embed/{{props.vid}}" allowfullscreen="allowfullscreen"></iframe>
+  {% slot props.slot.default %}{% endslot %}
 </article>
 {% endmacro %}

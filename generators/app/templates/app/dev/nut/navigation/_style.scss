@@ -1,8 +1,8 @@
 // Default
 [data-codenut="navigation"] {
-  .navigation__mobile{
+  .navigation__mobile {
     display: none;
-    @include e('button'){
+    @include e("button") {
       background: none;
       border: 0;
     }
@@ -12,18 +12,17 @@
   }
 }
 
-
 // Styling
-.navigation--horiz{
-  & > .navigation__menu{
+.navigation--horiz {
+  & > .navigation__menu {
     white-space: nowrap;
     @include flexbox();
-    & > .navigation__item{
+    & > .navigation__item {
       position: relative;
-      .navigation__link{
+      .navigation__link {
         text-decoration: none;
       }
-      & > .navigation__menu{
+      & > .navigation__menu {
         position: absolute;
         width: 100%;
         min-width: rem(100px);
@@ -34,14 +33,14 @@
   }
 }
 
-.navigation--verti{
-  & > .navigation__menu{
-    & > .navigation__item{
+.navigation--verti {
+  & > .navigation__menu {
+    & > .navigation__item {
       position: relative;
-      .navigation__link{
+      .navigation__link {
         text-decoration: none;
       }
-      & > .navigation__menu{
+      & > .navigation__menu {
         display: none;
       }
     }

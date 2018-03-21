@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    imagery:{
+    image:{
         props: {
             width: 320,
             height: 160,

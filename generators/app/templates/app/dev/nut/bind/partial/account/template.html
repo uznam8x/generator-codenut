@@ -1,0 +1,12 @@
+{% macro create(props, attrs) %}
+<aside class="account">
+    {% set bool = boolean(props.item.login) %}
+    {% if bool %}
+    <a href="#">My page</a>
+    <a href="/logout">Log out</a>
+    {% else %}
+    <a href="#">Sign up</a>
+    <a href="/login">Log in</a>
+    {% endif %}
+</aside>
+{% endmacro %}

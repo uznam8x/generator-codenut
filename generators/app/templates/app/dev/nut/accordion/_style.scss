@@ -22,7 +22,7 @@
       display: none;
     }
 
-    @include m('opened') {
+    @include m('activate') {
       #{$block}__content{
         display: block;
       }

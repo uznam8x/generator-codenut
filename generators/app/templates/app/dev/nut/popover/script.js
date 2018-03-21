@@ -27,5 +27,4 @@
             title.addEventListener('focusout', blur);
         })
     });
-
 })(Codenut);

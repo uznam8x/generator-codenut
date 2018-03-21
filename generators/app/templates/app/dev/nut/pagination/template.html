@@ -1,5 +1,5 @@
-{% macro create(props, attribs) %}
-<nav data-codenut="pagination" {{arrtibs(attribs) | safe}}>
+{% macro create(props, attrs) %}
+<nav data-codenut="pagination" {{attribs(attribs) | safe}}>
   <ul class="pagination__menu">
     <li class="pagination__item pagination__prev">
       <a href="#" class="pagination__link">
@@ -14,6 +14,7 @@
       <a href="#" class="pagination__link">{{i}}</a>
     </li>
     {%- endfor %}
+    {% slot props.slot.default %}{% endslot %}
 
     <li class="pagination__item pagination__next">
       <a href="#" class="pagination__link">
@@ -23,6 +24,5 @@
       </a>
     </li>
   </ul>
-  {% slot props.slot.default %}{% endslot %}
 </nav>
 {% endmacro %}

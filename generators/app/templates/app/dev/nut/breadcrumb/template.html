@@ -1,14 +1,16 @@
-{% macro create(props, attribs) %}
-<article data-codenut="breadcrumb" data-model="{{props.model}}" {{arrtibs(attribs)}}>
+{% macro create(props, attrs) %}
+<article data-codenut="breadcrumb" data-model="{{props.model}}" {{attribs(attrs)}}>
     <ul class="breadcrumb__list">
         <li class="breadcrumb__item">
             {% slot props.slot.home %}
             <span class="nut-icon--home"><i></i></span>
             {% endslot %}
         </li>
-        {% for item in props.item %}
-        <li class="breadcrumb__item"><a href="{{item.link}}" class="breadcrumb__link">{{item.title | safe}}</a></li>
-        {% endfor %}
+        {% slot props.slot.default %}
+            {% for item in props.item %}
+            <li class="breadcrumb__item"><a href="{{item.link}}" class="breadcrumb__link">{{item.title | safe}}</a></li>
+            {% endfor %}
+        {% endslot %}
     </ul>
 </article>
 {% endmacro %}

@@ -1,5 +1,5 @@
-{% macro create(props, attribs) %}
-<article data-codenut="radiobox" {{arrtibs(attribs) | safe}}>
+{% macro create(props, attrs) %}
+<article data-codenut="radiobox" {{attribs(attribs) | safe}}>
   <label>
     <input type="radio"
            class="radiobox__input"
@@ -9,8 +9,13 @@
            {% if(props.disabled) %}disabled="disabled"{% endif %}
            {% if(props.checked) %}checked="checked"{% endif %}
     />
-    <span class="radiobox__icon"><i></i></span>
+    <span class="radiobox__icon">
+      {% slot props.slot.icon %}
+        <i></i>
+      {% endslot %}
+    </span>
     <span class="radiobox__title">{{props.title}}</span>
   </label>
+  {% slot props.slot.default %}{% endslot %}
 </article>
 {% endmacro %}
