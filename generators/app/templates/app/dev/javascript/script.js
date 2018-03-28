@@ -8,3 +8,4 @@ require('../nut/popover/script');
 require('../nut/modal/script');
 require('../nut/alert/script');
 require('../nut/scrollbar/script');
+require('../nut/search/script');
