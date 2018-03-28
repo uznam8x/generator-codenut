@@ -1,6 +1,10 @@
+require('../nut/navigation/script');
 require('../nut/accordion/script');
 require('../nut/toggle/script');
 require('../nut/top/script');
 require('../nut/textfield/script');
 require('../nut/selectbox/script');
 require('../nut/popover/script');
+require('../nut/modal/script');
+require('../nut/alert/script');
+require('../nut/scrollbar/script');

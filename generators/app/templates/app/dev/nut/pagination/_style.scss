@@ -5,6 +5,7 @@
   margin: 0;
   list-style: none;
 }
+
 .pagination {
   @include e("menu") {
     @include flexbox();
@@ -12,7 +13,7 @@
   }
 
   @include e("link") {
-    &:before{
+    &:before {
       content: '';
       display: inline-block;
       height: 100%;
@@ -24,11 +25,11 @@
 }
 
 // Styling
-.pagination--simple{
-  .pagination__item{
+.pagination--simple {
+  .pagination__item {
     display: none;
   }
-  .pagination__item.pagination__prev, .pagination__item.pagination__next{
+  .pagination__item.pagination__prev, .pagination__item.pagination__next {
     display: block;
   }
 }

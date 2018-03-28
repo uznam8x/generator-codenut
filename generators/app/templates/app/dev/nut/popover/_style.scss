@@ -12,12 +12,12 @@
         content: "";
       }
 
-      &.popover--visible + .popover__content {
+      &.popover--hold + .popover__content {
         z-index: 3;
         display: block;
       }
 
-      &.popover--focus + .popover__content {
+      &.popover--activate + .popover__content {
         opacity: 1;
       }
     }

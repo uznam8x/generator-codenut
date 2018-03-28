@@ -17,4 +17,9 @@ $breakpoint: (
   xl: 1200px
 ) !default;
 
+$device: (
+  mobile:"md",
+  tablet:"lg",
+) !default;
+
 $icon-color:#626262;

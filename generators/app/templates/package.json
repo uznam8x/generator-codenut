@@ -7,7 +7,7 @@
     "start": "node ./node_modules/gulp/bin/gulp.js default"
   },
   "author": "",
-  "license": "MIT",
+  "license": "GPLv2",
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
@@ -15,6 +15,7 @@
     "child_process": "^1.0.2",
     "codenut-compiler": "latest",
     "codenut-style": "latest",
+    "css-loader": "^0.28.11",
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
     "gulp-data": "^1.2.1",
@@ -24,7 +25,11 @@
     "gulp-sass-glob": "^1.0.8",
     "gulp-sequence": "^0.4.6",
     "glob-loader": "^0.3.0",
+    "mobile-detect": "^1.4.1",
     "node-sass": "^4.6.0",
+    "node-uuid": "^1.4.8",
+    "sass-loader": "^6.0.7",
+    "style-loader": "^0.20.3",
     "path": "^0.12.7",
     "through2": "^2.0.3",
     "webpack": "^3.8.1",

@@ -1,5 +1,5 @@
 {% macro create(props, attrs) %}
-    <article data-codenut="bind" data-uri="{{props.uri}}">
+    <article data-codenut="bind" data-uri="{{props.uri}}" {{attribs(attrs)}}>
         {% set path = props.base+props.uri+"/template.html" %}
         {% import path as template %}
 

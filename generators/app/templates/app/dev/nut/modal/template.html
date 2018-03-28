@@ -1,34 +1,33 @@
 {% macro create(props, attrs) %}
-<article data-codenut="modal" {{attribs(attrs)}}>
-  <div class="modal__container">
-    {% if props.slot.header %}
-    <div class="modal__header">
-      {% slot props.slot.header %}
-      {% endslot %}
-    </div>
-    {% endif %}
-    {% if props.slot.content %}
-    <div class="modal__content">
-      {% slot props.slot.content %}
-      {% endslot %}
-    </div>
-    {% endif %}
+<script type="text/html" id="template-modal-{{props.id}}">
+    <article id="{{props.id}}" data-codenut="modal" tabindex="0" {{attribs(attrs)}}>
+        <div class="modal__container">
+            {% if props.slot.header %}
+            <div class="modal__header">
+                {% slot props.slot.header %}
+                {% endslot %}
+            </div>
+            {% endif %}
 
-    {% if props.slot.action %}
-    <div class="modal__action">
-      {% slot props.slot.action %}
-      {% endslot %}
-    </div>
-    {% endif %}
+            <div class="modal__content">
+                {% slot props.slot.default %}
+                {% endslot %}
+            </div>
 
-    {% slot props.slot.default %}{% endslot %}
+            {% if props.slot.action %}
+            <div class="modal__action">
+                {% slot props.slot.action %}
+                {% endslot %}
+            </div>
+            {% endif %}
 
-    <button type="button" class="modal__close">
-      {% slot props.slot.close %}
-        <span class="nut-icon--close"><i></i></span>
-      {% endslot %}
-    </button>
-
-  </div>
-</article>
+            {% slot props.slot.close %}
+            <button type="button" class="modal__close" onclick="['Event.MODAL_CLOSE', '{{props.id}}']">
+                <span class="voice--only">Close</span>
+                <i></i>
+            </button>
+            {% endslot %}
+        </div>
+    </article>
+</script>
 {% endmacro %}

@@ -1,7 +1,7 @@
 {% macro create(props, attrs) %}
 <button data-codenut="top" type="button" title="TOP" {{attribs(attrs)}}>
   {% slot props.slot.default %}
-  <i></i>
+  <i aria-hidden="true"></i>
   {% endslot %}
 </button>
 {% endmacro %}

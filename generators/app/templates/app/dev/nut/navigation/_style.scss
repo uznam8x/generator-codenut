@@ -1,12 +1,5 @@
 // Default
 [data-codenut="navigation"] {
-  .navigation__mobile {
-    display: none;
-    @include e("button") {
-      background: none;
-      border: 0;
-    }
-  }
   .navigation__menu {
     list-style: none;
   }

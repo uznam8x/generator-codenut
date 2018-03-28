@@ -1,11 +1,12 @@
 ((nut) => {
+    /*
     const click = (evt) => {
         let nav = evt.currentTarget.closest('[data-codenut="navigation"]');
         nav.classList.toggle('navigation__mobile--activate');
         const uuid = nut.util.uuid();
         nav.setAttribute('data-layer-id', uuid);
         nut.layer.add(uuid);
-    };
+    };*/
 
     const resize = (evt) => {
         const mobile = document.querySelectorAll('.navigation__mobile');
@@ -28,13 +29,11 @@
     };
 
     const focus = (evt) => {
-        //console.log( evt.currentTarget.closest('.navigation__item') );
         const item = evt.currentTarget.closest('.navigation__item');
         item.classList.add('navigation--focus');
     };
 
     const blur = (evt) => {
-        //console.log( evt.currentTarget.closest('.navigation__item') );
         const item = evt.currentTarget.closest('.navigation__item');
         const menu = item.querySelector(':scope > .navigation__menu');
         if( !menu ) {
@@ -59,39 +58,20 @@
                 }
             },1);
         }
-
-
     };
 
     nut.component('navigation', (node) => {
         _.each(node, (el) => {
-            const mobile = el.querySelector('.navigation__mobile__button');
-            mobile.addEventListener('click', click);
-
-            el.addEventListener('click', (e) => {
-                if (e.target.getAttribute('data-codenut') === 'navigation') {
-                    e.target.classList.remove('navigation__mobile--activate');
-                    const uuid = e.target.getAttribute('data-layer-id');
-                    if (uuid) {
-                        nut.layer.remove(uuid);
-                    }
-                }
-            });
-
             const item = el.querySelectorAll('.navigation__item');
             _.each(item, (instance) => {
                 instance.addEventListener('mouseenter', enter);
                 instance.addEventListener('mouseleave', leave);
-                //instance.addEventListener('focusout', leave);
             });
 
             const link = el.querySelectorAll('.navigation__link');
             _.each(link, (instance) => {
                 instance.addEventListener('focus', focus);
                 instance.addEventListener('focusout', blur);
-                /*instance.addEventListener('mouseenter', focus);
-                instance.addEventListener('mouseleave', blur);
-                */
             });
 
 
@@ -102,8 +82,5 @@
                 }
             }, false);
         });
-
-
     });
-    window.addEventListener('resize', resize);
 })(Codenut);

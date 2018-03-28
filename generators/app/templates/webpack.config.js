@@ -8,22 +8,49 @@ module.exports = {
     prev[current.match(name)[1]] = current;
     return prev;
   }, {}))(),
+
   output: {
     filename: '[name].min.js',
   },
+
   cache: false,
 
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015'],
-        },
+        use:[
+          {
+            loader: 'babel-loader',
+            query: {
+              presets: ['es2015'],
+            },
+          }
+        ]
       },
-    ],
+      {
+        test: /\.scss$/,
+        exclude: /node_module/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              outputStyle: 'compressed',
+              includePaths: [
+                path.resolve(__dirname, './node_modules/codenut-style/scss/')
+              ]
+            }
+          }
+        ]
+      }
+    ]
   },
 
   plugins: [

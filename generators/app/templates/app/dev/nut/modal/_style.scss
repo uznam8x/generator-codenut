@@ -1,0 +1,22 @@
+[data-codenut="modal"] {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  .modal {
+    @include e("container") {
+      position: absolute;
+      top: rem(16px);
+      left: 50%;
+      min-width: rem(320px);
+      background-color: #fff;
+      @include transform(translate(-50%, 0));
+    }
+
+
+  }
+}

@@ -1,7 +1,8 @@
+const fs = require('fs');
 const path = require('path');
 
 module.exports = {
-  modal: {
+  scrollbar: {
     props: {
       id:false,
     },

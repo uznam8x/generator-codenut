@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  modal: {
+  alert: {
     props: {
       id:false,
     },

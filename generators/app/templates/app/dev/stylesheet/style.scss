@@ -1,10 +1,15 @@
-@import "variable";
-@import "mixin/*.scss";
-@import "function/*.scss";
-@import "icon";
+@import "./variable";
+@import "mixin/flex";
+@import "mixin/bem";
+@import "mixin/crossbrowser";
+@import "mixin/mediaquery";
+@import "function/rem";
+@import "function/em";
 @import "base/initialize";
 @import "base/regular";
-
+@import "icon";
 @import "component/grid";
+@import "component/typo";
+@import "component/device";
 @import "component/*";
 @import "../nut/**/_style.scss";

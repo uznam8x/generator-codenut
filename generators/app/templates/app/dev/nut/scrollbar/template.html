@@ -1,0 +1,10 @@
+{% macro create(props, attrs) %}
+<div data-codenut="scrollbar" {{attribs(attrs)}}>
+    <div class="scrollbar__content">
+        {% slot props.slot.default %}{% endslot%}
+    </div>
+    <div class="scrollbar__track">
+        <button type="button" class="scrollbar__handle"></button>
+    </div>
+</div>
+{% endmacro %}

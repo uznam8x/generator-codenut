@@ -1,0 +1,15 @@
+[data-codenut="card"] {
+  position: relative;
+  .card {
+    @include e("wrap") {
+      position: relative;
+    }
+    @include e("image") {
+      img {
+        max-width: none !important;
+        width: 100%;
+      }
+    }
+  }
+}
+

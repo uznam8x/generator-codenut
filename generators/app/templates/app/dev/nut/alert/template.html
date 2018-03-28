@@ -1,0 +1,25 @@
+{% macro create(props, attrs) %}
+<script type="text/html" id="template-alert-{{props.id}}">
+    <article id="{{props.id}}" data-codenut="alert" tabindex="0" {{attribs(attrs)}}>
+        <div class="alert__container">
+            {% if props.slot.header %}
+            <div class="alert__header">
+                {% slot props.slot.header %}
+                {% endslot %}
+            </div>
+            {% endif %}
+
+            <div class="alert__content">
+                {% slot props.slot.default %}
+                {% endslot %}
+            </div>
+
+            <div class="alert__action">
+                {% slot props.slot.action %}
+                <button type="button" class="alert__close" onclick="['Event.ALERT_CLOSE', '{{props.id}}']">CLOSE</button>
+                {% endslot %}
+            </div>
+        </div>
+    </article>
+</script>
+{% endmacro %}

@@ -2,20 +2,21 @@
     const focus = (evt) => {
         const self = evt.currentTarget;
         TweenMax.killTweensOf(self);
-        self.classList.add('popover--visible');
-        setTimeout(() => {
-            self.classList.add('popover--focus');
+        self.classList.add('popover--hold');
+        clearTimeout(self.timeout);
+        self.timeout = setTimeout(() => {
+            self.classList.add('popover--activate');
         }, 1);
 
     };
 
     const blur = (evt) => {
-        evt.currentTarget.classList.remove('popover--focus');
-        TweenMax.to(evt.currentTarget, 1, {
-            onComplete: function () {
-                this.target.classList.remove('popover--visible')
-            }
-        });
+        const self = evt.currentTarget;
+        self.classList.remove('popover--activate');
+        clearTimeout(self.timeout);
+        self.timeout = setTimeout(()=>{
+            self.classList.remove('popover--hold')
+        },1000);
     };
 
     nut.component('popover', (node) => {

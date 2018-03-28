@@ -1,5 +1,5 @@
 {% macro create(props, attrs) %}
-<button data-codenut="toggle" class="{% if props.activate %} toggle--activate {% endif %}" {{attribs(attrs)}}>
-    {% slot props.slot.default %}{% endslot %}
+<button data-codenut="toggle" class="{{props.class}}{% if props.activate %} toggle--activate {% endif %}" {{attribs(attrs)}}>
+    {% slot props.slot.default %}<i aria-hidden="true"></i>{% endslot %}
 </button>
 {% endmacro %}

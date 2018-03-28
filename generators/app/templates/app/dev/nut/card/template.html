@@ -1,33 +1,34 @@
 {% macro create(props, attrs) %}
 <article data-codenut="card" {{attribs(attrs)}}>
-  {% if props.slot.header %}
-  <div class="card__header">
-    {% slot props.slot.header %}
-    {% endslot %}
-  </div>
-  {% endif %}
+    <div class="card__wrap">
+        {% if props.slot.header %}
+        <div class="card__header">
+            {% slot props.slot.header %}
+            {% endslot %}
+        </div>
+        {% endif %}
 
-  {% if props.slot.image %}
-  <div class="card__image">
-    {% slot props.slot.image %}
-    {% endslot %}
-  </div>
-  {% endif %}
+        {% if props.slot.image %}
+        <figure class="card__image">
+            {% slot props.slot.image %}{% endslot %}
+        </figure>
+        {% endif %}
+    </div>
 
-  {% if props.slot.content %}
-  <div class="card__content">
-    {% slot props.slot.content %}
-    {% endslot %}
-  </div>
-  {% endif %}
+    {% if props.slot.content %}
+    <div class="card__content">
+        {% slot props.slot.content %}
+        {% endslot %}
+    </div>
+    {% endif %}
 
-  {% if props.slot.extra %}
-  <div class="card__extra">
-    {% slot props.slot.extra %}
-    {% endslot %}
-  </div>
+    {% if props.slot.extra %}
+    <div class="card__extra">
+        {% slot props.slot.extra %}
+        {% endslot %}
+    </div>
 
-  {% slot props.slot.default %}{% endslot %}
-  {% endif %}
+    {% slot props.slot.default %}{% endslot %}
+    {% endif %}
 </article>
 {% endmacro %}

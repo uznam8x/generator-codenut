@@ -9,6 +9,13 @@
            {% if props.disabled %}disabled="disabled"{% endif %}
     />
     <span class="textfield__placeholder">{{props.placeholder}}</span>
+    {% if props.slot.icon %}
+    <span class="textfield__icon">
+      {% slot props.slot.icon %}
+      <i aria-hidden="true"></i>
+      {% endslot %}
+    </span>
+    {% endif %}
   </label>
   {% if props.slot.extra %}
   <div class="textfield__extra">
