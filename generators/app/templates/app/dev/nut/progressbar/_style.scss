@@ -1,0 +1,9 @@
+// Default
+[data-codenut="progressbar"] {
+  position: relative;
+  height: 16px;
+  .progressbar__gauge {
+    width: 0;
+    height: 100%;
+  }
+}

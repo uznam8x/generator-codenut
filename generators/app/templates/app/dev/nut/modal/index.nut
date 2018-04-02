@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   modal: {
     props: {
-      id:false,
+      id:'',
     },
     template: path.resolve(__dirname, './template.html'),
   }

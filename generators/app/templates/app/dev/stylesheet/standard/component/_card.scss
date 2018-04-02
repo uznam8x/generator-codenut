@@ -1,0 +1,147 @@
+[data-codenut="card"] {
+  border: 1px solid rgba(#000, .08);
+  @include box-shadow(0, rem(4px), rem(18px), 0, rgba(#000, .08));
+  .card {
+    @include e("header") {
+      position: relative;
+      padding: rem(12px);
+    }
+    @include e("content") {
+      padding: rem(12px);
+      p {
+        line-height: 1.4;
+      }
+    }
+    @include e("extra") {
+      padding: rem(12px);
+    }
+  }
+}
+
+.feed {
+  .card {
+    @include e("header") {
+      padding-right: 0;
+      @include flexbox();
+      @include align-items(center);
+    }
+    @include e("extra") {
+      border-top: 1px solid rgba(#000, .05);
+      background-color: #f6f6f6;
+    }
+  }
+  @include e("avatar") {
+    img {
+      width: rem(40px);
+      border-radius: 50%;
+    }
+  }
+  @include e("info") {
+    padding: rem(0 12px);
+    dt {
+      margin-bottom: rem(4px) !important;
+      font-size: rem(14px);
+      font-weight: 600 !important;
+    }
+    dd {
+      margin-bottom: 0;
+      font-size: rem(12px);
+    }
+  }
+  @include e("more") {
+    margin-left: auto;
+    .nut-icon--more-horiz {
+      width: rem(40px);
+      height: rem(40px);
+    }
+
+    @include e("menu") {
+      position: absolute;
+      right: 0;
+      z-index: 20;
+      display: none;
+      padding: rem(6px 0);
+      background-color: #fff;
+      border: 1px solid rgba(#000, .05);
+      border-right: 0;
+      @include box-shadow(0, rem(4px), rem(18px), 0, rgba(#000, .08));
+    }
+    @include e("link") {
+      display: block;
+      padding: rem(6px 12px);
+      font-size: rem(13px);
+      text-align: right;
+    }
+  }
+  .toggle--activate + .feed__more__menu {
+    display: block;
+  }
+
+
+}
+
+.album {
+  .card {
+    @include e("header") {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding-top: rem(40px);
+      color: #fff;
+      @include background-gradient(transparent, rgba(#000, .6));
+
+      dl {
+        dt {
+          font-size: rem(16px);
+          font-weight: 500;
+        }
+        dd {
+          font-size: rem(12px);
+          color: #ccc;
+          line-height: 1.4;
+        }
+      }
+    }
+  }
+}
+
+.profile {
+  .card {
+    @include e("wrap") {
+      padding-top: 75%;
+    }
+
+    @include e("header") {
+
+      position: relative;
+      bottom: 0;
+      z-index: 2;
+      width: 100%;
+      text-align: center;
+      margin-top: rem(-38px);
+
+      dl {
+        dt {
+          font-size: rem(16px);
+          font-weight: 500;
+          margin: .5rem 0 .2rem;
+        }
+        dd {
+          font-size: rem(12px);
+          font-weight: 300;
+        }
+      }
+    }
+    @include e("image") {
+      position: absolute;
+      top: 0;
+      width: 100%;
+    }
+  }
+  @include e("avatar") {
+    img {
+      width: rem(52px);
+      border-radius: 50%;
+    }
+  }
+}

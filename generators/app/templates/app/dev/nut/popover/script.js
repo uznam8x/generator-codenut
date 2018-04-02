@@ -1,21 +1,21 @@
 ((nut) => {
     const focus = (evt) => {
-        const self = evt.currentTarget;
-        TweenMax.killTweensOf(self);
-        self.classList.add('popover--hold');
-        clearTimeout(self.timeout);
-        self.timeout = setTimeout(() => {
-            self.classList.add('popover--activate');
+        const SELF = evt.currentTarget;
+        TweenMax.killTweensOf(SELF);
+        SELF.classList.add('popover--hold');
+        clearTimeout(SELF.timeout);
+        SELF.timeout = setTimeout(() => {
+            SELF.classList.add('popover--activate');
         }, 1);
 
     };
 
     const blur = (evt) => {
-        const self = evt.currentTarget;
-        self.classList.remove('popover--activate');
-        clearTimeout(self.timeout);
-        self.timeout = setTimeout(()=>{
-            self.classList.remove('popover--hold')
+        const SELF = evt.currentTarget;
+        SELF.classList.remove('popover--activate');
+        clearTimeout(SELF.timeout);
+        SELF.timeout = setTimeout(()=>{
+            SELF.classList.remove('popover--hold')
         },1000);
     };
 

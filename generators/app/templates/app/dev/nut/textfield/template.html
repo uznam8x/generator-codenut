@@ -17,11 +17,6 @@
     </span>
     {% endif %}
   </label>
-  {% if props.slot.extra %}
-  <div class="textfield__extra">
-    {% slot props.slot.extra %}
-    {% endslot %}
-  </div>
-  {% endif %}
+  {% slot props.slot.default %}{% endslot %}
 </article>
 {% endmacro %}

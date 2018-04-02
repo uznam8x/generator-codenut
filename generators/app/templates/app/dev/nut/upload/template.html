@@ -1,0 +1,28 @@
+{% macro create(props, attrs) %}
+<form data-codenut="upload" method="post" {{attribs(attrs)}} enctype="multipart/form-data">
+    <div class="upload__box">
+        <label>
+            <input type="file" class="upload__input"
+                   {% if props.multiple %}
+                   name="{{props.name}}[]" multiple="multiple"
+                   {% else %}
+                   name="{{props.name}}"
+                   {% endif %} />
+            <span class="upload__status">{% slot props.slot.title %}
+                <span class="nut-icon--arrow-top">
+                    <i aria-hidden="true"></i>
+                </span>
+                <span>
+                    {% if props.multiple %}
+                    <strong>Choose files</strong>&nbsp;<span>or drag it here.</span>
+                    {% else %}
+                    <strong>Choose a file</strong>&nbsp;<span>or drag it here.</span>
+                    {% endif %}
+                </span>
+                {% endslot %}
+            </span>
+        </label>
+    </div>
+    {% slot props.slot.default %}{% endslot %}
+</form>
+{% endmacro %}

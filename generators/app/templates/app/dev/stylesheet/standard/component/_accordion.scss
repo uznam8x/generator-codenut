@@ -1,0 +1,31 @@
+[data-codenut="accordion"] {
+  .accordion {
+    @include e('item') {
+      @include box-shadow(0,0,0,1px, #dbdbdb);
+      margin-top: 1px;
+
+      &:first-child{
+        margin-top: 0;
+      }
+    }
+    @include e('title') {
+      color:map-get($color, 'black');
+      padding: rem(8px 12px);
+      font-size: rem(14px);
+      height: rem(36px);
+    }
+    @include e('content') {
+      overflow: hidden;
+      padding-left: rem(12px);
+      padding-right: rem(12px);
+      font-size: rem(14px);
+      line-height: 1.4;
+      background-color: #f7f7f7;
+      &::before, &::after{
+        display: block;
+        height: rem(6px);
+        content:"";
+      }
+    }
+  }
+}

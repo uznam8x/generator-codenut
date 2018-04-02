@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports = {
-    image:{
+    'progressbar': {
         props: {
-            width: 320,
-            height: 160,
-            backgroundColor:'333333',
+            value: 0,
+            max:0,
+
         },
         template: path.resolve(__dirname, './template.html'),
     }

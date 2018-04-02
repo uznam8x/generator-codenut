@@ -1,0 +1,6 @@
+{% macro create(props, attrs) %}
+<article data-codenut="progressbar" data-value="{{props.value}}" data-max="{{props.max}}" {{attribs(attrs)}}>
+    <div class="progressbar__gauge"></div>
+    {% slot props.slot.default %}{% endslot %}
+</article>
+{% endmacro %}

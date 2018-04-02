@@ -1,0 +1,29 @@
+$toogleSize: 24px;
+[data-codenut="toggle"].toggle--switch {
+  width: rem($toogleSize * 2);
+  height: rem($toogleSize);
+  text-align: left;
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: rem($toogleSize);
+  &::before {
+    position: relative;
+    left: 0;
+    display: inline-block;
+    width: rem($toogleSize + 2);
+    height: rem($toogleSize + 2);
+    margin-top: rem(-2px);
+    margin-left: rem(-2px);
+    content: "";
+    background-color: #d2d2d2;
+    border-radius: 50%;
+    @include transition(left .2s ease-out, background-color .2s ease-out);
+  }
+}
+
+[data-codenut="toggle"].toggle--switch.toggle--activate {
+  &::before {
+    left: rem($toogleSize);
+    background-color: #888;
+  }
+}

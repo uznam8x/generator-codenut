@@ -4,13 +4,13 @@ module.exports = {
     textfield: {
         props: {
             type: 'text',
-            name: 'name',
+            name: '',
             value: '',
             title: '',
             placeholder: '',
             readonly: false,
             required: false,
-            autocomplete: '',
+            autocomplete: false,
             maxlength: false,
             disabled: false,
             class: ''

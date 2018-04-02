@@ -6,11 +6,11 @@
     });
 
     const open = (id) => {
-        const template = document.getElementById('template-modal-' + id);
-        if (template) {
+        const TEMPLATE = document.getElementById('template-modal-' + id);
+        if (TEMPLATE) {
             if (!document.getElementById(id)) {
-                nut.layer.add(template);
-                document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', template.innerHTML.replace(/\n|\t|\r/g, ''));
+                nut.layer.add(TEMPLATE);
+                document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', TEMPLATE.innerHTML.replace(/\n|\t|\r/g, ''));
                 setTimeout(() => {
                     let article = document.getElementById(id);
                     article.focus();
@@ -21,12 +21,12 @@
     };
 
     const close = (id) => {
-        const article = document.getElementById(id);
-        if (article) {
+        const ARTICLE = document.getElementById(id);
+        if (ARTICLE) {
             nut.layer.remove(document.getElementById('template-modal-' + id));
-            article.classList.remove('modal--activate');
+            ARTICLE.classList.remove('modal--activate');
             setTimeout(() => {
-                article.parentNode.removeChild(article);
+                ARTICLE.parentNode.removeChild(ARTICLE);
             },1000);
 
         }
@@ -53,12 +53,12 @@
     };
 
     nut.component('modal', (node) => {
-        const event = [
+        const EVENT = [
             [nut.Event.MODAL_OPEN, listener.open],
             [nut.Event.MODAL_CLOSE, listener.close],
             ['click', listener.click]
         ];
-        _.each(event, (task) => {
+        _.each(EVENT, (task) => {
             document.removeEventListener(task[0], task[1]);
             document.addEventListener(task[0], task[1]);
         });

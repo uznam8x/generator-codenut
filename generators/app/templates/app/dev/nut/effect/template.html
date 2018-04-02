@@ -1,0 +1,11 @@
+{% macro create(props, attrs) %}
+<a href="{{props.href}}" data-codenut="effect" class="{{props.class}} effect--{{props.preset}}" {{attribs(attrs)}}>
+    {% slot props.slot.image %}
+    <image width="480" height="360" />
+    {% endslot %}
+    <div class="effect__overlay">
+        {% slot props.slot.default %}
+        {% endslot %}
+    </div>
+</a>
+{% endmacro %}

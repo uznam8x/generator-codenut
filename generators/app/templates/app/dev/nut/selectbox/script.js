@@ -1,9 +1,9 @@
 ((nut) => {
     const change = (evt) => {
-        const target = evt.currentTarget;
-        const nut = evt.currentTarget.closest('[data-codenut="selectbox"]');
-        nut.classList.add('selectbox--selected');
-        nut.querySelector('.selectbox__title').innerText = target.options[target.selectedIndex].text;
+        const SELECT = evt.currentTarget;
+        const COMP = evt.currentTarget.closest('[data-codenut="selectbox"]');
+        COMP.classList.add('selectbox--selected');
+        COMP.querySelector('.selectbox__title').innerText = SELECT.options[SELECT.selectedIndex].text;
     };
 
     nut.component('selectbox', (node) => {

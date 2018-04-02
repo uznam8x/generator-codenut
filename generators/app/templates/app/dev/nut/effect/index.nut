@@ -1,11 +1,11 @@
 const path = require('path');
 
 module.exports = {
-    image:{
+    effect: {
         props: {
-            width: 320,
-            height: 160,
-            backgroundColor:'333333',
+            href: '#',
+            preset: 'fade',
+            class:''
         },
         template: path.resolve(__dirname, './template.html'),
     }

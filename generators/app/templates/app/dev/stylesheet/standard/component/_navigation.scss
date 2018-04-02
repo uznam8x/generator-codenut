@@ -1,0 +1,63 @@
+[data-codenut="navigation"] {
+  .navigation__link {
+    display: block;
+    padding: rem(8px 12px);
+    font-size: rem(14px);
+    font-weight: 400;
+    color: map-get($color, "black");
+
+    &:hover {
+      color: #444;
+    }
+  }
+
+  & > .navigation__menu {
+    & > .navigation__item {
+
+      & > .navigation__menu {
+        background-color: #e7e8ec;
+        .navigation__item {
+          .navigation__link {
+            font-weight: 300;
+            color: #9297a0;
+          }
+        }
+
+      }
+
+      &.navigation--focus {
+        & > .navigation__menu {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.navigation--verti {
+  & > .navigation__menu {
+    & > .navigation__item {
+      &:first-of-type {
+        margin-top: 0;
+      }
+    }
+    .navigation__menu {
+      border-left: 2px solid #138eac;
+      .navigation__item {
+        padding-left: rem(10px);
+      }
+    }
+  }
+}
+
+.navigation--horiz.navigation--center {
+  & > .navigation__menu {
+    @include justify-content(center);
+  }
+}
+
+.navigation--horiz.navigation--right {
+  & > .navigation__menu {
+    @include justify-content(flex-end);
+  }
+}

@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
     checkbox:{
         props: {
-            name: 'name',
+            name: '',
             value: '',
             title: '',
             required:false,

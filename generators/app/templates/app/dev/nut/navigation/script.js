@@ -1,25 +1,4 @@
 ((nut) => {
-    /*
-    const click = (evt) => {
-        let nav = evt.currentTarget.closest('[data-codenut="navigation"]');
-        nav.classList.toggle('navigation__mobile--activate');
-        const uuid = nut.util.uuid();
-        nav.setAttribute('data-layer-id', uuid);
-        nut.layer.add(uuid);
-    };*/
-
-    const resize = (evt) => {
-        const mobile = document.querySelectorAll('.navigation__mobile');
-        _.each(mobile, (node) => {
-            if (getComputedStyle(node).display === 'none') {
-                const nav = node.closest('[data-codenut="navigation"]');
-                nav.classList.remove('navigation__mobile--activate');
-                nut.layer.remove(nav.getAttribute('data-layer-id'));
-                nav.removeAttribute('data-layer-id');
-            }
-        })
-    };
-
     const enter = (evt) => {
         evt.currentTarget.classList.add('navigation--focus');
     };
@@ -29,17 +8,17 @@
     };
 
     const focus = (evt) => {
-        const item = evt.currentTarget.closest('.navigation__item');
-        item.classList.add('navigation--focus');
+        const ITEM = evt.currentTarget.closest('.navigation__item');
+        ITEM.classList.add('navigation--focus');
     };
 
     const blur = (evt) => {
-        const item = evt.currentTarget.closest('.navigation__item');
-        const menu = item.querySelector(':scope > .navigation__menu');
-        if( !menu ) {
-            item.classList.remove('navigation--focus');
+        const ITEM = evt.currentTarget.closest('.navigation__item');
+        const MENU = ITEM.querySelector(':scope > .navigation__menu');
+        if( !MENU ) {
+            ITEM.classList.remove('navigation--focus');
 
-            const parentItem = item.parentNode.closest('.navigation__item');
+            const parentItem = ITEM.parentNode.closest('.navigation__item');
             if(parentItem){
                 setTimeout(()=>{
                     const focused = parentItem.querySelector('.navigation--focus');
@@ -50,11 +29,11 @@
             }
         }
 
-        if( menu ){
+        if( MENU ){
             setTimeout(()=>{
-                const focused = menu.querySelector('.navigation--focus');
+                const focused = MENU.querySelector('.navigation--focus');
                 if( !focused ){
-                    item.classList.remove('navigation--focus');
+                    ITEM.classList.remove('navigation--focus');
                 }
             },1);
         }
@@ -62,8 +41,8 @@
 
     nut.component('navigation', (node) => {
         _.each(node, (el) => {
-            const item = el.querySelectorAll('.navigation__item');
-            _.each(item, (instance) => {
+            const ITEM = el.querySelectorAll('.navigation__item');
+            _.each(ITEM, (instance) => {
                 instance.addEventListener('mouseenter', enter);
                 instance.addEventListener('mouseleave', leave);
             });
@@ -76,9 +55,11 @@
 
 
             el.addEventListener('touchmove', (e) => {
-                const nav = e.target.closest('[data-codenut="navigation"]') || e.target;
-                if (nav.getAttribute('data-codenut') === 'navigation') {
-                    e.preventDefault();
+                if(document.querySelector('body').classList.contains('layer--activate')){
+                    const nav = e.target.closest('[data-codenut="navigation"]') || e.target;
+                    if (nav.getAttribute('data-codenut') === 'navigation') {
+                        e.preventDefault();
+                    }
                 }
             }, false);
         });

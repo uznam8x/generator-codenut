@@ -1,0 +1,22 @@
+[data-codenut="effect"] {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  & > img {
+    max-width: none;
+    width: 100%;
+  }
+  .effect {
+
+    @include e("overlay") {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      width: 100%;
+      @include flexbox();
+      @include align-items(center);
+      @include justify-content(center);
+    }
+  }
+}

@@ -1,7 +1,7 @@
 ((nut) => {
 
     const Scrollbar = function (content, track) {
-        const handle = track.querySelector('.scrollbar__handle');
+        const HANDLE = track.querySelector('.scrollbar__handle');
         let timeout = null;
 
         const offset = (target) => ({
@@ -14,15 +14,15 @@
         });
 
         const draw = () => {
-            const hh = (offset(content).height / scroll(content).height) * offset(content).height;
-            handle.style.height = hh + 'px';
+            const HH = (offset(content).height / scroll(content).height) * offset(content).height;
+            HANDLE.style.height = HH + 'px';
         };
 
         const position = () => {
-            const ch = scroll(content).height - offset(content).height;
-            const hh = (offset(content).height / scroll(content).height) * offset(content).height;
-            const y = (scroll(content).top / ch) * (offset(content).height - hh);
-            handle.style.top = y + 'px';
+            const CH = scroll(content).height - offset(content).height;
+            const HH = (offset(content).height / scroll(content).height) * offset(content).height;
+            const Y = (scroll(content).top / CH) * (offset(content).height - HH);
+            HANDLE.style.top = Y + 'px';
         };
 
         const prepare = () => {
@@ -32,10 +32,10 @@
 
         content.addEventListener('scroll', (evt)=>{
             prepare();
-            handle.classList.add('scrollbar--activate');
+            HANDLE.classList.add('scrollbar--activate');
             clearTimeout(timeout);
             timeout = setTimeout(() => {
-                handle.classList.remove('scrollbar--activate');
+                HANDLE.classList.remove('scrollbar--activate');
             }, 800);
         });
         window.addEventListener('resize', prepare);

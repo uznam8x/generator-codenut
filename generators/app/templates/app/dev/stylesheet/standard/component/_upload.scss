@@ -1,0 +1,45 @@
+[data-codenut="upload"] {
+  .upload {
+    @include e("box") {
+      height: rem(120px);
+      background-color: #f2f2f2;
+      border: 1px dashed #e3e3e3;
+
+    }
+    @include e("status") {
+      display: block;
+      font-size: rem(13px);
+      .nut-icon--arrow-top {
+        color: #aaa;
+        border: 1px solid #bbb;
+        border-radius: 50%;
+        @include transform(scale(.8));
+      }
+      .nut-icon--arrow-top + span {
+        display: block;
+        padding-top: .5rem;
+      }
+    }
+  }
+
+  [data-codenut="progressbar"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+    background-color: transparent;
+    .progressbar__gauge{
+      height: 2px;
+    }
+  }
+}
+
+.upload--dragover {
+  .upload {
+    @include e("box") {
+      background-color: #e4e4e4;
+      border: 1px dashed #bbb;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+[data-codenut="alert"] {
+  @include opacity(0);
+  @include transform(scale(.8));
+  @include transition(opacity .15s, transform, .15s);
+  .alert {
+    @include e("container") {
+      @include border-radius(3px);
+      @include box-shadow(0, 0, rem(10px), rem(6px), rgba(#000, .2));
+    }
+    @include e("header") {
+      padding: rem(16px);
+    }
+    @include e("content") {
+      padding: rem(16px);
+    }
+    @include e("action") {
+      padding: rem(16px);
+      text-align: right;
+      background-color: #f2f2f2;
+    }
+  }
+}
+.alert--activate{
+  @include opacity(1);
+  @include transform(scale(1));
+}

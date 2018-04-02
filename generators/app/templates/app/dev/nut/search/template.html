@@ -1,12 +1,11 @@
 {% macro create(props, attrs) %}
 <form data-codenut="search" {{attribs(attrs)}}>
-    {% slot props.slot.default%}{% endslot %}
+
     <textfield name="{{props.name}}" value="{{props.value}}" placeholder="{{props.placeholder}}" class="search__field">
-        {% if props.slot.extra %}
-            <slot name="extra">{{ props.slot.extra.value }}</slot>
-        {% endif %}
+        {{ props.slot.default.value }}
     </textfield>
 
+    {% slot props.slot.extra %}{% endslot %}
     <button type="submit">
         {% slot props.slot.submit%}
             <span class="nut-icon--search"><i aria-hidden="true"></i></span>

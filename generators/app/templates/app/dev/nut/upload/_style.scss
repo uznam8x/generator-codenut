@@ -1,0 +1,68 @@
+[data-codenut="upload"] {
+  position: relative;
+  width: 100%;
+  .upload {
+    @include e("box") {
+      position: relative;
+      & > label {
+        width: 100%;
+        height: 100%;
+        @include flexbox();
+        @include align-items(center);
+        @include justify-content(center);
+        cursor: pointer;
+      }
+    }
+    @include e("input") {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      @include opacity(0);
+    }
+    @include e("status") {
+      text-align: center;
+    }
+
+    &__sending, &__success, &__error {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: none;
+    }
+    &__dragndrop {
+      display: none;
+    }
+  }
+}
+
+.upload--droppable {
+  .upload__dragndrop {
+    display: inline;
+  }
+}
+
+.upload--sending {
+  .upload__sending {
+    display: block;
+  }
+}
+
+.upload--error {
+  .upload__error {
+    display: block;
+  }
+}
+
+.upload--success {
+  .upload__success {
+    display: block;
+  }
+}

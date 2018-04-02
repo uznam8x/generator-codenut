@@ -1,0 +1,32 @@
+.button {
+  display: inline-block;
+  padding: rem(11px 12px 12px);
+  font-size: rem(14px);
+  color: map-get($color, "black");
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid #dbdbdb;
+  border-radius: rem(3px);
+  @include transition(border .2s ease-out);
+
+  &:hover {
+    border-color: #b5b5b5;
+  }
+}
+
+.button--round {
+  border-radius: rem(100px);
+}
+
+.button--large {
+  padding: rem(16px 30px 16px);
+  font-size: rem(18px);
+}
+
+.button--light {
+  color: #333;
+  background-color: #f2f2f2;
+}

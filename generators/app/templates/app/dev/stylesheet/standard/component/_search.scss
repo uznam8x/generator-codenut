@@ -1,0 +1,17 @@
+[data-codenut="search"] {
+  position: relative;
+  button[type="submit"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    width: rem(36px);
+    height: rem(36px);
+    .nut-icon--search {
+      width: rem(36px);
+      height: rem(36px);
+      color: #bbb;
+      @include transform(scale(.86));
+    }
+  }
+}

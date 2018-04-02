@@ -1,0 +1,12 @@
+[data-codenut="progressbar"] {
+  background-color: #f2f2f2;
+  .progressbar__gauge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    @include transition(width .15s ease-out);
+    background-color: #138eac;
+    content: attr(data-value);
+  }
+}

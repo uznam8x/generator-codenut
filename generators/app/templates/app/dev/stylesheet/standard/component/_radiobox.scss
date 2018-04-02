@@ -1,0 +1,48 @@
+[data-codenut="radiobox"] {
+  label{
+    height: rem(22px);
+    font-weight:300;
+    color:map-get($color, 'black');
+    input:checked + .radiobox__icon{
+      i::before{
+        opacity: 1;
+      }
+    }
+    input:disabled ~ .radiobox__icon, input:disabled ~ .radiobox__title{
+      color: #9c9c9c;
+    }
+  }
+}
+
+.radiobox{
+  @include e("input") {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 9;
+    @include opacity(0);
+  }
+  @include e('icon'){
+    @include icon-radiobox-checked(#444){
+      & > i{
+        transform-origin: 0 50%;
+        @include transform(scale(.7));
+        &::before{
+          @include transition(opacity .2s ease-out);
+          opacity: 0;
+        }
+      }
+    };
+    width: rem(22px);
+    height: rem(22px);
+  }
+  @include e('title'){
+    line-height: 1;
+    padding-left: rem(2px);
+  }
+}

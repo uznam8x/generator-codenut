@@ -9,3 +9,5 @@ require('../nut/modal/script');
 require('../nut/alert/script');
 require('../nut/scrollbar/script');
 require('../nut/search/script');
+require('../nut/upload/script');
+require('../nut/progressbar/script');

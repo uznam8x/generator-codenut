@@ -1,0 +1,36 @@
+[data-codenut="selectbox"] {
+
+}
+
+.selectbox{
+  @include e('title'){
+    font-size: rem(16px);
+    padding-left: rem(10px);
+    padding-right: rem(10px);
+    width: 100%;
+    height: rem(36px);
+    font-weight: 300;
+    border: 1px solid #dbdbdb;
+    border-radius: rem(3px);
+    color: #bbb;
+    @include flexbox();
+    @include align-items(center);
+  }
+  @include e('icon'){
+    @include icon-chevron-bottom(#999){
+      position: absolute;
+      right:0;
+      top:0;
+      width: rem(36px);
+      height: rem(36px);
+      & > i{
+        @include transform(scale(.45));
+      }
+    };
+  }
+}
+.selectbox--selected{
+  .selectbox__title{
+    color:map-get($color, 'black');
+  }
+}

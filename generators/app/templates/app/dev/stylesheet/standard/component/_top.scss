@@ -1,0 +1,6 @@
+[data-codenut="top"] {
+  width: rem(48px);
+  height: rem(48px);
+  background-color: rgba(#000, .4);
+  @include icon-arrow-top(#fff);
+}

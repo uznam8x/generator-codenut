@@ -14,10 +14,10 @@
 
     nut.component('textfield', (node) => {
         _.each(node, (el) => {
-            const input = el.querySelector('.textfield__input');
-            input.addEventListener('focus', focus);
-            input.addEventListener('focusout', blur);
-            input.addEventListener('input', change);
+            const INPUT = el.querySelector('.textfield__input');
+            INPUT.addEventListener('focus', focus);
+            INPUT.addEventListener('focusout', blur);
+            INPUT.addEventListener('input', change);
         });
     });
 })(Codenut);

@@ -1,0 +1,22 @@
+[data-codenut="pagination"] {
+  .pagination__item {
+    margin-left: 1px;
+    line-height: 0;
+    &:first-child {
+      margin: 0;
+    }
+    @include box-shadow(0, 0, 0, 1px, #dbdbdb);
+  }
+  .pagination__link {
+    height: rem(36px);
+    padding: rem(8px 12px);
+    font-size: rem(14px);
+    line-height: 1;
+    color: map-get($color, "black");
+    vertical-align: middle;
+    @include transition(background .1s ease-out);
+    &:hover {
+      background-color: #f2f2f2;
+    }
+  }
+}

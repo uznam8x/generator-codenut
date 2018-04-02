@@ -15,9 +15,9 @@
         {% endif %}
     </div>
 
-    {% if props.slot.content %}
+    {% if props.slot.default %}
     <div class="card__content">
-        {% slot props.slot.content %}
+        {% slot props.slot.default %}
         {% endslot %}
     </div>
     {% endif %}

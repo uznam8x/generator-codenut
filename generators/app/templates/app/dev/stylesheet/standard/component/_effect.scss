@@ -1,0 +1,61 @@
+[data-codenut="effect"].effect--fade {
+  .effect {
+    @include e("overlay") {
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      background-color: rgba(#fff, .86);
+      @include opacity(0);
+      @include transition(opacity .2s ease-out);
+    }
+  }
+  &:hover, &:focus {
+    .effect__overlay {
+      @include opacity(1);
+    }
+  }
+}
+
+[data-codenut="effect"].effect--zoom {
+  img {
+    @include transform(scale(1));
+    @include transition(transform .4s);
+  }
+  .effect {
+
+    @include e("overlay") {
+      right: 0;
+      bottom: 0;
+      height: 100%;
+      @include opacity(0);
+      @include transition(opacity .2s ease-out);
+    }
+  }
+  &:hover, &:focus {
+    img {
+      @include transform(scale(1.2));
+    }
+    .effect__overlay {
+      @include opacity(1);
+    }
+  }
+}
+
+[data-codenut="effect"].effect--tilt-up {
+  .effect {
+    @include e("overlay") {
+      top: auto;
+      bottom: 0;
+      background-color: rgba(#fff, .86);
+      @include transform(translate(0, 100%));
+      @include opacity(0);
+      @include transition(opacity .2s ease-out, transform .2s ease-out);
+    }
+  }
+  &:hover, &:focus {
+    .effect__overlay {
+      @include opacity(1);
+      @include transform(translate(0, 0));
+    }
+  }
+}

@@ -6,11 +6,11 @@
     });
 
     const open = (id) => {
-        const template = document.getElementById('template-alert-' + id);
-        if (template) {
+        const TEMPLATE = document.getElementById('template-alert-' + id);
+        if (TEMPLATE) {
             if (!document.getElementById(id)) {
-                nut.layer.add(template);
-                document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', template.innerHTML.replace(/\n|\t|\r/g, ''));
+                nut.layer.add(TEMPLATE);
+                document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', TEMPLATE.innerHTML.replace(/\n|\t|\r/g, ''));
                 setTimeout(() => {
                     let article = document.getElementById(id);
                     article.focus();
@@ -52,12 +52,12 @@
     };
 
     nut.component('alert', (node) => {
-        const event = [
+        const EVENT = [
             [nut.Event.ALERT_OPEN, listener.open],
             [nut.Event.ALERT_CLOSE, listener.close],
             ['click', listener.click]
         ];
-        _.each(event, (task) => {
+        _.each(EVENT, (task) => {
             document.removeEventListener(task[0], task[1]);
             document.addEventListener(task[0], task[1]);
         });

@@ -3,9 +3,7 @@ const path = require('path');
 
 module.exports = {
   scrollbar: {
-    props: {
-      id:false,
-    },
+    props: {},
     template: path.resolve(__dirname, './template.html'),
   }
 };

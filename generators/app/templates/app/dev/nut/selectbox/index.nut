@@ -6,6 +6,7 @@ module.exports = {
             title: '',
             required: false,
             multiple: false,
+            disabled: false,
         },
         beforeCreate:(config)=>{
             return config;

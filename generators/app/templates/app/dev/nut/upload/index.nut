@@ -1,11 +1,10 @@
 const path = require('path');
 
 module.exports = {
-    image:{
+    upload: {
         props: {
-            width: 320,
-            height: 160,
-            backgroundColor:'333333',
+            multiple:false,
+            name:"file",
         },
         template: path.resolve(__dirname, './template.html'),
     }
