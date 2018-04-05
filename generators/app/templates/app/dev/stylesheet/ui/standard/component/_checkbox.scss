@@ -1,48 +1,49 @@
 [data-codenut="checkbox"] {
-  label{
+  label {
     height: rem(22px);
-    font-weight:300;
-    color:map-get($color, 'black');
-    input:checked + .checkbox__icon{
-      i::before{
+    font-weight: 300;
+    color: map-get($color, "black");
+    input:checked + .checkbox__icon {
+      i::before {
         opacity: 1;
       }
     }
-    input:disabled ~ .checkbox__icon, input:disabled ~ .checkbox__title{
+    input:disabled ~ .checkbox__icon, input:disabled ~ .checkbox__title {
       color: #9c9c9c;
     }
   }
 
 }
-.checkbox{
+
+.checkbox {
   @include e("input") {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    z-index: 9;
     width: 100%;
     height: 100%;
     cursor: pointer;
-    z-index: 9;
     @include opacity(0);
   }
-  @include e('icon'){
-    @include icon-checkbox-checked(#444){
-      & > i{
+  @include e("icon") {
+    @include icon-checkbox-checked(#444) {
+      & > i {
         transform-origin: 0 50%;
         @include transform(scale(.7));
-        &::before{
+        &::before {
           @include transition(opacity .2s ease-out);
           opacity: 0;
         }
       }
-    };
+    }
+  ;
     width: rem(22px);
     height: rem(22px);
   }
-  @include e('title'){
-    padding-left: rem(2px);
+  @include e("title") {
     line-height: 1;
   }
 }

@@ -2,6 +2,16 @@
 [data-codenut="navigation"] {
   .navigation__menu {
     list-style: none;
+
+    & > .navigation__item{
+      &.navigation--focus {
+        & > .navigation__menu {
+          display: block;
+          text-align: left;
+        }
+      }
+    }
+
   }
 }
 
@@ -9,20 +19,23 @@
 .navigation--horiz {
   & > .navigation__menu {
     white-space: nowrap;
-    @include flexbox();
+
     & > .navigation__item {
       position: relative;
+      display: inline-block;
       .navigation__link {
         text-decoration: none;
       }
       & > .navigation__menu {
         position: absolute;
+        z-index: 9;
         display: none;
         width: 100%;
         min-width: rem(100px);
       }
     }
   }
+
 }
 
 .navigation--verti {

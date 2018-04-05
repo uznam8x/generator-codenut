@@ -1,29 +1,22 @@
 [data-codenut="accordion"] {
   position: relative;
   .accordion {
-    $block : '.accordion';
-    @include e('item') {
+    $block: ".accordion";
+    @include e("item") {
       position: relative;
     }
-    @include e('title') {
-      &:before{
-        content: '';
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
-      }
+    @include e("title") {
       width: 100%;
-      line-height: 0;
-      display: inline-block;
-      vertical-align: middle;
+      line-height: 1;
+      display: block;
     }
-    @include e('content') {
+    @include e("content") {
       overflow: hidden;
       display: none;
     }
 
-    @include m('activate') {
-      #{$block}__content{
+    @include m("activate") {
+      #{$block}__content {
         display: block;
       }
     }

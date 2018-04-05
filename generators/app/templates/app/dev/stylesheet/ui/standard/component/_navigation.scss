@@ -22,14 +22,9 @@
             color: #9297a0;
           }
         }
-
       }
 
-      &.navigation--focus {
-        & > .navigation__menu {
-          display: block;
-        }
-      }
+
     }
   }
 }
@@ -52,12 +47,10 @@
 
 .navigation--horiz.navigation--center {
   & > .navigation__menu {
-    @include justify-content(center);
   }
 }
 
 .navigation--horiz.navigation--right {
   & > .navigation__menu {
-    @include justify-content(flex-end);
   }
 }

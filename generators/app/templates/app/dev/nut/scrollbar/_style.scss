@@ -50,8 +50,8 @@ body[data-codenut="scrollbar"] {
 }
 
 
-[data-screen-device="mobile"],[data-screen-device="tablet"] {
-  .scrollbar__track {
+[data-screen-device="mobile"], [data-screen-device="tablet"], [data-screen-os="androidos"] {
+  .scrollbar__track, .scrollbar__handle {
     display: none !important;
   }
 }

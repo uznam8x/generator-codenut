@@ -1,19 +1,15 @@
 [data-codenut="card"] {
-  border: 1px solid rgba(#000, .08);
-  @include box-shadow(0, rem(4px), rem(18px), 0, rgba(#000, .08));
   .card {
     @include e("header") {
       position: relative;
       padding: rem(12px);
     }
     @include e("content") {
-      padding: rem(12px);
       p {
         line-height: 1.4;
       }
     }
     @include e("extra") {
-      padding: rem(12px);
     }
   }
 }

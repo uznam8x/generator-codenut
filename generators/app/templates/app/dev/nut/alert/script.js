@@ -12,21 +12,21 @@
                 nut.layer.add(TEMPLATE);
                 document.getElementsByTagName('body')[0].insertAdjacentHTML('beforeend', TEMPLATE.innerHTML.replace(/\n|\t|\r/g, ''));
                 setTimeout(() => {
-                    let article = document.getElementById(id);
-                    article.focus();
-                    article.classList.add('alert--activate');
+                    const ARTICLE = document.getElementById(id);
+                    ARTICLE.focus();
+                    ARTICLE.classList.add('alert--activate');
                 }, 10);
             }
         }
     };
 
     const close = (id) => {
-        const article = document.getElementById(id);
-        if (article) {
+        const ARTICLE = document.getElementById(id);
+        if (ARTICLE) {
             nut.layer.remove(document.getElementById('template-alert-' + id));
-            article.classList.remove('alert--activate');
+            ARTICLE.classList.remove('alert--activate');
             setTimeout(() => {
-                article.parentNode.removeChild(article);
+                ARTICLE.parentNode.removeChild(ARTICLE);
             },1000);
         }
     };
@@ -44,8 +44,8 @@
             delegate.focus();
         },
         click: (e) => {
-            let nut = e.target.getAttribute('data-codenut');
-            if (nut === 'alert') {
+            const COMP = e.target.getAttribute('data-codenut');
+            if (COMP === 'alert') {
                 close(e.target.getAttribute('id'));
             }
         }

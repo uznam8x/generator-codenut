@@ -2,8 +2,10 @@
 <article data-codenut="sns" {{attribs(attrs)}}>
   <ul class="sns__menu">
     {% for name, item in props.slot %}
+
     <li class="sns__item">
-      <a {{attribs(item.attribs)}} class="sns__link sns--{{name}}">
+      {% set attr = item.attribs %}
+      <a class="sns__link sns--{{name}} {% if attr.class %} {{attr.class}}{% set attr = removeAttr(attr, 'class') %}{% endif %}" {{attribs(attr)}}>
         <img src="/resource/image/sns/{{name}}{% if(props.symbol) %}-symbol{% endif%}.png" alt="{{name}}" />
       </a>
     </li>

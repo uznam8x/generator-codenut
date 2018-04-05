@@ -1,25 +1,30 @@
 [data-codenut="textfield"] {
   label {
     input {
-      color: map-get($color, 'black');
+      color: map-get($color, "black");
       border: 1px solid #dbdbdb;
       border-radius: rem(3px);
     }
 
-    input, .textfield__placeholder {
+    input {
       font-size: rem(16px);
       padding-left: rem(10px);
       padding-right: rem(10px);
       height: rem(36px);
       font-weight: 300;
-      @include flexbox();
-      @include align-items(center);
+    }
+    .textfield__placeholder {
+      top: 50%;
+      padding-right: rem(10px);
+      padding-left: rem(10px);
+      font-size: rem(16px);
+      @include transform(translateY(-50%));
     }
   }
 }
 
 .textfield {
-  @include e('placeholder') {
+  @include e("placeholder") {
     position: absolute;
     left: 0;
     top: 0;

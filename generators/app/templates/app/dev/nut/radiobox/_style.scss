@@ -2,8 +2,11 @@
   position: relative;
   display: inline-block;
   label {
-    @include flexbox();
-    @include align-items(center);
     margin-bottom: 0;
+    display: table;
+    & > * {
+      display: table-cell;
+      vertical-align: middle;
+    }
   }
 }

@@ -14,29 +14,42 @@
 
     const blur = (evt) => {
         const ITEM = evt.currentTarget.closest('.navigation__item');
-        const MENU = ITEM.querySelector(':scope > .navigation__menu');
-        if( !MENU ) {
+        const MENU = _.filter(ITEM.children, (child) => child.classList.contains('navigation__menu'))[0];
+        if (!MENU) {
             ITEM.classList.remove('navigation--focus');
 
             const parentItem = ITEM.parentNode.closest('.navigation__item');
-            if(parentItem){
-                setTimeout(()=>{
+            if (parentItem) {
+                setTimeout(() => {
                     const focused = parentItem.querySelector('.navigation--focus');
-                    if( !focused ){
+                    if (!focused) {
                         parentItem.classList.remove('navigation--focus');
                     }
-                },1);
+                }, 1);
             }
         }
 
-        if( MENU ){
-            setTimeout(()=>{
+        if (MENU) {
+            setTimeout(() => {
                 const focused = MENU.querySelector('.navigation--focus');
-                if( !focused ){
+                if (!focused) {
                     ITEM.classList.remove('navigation--focus');
                 }
-            },1);
+            }, 1);
         }
+    };
+
+    const touch = (e) => {
+        const NAV = document.querySelectorAll('[data-codenut="navigation"]');
+        _.each(NAV, (n) => {
+            const iTEM = n.querySelectorAll('.navigation__item');
+            _.each(iTEM, (i) => {
+                blur({currentTarget: i});
+            })
+        });
+
+        setTimeout(focus.bind(null, {currentTarget:e.target}), 2);
+
     };
 
     nut.component('navigation', (node) => {
@@ -49,19 +62,13 @@
 
             const link = el.querySelectorAll('.navigation__link');
             _.each(link, (instance) => {
-                instance.addEventListener('focus', focus);
-                instance.addEventListener('focusout', blur);
-            });
-
-
-            el.addEventListener('touchmove', (e) => {
-                if(document.querySelector('body').classList.contains('layer--activate')){
-                    const nav = e.target.closest('[data-codenut="navigation"]') || e.target;
-                    if (nav.getAttribute('data-codenut') === 'navigation') {
-                        e.preventDefault();
-                    }
+                if (('ontouchstart' in document.documentElement)) {
+                    instance.addEventListener('touchstart', touch);
+                } else {
+                    instance.addEventListener('focus', focus);
+                    instance.addEventListener('focusout', blur);
                 }
-            }, false);
+            });
         });
     });
 })(Codenut);

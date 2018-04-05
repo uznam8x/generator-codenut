@@ -1,8 +1,7 @@
-[data-codenut="modal"] {
-  margin-top: rem(26px);
+[data-codenut="alert"] {
   @include opacity(0);
-  @include transition(opacity .15s, margin .25s);
-  .modal {
+  @include transition(opacity .15s, transform, .15s);
+  .alert {
     @include e("container") {
       @include border-radius(3px);
       @include box-shadow(0, 0, rem(10px), rem(6px), rgba(#000, .2));
@@ -18,22 +17,9 @@
       text-align: right;
       background-color: #f2f2f2;
     }
-
-    @include e("close") {
-      @include icon-close(#333);
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: rem(48px);
-      height: rem(48px);
-      & > i {
-        @include transform(scale(.7));
-      }
-    }
   }
 }
 
-.modal--activate{
+.alert--activate{
   @include opacity(1);
-  margin-top: 0;
 }

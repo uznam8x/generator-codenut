@@ -13,7 +13,6 @@
     font-size: rem(14px);
     line-height: 1;
     color: map-get($color, "black");
-    vertical-align: middle;
     @include transition(background .1s ease-out);
     &:hover {
       background-color: #f2f2f2;

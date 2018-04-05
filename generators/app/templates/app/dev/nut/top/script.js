@@ -1,5 +1,10 @@
 ((nut) => {
-    const click = (evt) => {
+    const click = (e) => {
+        /*if (document.querySelector('html').getAttribute('data-screen-os') === 'androidos') {
+            window.scrollTo(0, 0);
+        } else {
+
+        }*/
         TweenMax.killTweensOf(window);
         TweenMax.to(window, 0.8, {scrollTo: 0, ease: Expo.easeOut});
     };

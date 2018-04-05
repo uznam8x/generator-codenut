@@ -1,0 +1,7 @@
+{% macro create(props, attrs) %}
+<div data-codenut="sticky" data-sticky="top:{{props.top}}; wrap:{{props.wrap}}; breakpoint:{{props.breakpoint}};" {{attribs(attrs)}}>
+    <div class="sticky__content">
+        {% slot props.slot.default %}{% endslot %}
+    </div>
+</div>
+{% endmacro %}

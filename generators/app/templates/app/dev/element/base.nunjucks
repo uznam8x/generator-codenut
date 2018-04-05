@@ -1,19 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <title>Codenut</title>
-  <include src="element/meta.nunjucks" />
+  <title>
+    <block name="title">Codenut</block>
+  </title>
+  <block name="meta">
+    <include src="element/meta.nunjucks" />
+  </block>
   <block name="head">
     <include src="element/link.nunjucks" />
   </block>
 </head>
 
-<body {% if attr %} {{attr}} {% endif %}>
+<body {% if bodyAttribute %} {{bodyAttribute}} {% endif %}>
 <block name="body">
   <block name="content" />
 </block>
 
-<block name="foot" />
-<include src="element/script.nunjucks" />
+<block name="foot">
+  <include src="element/script.nunjucks" />
+</block>
 </body>
 </html>

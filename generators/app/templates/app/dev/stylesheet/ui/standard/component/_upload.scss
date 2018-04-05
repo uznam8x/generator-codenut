@@ -7,12 +7,13 @@
 
     }
     @include e("status") {
-      display: block;
       font-size: rem(13px);
       .nut-icon--arrow-top {
         color: #aaa;
         border: 1px solid #bbb;
         border-radius: 50%;
+        width: rem(52px);
+        height: rem(52px);
         @include transform(scale(.8));
       }
       .nut-icon--arrow-top + span {
@@ -24,10 +25,10 @@
 
   [data-codenut="progressbar"] {
     position: absolute;
-    left: 0;
     top: 0;
-    width: 100%;
+    left: 0;
     z-index: 9;
+    width: 100%;
     background-color: transparent;
     .progressbar__gauge{
       height: 2px;

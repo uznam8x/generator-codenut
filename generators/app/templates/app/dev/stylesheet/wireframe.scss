@@ -1,0 +1,110 @@
+@import "./variable";
+@import "mixin/flex";
+@import "mixin/bem";
+@import "mixin/crossbrowser";
+@import "mixin/mediaquery";
+@import "function/rem";
+@import "function/em";
+@import "function/string";
+@import "function/number";
+@import "base/initialize";
+@import "base/regular";
+@import "icon";
+@import "component/grid";
+@import "component/typo";
+@import "component/device";
+@import "../nut/**/_style.scss";
+
+header {
+  max-width: map-get($breakpoint, "xl");
+  margin: 0 auto;
+  [data-codenut="navigation"] {
+    margin-right: rem(-12px);
+  }
+  .mobile.nut-icon--menu, .tablet.nut-icon--menu {
+    width: 28px;
+    height: 28px;
+    & > i {
+      @include transform(scale(.8));
+    }
+  }
+}
+
+footer {
+  h5 {
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 2rem !important;
+  }
+
+  a {
+    display: block;
+    color: #CBCBCB;
+  }
+
+  [data-codenut="sns"] .sns__link {
+    width: 32px;
+    margin-right: 4px;
+    background-color: #138eac;
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  .info {
+    margin-top: -.6rem;
+
+    li {
+      padding: .6rem 0;
+      line-height: 1.6;
+      border-top: 1px solid rgba(255, 255, 255, .2);
+    }
+    li:first-child {
+      border: 0;
+    }
+  }
+}
+
+.bgc--primary {
+  background-color: #138eac;
+}
+
+.bgc--secondary {
+  background-color: #8bbea2;
+}
+
+.bgc--white {
+  background-color: #fff;
+}
+
+.bgc--white-gray {
+  background-color: #f2f2f2;
+}
+
+.bgc--black {
+  color: #cbcbcb;
+  background-color: #212121;
+}
+
+.tc--white {
+  color: #fff;
+}
+.tc--white-gray {
+  color: #cbcbcb;
+}
+
+.tc--primary {
+  color: #138eac;
+}
+
+.tc--secondary {
+  color: #8bbea2;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  background-color: #e9e9e9;
+  border: 0;
+}

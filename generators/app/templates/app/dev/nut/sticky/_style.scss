@@ -1,0 +1,20 @@
+[data-codenut="sticky"] {
+  .sticky__placeholder {
+    display: none;
+  }
+}
+
+.sticky--activate {
+  .sticky__content {
+    position: fixed;
+    z-index: 99;
+  }
+  .sticky__placeholder {
+    display: block;
+  }
+}
+
+.sticky--freeze {
+
+
+}

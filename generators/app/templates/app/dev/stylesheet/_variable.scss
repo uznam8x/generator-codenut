@@ -1,3 +1,4 @@
+// Font
 $font-base: 16px;
 $font-family: 'Roboto', sans-serif;
 $font-heading: (
@@ -9,6 +10,12 @@ $font-heading: (
   h6: 20px,
 ) !default;
 
+$lineheight: (
+  header: 1.2,
+  paragraph: 1.6
+) !default;
+
+// Breakpoint
 $breakpoint: (
   xs: 0,
   sm: 414px,
@@ -22,4 +29,5 @@ $device: (
   tablet:"lg",
 ) !default;
 
+// Icon
 $icon-color:#626262;

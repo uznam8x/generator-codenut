@@ -4,9 +4,19 @@
       right: 0;
       bottom: 0;
       height: 100%;
+      text-align: center;
       background-color: rgba(#fff, .86);
       @include opacity(0);
       @include transition(opacity .2s ease-out);
+      &::after{
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+      & > *{
+        display: inline-block;
+        vertical-align: middle;
+      }
     }
   }
   &:hover, &:focus {
@@ -27,8 +37,18 @@
       right: 0;
       bottom: 0;
       height: 100%;
+      text-align: center;
       @include opacity(0);
       @include transition(opacity .2s ease-out);
+      &::after{
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+      & > *{
+        display: inline-block;
+        vertical-align: middle;
+      }
     }
   }
   &:hover, &:focus {
@@ -46,6 +66,7 @@
     @include e("overlay") {
       top: auto;
       bottom: 0;
+      padding-left: 1rem;
       background-color: rgba(#fff, .86);
       @include transform(translate(0, 100%));
       @include opacity(0);

@@ -13,6 +13,12 @@
   }
 }
 
+.list--horiz {
+  & > li {
+    display: inline-block;
+  }
+}
+
 .list--normal {
   .list {
     @include e("menu") {

@@ -28,7 +28,6 @@
             setTimeout(() => {
                 ARTICLE.parentNode.removeChild(ARTICLE);
             },1000);
-
         }
     };
 
@@ -45,8 +44,8 @@
             delegate.focus();
         },
         click: (e) => {
-            let nut = e.target.getAttribute('data-codenut');
-            if (nut === 'modal') {
+            const COMP = e.target.getAttribute('data-codenut');
+            if (COMP === 'modal') {
                 close(e.target.getAttribute('id'));
             }
         }

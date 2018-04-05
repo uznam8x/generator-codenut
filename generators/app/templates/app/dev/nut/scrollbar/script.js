@@ -59,18 +59,16 @@
     let instance = [];
 
     nut.component('scrollbar', (node) => {
-        if( document.documentElement.getAttribute('data-screen-device') !== 'mobile' ){
-            _.each(node, (el) => {
-                let content, track;
-                if (el.nodeName.toLowerCase() === 'body') {
-                    content = window;
-                    track = _.filter(el.children, (child) => child.classList.contains('scrollbar__track'))[0];
-                } else {
-                    content = _.filter(el.children, (child) => child.classList.contains('scrollbar__content'))[0];
-                    track = _.filter(el.children, (child) => child.classList.contains('scrollbar__track'))[0];
-                }
-                instance.push(new Scrollbar(content, track));
-            });
-        }
+        _.each(node, (el) => {
+            let content, track;
+            if (el.nodeName.toLowerCase() === 'body') {
+                content = window;
+                track = _.filter(el.children, (child) => child.classList.contains('scrollbar__track'))[0];
+            } else {
+                content = _.filter(el.children, (child) => child.classList.contains('scrollbar__content'))[0];
+                track = _.filter(el.children, (child) => child.classList.contains('scrollbar__track'))[0];
+            }
+            instance.push(new Scrollbar(content, track));
+        });
     });
 })(Codenut);

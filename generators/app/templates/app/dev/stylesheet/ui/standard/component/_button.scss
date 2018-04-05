@@ -1,13 +1,13 @@
 .button {
   display: inline-block;
-  padding: rem(11px 12px 12px);
+  padding: rem(10px 12px 10px);
   font-size: rem(14px);
   color: map-get($color, "black");
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
   user-select: none;
-  background-color: transparent;
+  background-color: #fff;
   border: 1px solid #dbdbdb;
   border-radius: rem(3px);
   @include transition(border .2s ease-out);
